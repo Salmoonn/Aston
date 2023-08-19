@@ -1,0 +1,83 @@
+.collection {
+  width: 330px;
+  gap: 15px;
+  overflow: hidden;
+}
+
+.collection img {
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.collection-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.collection-photo-main {
+  height: 330px;
+  width: 330px;
+}
+
+.collection-photo-other {
+  height: 100px;
+  width: 100px;
+}
+
+.collection-frame {
+  display: flex;
+  gap: 15px;
+  height: 100px;
+}
+
+.collection-frame-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100%;
+  background-color: #a259ff;
+  border-radius: 20px;
+}
+
+.collection-artist-card {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.collection-artist-name {
+  font-size: 16px;
+}
+
+.artist-avatar {
+  width: 24px;
+  border-radius: 100%;
+}
+
+@media screen and (max-width: 740px) {
+  .collection-card-frame {
+    height: 95px;
+  }
+  .collection-frame-number .h5 {
+    font-size: 16px;
+    line-height: 140%;
+  }
+  .sceleton .collection-photo-main {
+    width: 315px;
+    height: 315px;
+  }
+  .collection-frame {
+    height: 95px;
+  }
+  .collection-photo-main {
+    height: 315px;
+    width: 315px;
+  }
+  .collection-photo-other {
+    height: 95px;
+  }
+}
