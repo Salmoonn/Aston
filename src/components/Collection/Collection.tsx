@@ -28,8 +28,6 @@ const Collection = ({ id }: { id: string }) => {
 
   const srcAvatar = config.server + "/a/" + collection?.data.creator;
 
-  console.log(srcImg);
-
   return (
     <div className="collection column">
       <div className="collection-photos">

@@ -5,9 +5,7 @@ import { store } from "../store";
 import { getAccessToken, logoutUser } from "../store/auth/authAction";
 import Endpoints from "./endpoints";
 
-export const axiosInstance = axios.create({
-  // baseURL: config.server,
-});
+export const axiosInstance = axios.create({});
 
 const urlSkipAuth = [
   Endpoints.SIGN_UP,
