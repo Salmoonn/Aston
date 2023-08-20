@@ -1,4 +1,4 @@
-import "./style/reset.css";
+import "./styles/reset.css";
 import "./index.css";
 import "./fonts/fonts.css";
 
