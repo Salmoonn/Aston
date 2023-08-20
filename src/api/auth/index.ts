@@ -1,8 +1,8 @@
 import Endpoints from "../endpoints";
 import { axiosInstance } from "../instance";
-import { ILoginRequest } from "./types";
+import { LoginRequest } from "./types";
 
-export const login = (params: ILoginRequest) =>
+export const login = (params: LoginRequest) =>
   axiosInstance.post(Endpoints.AUTH.LOGIN, params);
 
 export const getProfile = () => axiosInstance.get(Endpoints.AUTH.PROFILE);

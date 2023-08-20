@@ -1,0 +1,97 @@
+.login {
+  display: flex;
+  height: 480px;
+  gap: 60px;
+}
+
+.login-image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.login-image img {
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+.login-body {
+  width: 100%;
+  padding: 100px 0;
+  gap: 40px;
+  align-items: end;
+}
+
+.login-form {
+  width: 330px;
+  gap: 30px;
+}
+
+.login-form-body {
+  gap: 15px;
+}
+
+.login-form-input {
+  background: #fff;
+  display: flex;
+  gap: 12px;
+  height: 46px;
+  padding: 0 16px;
+  border-radius: 20px;
+}
+
+.login-form-input input {
+  width: 100%;
+  border: none;
+}
+
+.login-form-input input:focus-visible {
+  outline: none;
+}
+
+.login-title {
+  /* width: 460px; */
+  gap: 20px;
+}
+
+.login-submit {
+  height: 46px;
+  border: none;
+  border-radius: 20px;
+  background: #a259ff;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.login input::placeholder {
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+}
+
+.login input {
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: black;
+}
+
+.login input[data-error="true"] {
+  color: red;
+}
+
+.login input[data-error="true"]:-webkit-autofill {
+  -webkit-text-fill-color: red;
+}
+
+.login input[data-error="true"]:-webkit-autofill:focus {
+  -webkit-text-fill-color: red;
+}
