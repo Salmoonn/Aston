@@ -1,8 +1,8 @@
-export interface ILoginRequest {
+export interface LoginRequest {
   login: string;
   password: string;
 }
 
-export interface ILoginRespons {
+export interface LoginRespons {
   accessToken: string;
 }
