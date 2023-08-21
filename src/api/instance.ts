@@ -1,6 +1,8 @@
 import axios, { AxiosError } from "axios";
+import api from ".";
 import { store } from "../store";
-import { getAccessToken, logoutUser } from "../store/auth/authAction";
+import { logoutUser } from "../store/auth/authAction";
+import { loginSuccess } from "../store/auth/authReducer";
 import Endpoints from "./endpoints";
 
 export const axiosInstance = axios.create({});
@@ -17,7 +19,7 @@ axiosInstance.interceptors.request.use(async (config) => {
     return config;
   }
 
-  const accessToken = await store.dispatch(getAccessToken());
+  const accessToken = store.getState().auth.authData.accessToken;
 
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
@@ -40,3 +42,12 @@ axiosInstance.interceptors.response.use(
     }
   }
 );
+
+axiosInstance.interceptors.response.use(async (response) => {
+  if (response.headers.istokenexpired === "true") {
+    const res = await api.auth.refreshToken();
+
+    res && store.dispatch(loginSuccess(res.data.accessToken));
+  }
+  return response;
+});

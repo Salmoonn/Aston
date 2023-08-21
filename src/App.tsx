@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LogIn from "./pages/LogIn";
 
-function App() {
+const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
@@ -9,6 +9,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

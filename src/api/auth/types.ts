@@ -4,5 +4,6 @@ export interface LoginRequest {
 }
 
 export interface LoginRespons {
-  accessToken: string;
+  accessToken?: string;
+  isNotValidData?: boolean;
 }
