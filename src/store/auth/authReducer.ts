@@ -54,15 +54,15 @@ export const authReducer = createSlice({
       state.authData.isLoading = false;
       state.authData.error = action.payload;
     },
-    getProfileStart(state) {
+    loadingProfileStart(state) {
       state.profileData.isLoading = true;
     },
-    getProfileSuccess(state: AuthState, action) {
+    loadingProfileSuccess(state: AuthState, action) {
       state.profileData.isLoading = false;
       state.profileData.profile = action.payload;
       state.profileData.error = null;
     },
-    getProfileFailure(state: AuthState, action) {
+    loadingProfileFailure(state: AuthState, action) {
       state.profileData.isLoading = false;
       state.profileData.error = action.payload;
     },
@@ -75,9 +75,9 @@ export const {
   loginNotValidData,
   loginSuccess,
   loginFailure,
-  getProfileStart,
-  getProfileSuccess,
-  getProfileFailure,
+  loadingProfileStart,
+  loadingProfileSuccess,
+  loadingProfileFailure,
   logoutSuccess,
 } = authReducer.actions;
 

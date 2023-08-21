@@ -3,16 +3,15 @@ import { store } from "../../store";
 import api from "../../api";
 import { LoginRequest, LoginRespons } from "../../api/auth/types";
 import {
-  getProfileFailure,
-  getProfileStart,
-  getProfileSuccess,
+  loadingProfileFailure,
+  loadingProfileStart,
+  loadingProfileSuccess,
   loginFailure,
   loginNotValidData,
   loginStart,
   loginSuccess,
   logoutSuccess,
 } from "./authReducer";
-import { history } from "../../utils/history";
 import { isTokenExpired } from "../../utils/jwt";
 import { AxiosPromise } from "axios";
 
@@ -46,7 +45,6 @@ export const logoutUser =
       await api.auth.logout();
 
       dispatch(logoutSuccess());
-      history.push("/");
     } catch (err) {
       console.error(err);
     }
@@ -56,40 +54,42 @@ export const getProfile =
   () =>
   async (dispatch: Dispatch): Promise<void> => {
     try {
-      dispatch(getProfileStart());
+      dispatch(loadingProfileStart());
 
       const res = await api.auth.getProfile();
 
-      dispatch(getProfileSuccess(res.data));
+      dispatch(loadingProfileSuccess(res.data));
     } catch (err: any) {
       console.error(err);
 
-      dispatch(getProfileFailure(err.message));
+      dispatch(loadingProfileFailure(err.message));
     }
   };
 
 let refreshTokenRequest: AxiosPromise<LoginRespons> | null = null;
 
-export const getAccessToken = () => async (dispatch: Dispatch) => {
-  try {
-    const accessToken = store.getState().auth.authData.accessToken;
+export const getAccessToken =
+  () =>
+  async (dispatch: Dispatch): Promise<string | null> => {
+    try {
+      const accessToken = store.getState().auth.authData.accessToken;
 
-    if (!accessToken || isTokenExpired(accessToken)) {
-      if (refreshTokenRequest === null) {
-        refreshTokenRequest = api.auth.refreshToken();
+      if (!accessToken || isTokenExpired(accessToken)) {
+        if (refreshTokenRequest === null) {
+          refreshTokenRequest = api.auth.refreshToken();
+        }
+
+        const res = await refreshTokenRequest;
+        refreshTokenRequest = null;
+
+        res && dispatch(loginSuccess(res.data.accessToken));
+
+        return res?.data.accessToken;
       }
+      return accessToken;
+    } catch (err) {
+      console.error(err);
 
-      const res = await refreshTokenRequest;
-      refreshTokenRequest = null;
-
-      res && dispatch(loginSuccess(res.data.accessToken));
-
-      return res?.data.accessToken;
+      return null;
     }
-    return accessToken;
-  } catch (err) {
-    console.error(err);
-
-    return null;
-  }
-};
+  };
