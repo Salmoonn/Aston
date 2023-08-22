@@ -9,7 +9,7 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(refreshToken());
-  });
+  }, []);
 
   return (
     <BrowserRouter>
