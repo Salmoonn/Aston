@@ -60,3 +60,14 @@ export const getProfile =
       dispatch(loadingProfileFailure(err.message));
     }
   };
+
+export const refreshToken =
+  () =>
+  async (dispatch: Dispatch): Promise<void> => {
+    try {
+      const response = await api.auth.refreshToken();
+      response && dispatch(loginSuccess(response.data.accessToken));
+    } catch (err: any) {
+      console.error(err);
+    }
+  };

@@ -44,7 +44,7 @@ axiosInstance.interceptors.response.use(
 );
 
 axiosInstance.interceptors.response.use(async (response) => {
-  if (response.headers.istokenexpired === "true") {
+  if (response?.headers.istokenexpired === "true") {
     const res = await api.auth.refreshToken();
 
     res && store.dispatch(loginSuccess(res.data.accessToken));
