@@ -8,10 +8,12 @@ import { RootState, useAppDispatch } from "../../store";
 import ProfileInfo from "./components/ProfileInfo";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getProfile } from "../../store/profile/profileAction";
+import { loadingProfile } from "../../store/profile/profileAction";
 import TabBar from "./components/TabBar";
 import ProfileCards from "./components/ProfileCards";
 import ProfileCollections from "./components/ProfileCollections";
+import { mergeItems } from "../../utils/mergeItems";
+import { createSrcAvatar, createSrcBanner } from "../../utils/createSrc";
 
 const Profile = (): JSX.Element => {
   const { id } = useParams();
@@ -24,23 +26,16 @@ const Profile = (): JSX.Element => {
   let items = user?.items || null;
   const collections = user?.collections || null;
 
-  if (user?.collections) {
-    const newItems = user.collections.map((e) => e.body).flat();
-    if (items) {
-      items = [...items, ...newItems];
-    } else {
-      items = newItems;
-    }
-  }
+  items = mergeItems(items, collections);
 
   const [isLoadingBanner, setIsLoadingBanner] = useState(false);
   const [isLoadingAvatar, setIsLoadingAvatar] = useState(false);
 
-  const srcBanner = config.server + "/b/" + user?.login;
-  const srcAvatar = config.server + "/a/" + user?.login;
+  const srcBanner = createSrcBanner(user?.login);
+  const srcAvatar = createSrcAvatar(user?.login);
 
   useEffect(() => {
-    id && dispatch(getProfile(id));
+    id && dispatch(loadingProfile(id));
   }, [id, dispatch]);
 
   if (profile.isLoading) {

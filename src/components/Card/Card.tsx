@@ -1,16 +1,16 @@
 import "./Card.css";
-import config from "../../config.json";
 
 import { Link } from "react-router-dom";
 import { Item } from "../../types/Item";
+import { createSrcAvatar, createSrcImg } from "../../utils/createSrc";
 
 interface CardProps {
   item: Item;
 }
 
 const Card = ({ item }: CardProps): JSX.Element => {
-  const srcImg = config.server + "/i/" + item.id;
-  const srcAvatar = item ? config.server + "/a/" + item.creator : item;
+  const srcImg = createSrcImg(item.id);
+  const srcAvatar = createSrcAvatar(item.creator);
 
   return (
     <Link to={"/i/" + item.id}>

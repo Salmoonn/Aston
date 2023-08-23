@@ -1,19 +1,5 @@
-export interface Item {
-  id: string;
-  creator: string;
-  name: string;
-  price: number;
-  highestBid: number;
-  tags: string[] | null;
-  collection: string[] | null;
-}
-
-export interface Collection {
-  id: string;
-  name: string;
-  creator: string;
-  body: Item[];
-}
+import { Item } from "../types/Item";
+import { ICollection } from "../types/collection";
 
 export interface User {
   login: string;
@@ -25,13 +11,13 @@ export interface User {
   followers: number;
   bio: string | null;
   link: {
-    globe: null;
-    discord: null;
-    youtube: null;
-    twitter: null;
-    instagram: null;
+    globe: string | null;
+    discord: string | null;
+    youtube: string | null;
+    twitter: string | null;
+    instagram: string | null;
   };
   items: Item[] | null;
-  collections: Collection[] | null;
+  collections: ICollection[] | null;
   roles: string[];
 }

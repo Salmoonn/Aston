@@ -1,11 +1,10 @@
 import "./Collection.css";
-import config from "../../config.json";
 
-import { useAppDispatch } from "../../store";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Endpoints from "../../api/endpoints";
 import { ICollection } from "../../types/collection";
+import { createSrcAvatar } from "../../utils/createSrc";
+import { createSrcImages } from "./utils/createSrcImages";
 
 interface CollectionProps {
   collection: ICollection;
@@ -16,12 +15,8 @@ const Collection = ({ collection }: CollectionProps): JSX.Element => {
   const [isLoadingOther1Photo, setIsloadingOther1Photo] = useState(false);
   const [isLoadingOther2Photo, setIsloadingOther2Photo] = useState(false);
 
-  const srcImg = collection.body
-    .slice(0, 3)
-    .map((e) => config.server + Endpoints.IMAGE.IMG_ID + e.id);
-
-  const srcAvatar =
-    config.server + Endpoints.IMAGE.AVATAR_ID + collection.creator;
+  const srcImg = createSrcImages(collection);
+  const srcAvatar = createSrcAvatar(collection.creator);
 
   return (
     <div className="collection column">

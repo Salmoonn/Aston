@@ -5,10 +5,9 @@ import {
   profileStart,
   profileSuccess,
   profileToInitialState,
-  // profileToInitialState,
 } from "./profileReducer";
 
-export const getProfile =
+export const loadingProfile =
   (data: string) =>
   async (dispatch: Dispatch): Promise<void> => {
     try {

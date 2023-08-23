@@ -1,5 +1,5 @@
 import "./ProfileCollections.css";
-import { Collection } from "../../../../components/Collection";
+import Collection from "../../../../components/Collection";
 import { ICollection } from "../../../../types/collection";
 
 interface ProfileCollectionsProps {
