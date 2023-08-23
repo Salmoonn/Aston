@@ -7,17 +7,14 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { logoutUser } from "../../store/auth/authAction";
 
-const Header = () => {
+const Header = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const IsLoggerIn = useSelector(
     (state: RootState) => !!state.auth.authData.accessToken
   );
-  const profile = useSelector(
-    (state: RootState) => state.auth.profileData.profile
-  );
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     dispatch(logoutUser());
   };
 
@@ -25,8 +22,8 @@ const Header = () => {
     <div className="header">
       <Link to="/">
         <div className="header-logo">
-          <img src={logo} className="header-logo-img" />
-          <img src={logoName} className="header-logo-text" />
+          <img src={logo} className="header-logo-img" alt="logo" />
+          <img src={logoName} className="header-logo-text" alt="logoName" />
         </div>
       </Link>
       <div className="header-menu">
@@ -78,7 +75,7 @@ const Header = () => {
           </>
         )}
         <Link to="/" className="not-desktop">
-          <img src={burgerMenu} />
+          <img src={burgerMenu} alt="burgerMenu" />
         </Link>
       </div>
     </div>

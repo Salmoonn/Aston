@@ -1,20 +1,37 @@
+export interface Item {
+  id: string;
+  creator: string;
+  name: string;
+  price: number;
+  highestBid: number;
+  tags: string[] | null;
+  collection: string[] | null;
+}
+
+export interface Collection {
+  id: string;
+  name: string;
+  creator: string;
+  body: Item[];
+}
+
 export interface User {
   login: string;
   email: string;
   name: string;
   totalSale: number;
-  collection: string[] | null;
   volume: number;
   sold: number;
   followers: number;
   bio: string | null;
   link: {
-    globe: string | null;
-    discord: string | null;
-    youtube: string | null;
-    twitter: string | null;
-    instagram: string | null;
+    globe: null;
+    discord: null;
+    youtube: null;
+    twitter: null;
+    instagram: null;
   };
-  item: string[] | null;
+  items: Item[] | null;
+  collections: Collection[] | null;
   roles: string[];
 }

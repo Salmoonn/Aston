@@ -1,0 +1,105 @@
+.artist-info {
+  padding: 40px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.artist-info-body {
+  gap: 30px;
+}
+
+.artist-info .text {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.artist-info .h5 {
+  color: #858584;
+}
+
+.artist-info-button {
+  display: flex;
+  gap: 20px;
+  height: 60px;
+}
+
+.artist-bio {
+  gap: 10px;
+}
+
+.artist-links {
+  gap: 10px;
+}
+
+.artist-links-icons {
+  gap: 10px;
+}
+
+@media screen and (max-width: 1100px) {
+  .artist-info .h2 {
+    font-size: 38px;
+    line-height: 120%;
+  }
+
+  .artist-info .h4 {
+    font-size: 22px;
+    line-height: 160%;
+  }
+
+  .artist-info .h5 {
+    font-size: 16px;
+    line-height: 140%;
+  }
+
+  .artist-info .text {
+    font-size: 16px;
+    line-height: 140%;
+  }
+}
+
+.artist-but-link,
+.artist-but-follow {
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 20px 30px;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 140%;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.artist-but-link {
+  background: #a259ff;
+  border: none;
+}
+
+.artist-but-follow {
+  background: none;
+  border: 2px solid #a259ff;
+}
+
+@media screen and (max-width: 740px) {
+  .artist-info-body {
+    width: 100%;
+  }
+
+  .artist-info .h2 {
+    font-size: 28px;
+    line-height: 140%;
+  }
+
+  .artist-info-button {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .artist-but-link,
+  .artist-but-follow {
+    justify-content: center;
+    height: 60px;
+  }
+}
