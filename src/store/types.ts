@@ -1,9 +1,11 @@
+import { Item } from "../types/Item";
+import { ICollection } from "../types/collection";
+
 export interface User {
   login: string;
   email: string;
   name: string;
   totalSale: number;
-  collection: string[] | null;
   volume: number;
   sold: number;
   followers: number;
@@ -15,6 +17,7 @@ export interface User {
     twitter: string | null;
     instagram: string | null;
   };
-  item: string[] | null;
+  items: Item[] | null;
+  collections: ICollection[] | null;
   roles: string[];
 }

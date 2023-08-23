@@ -3,14 +3,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 import { useAppDispatch } from "./store";
-import { refreshToken } from "./store/auth/authAction";
+import { refresh } from "./store/auth/authAction";
 
 const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(refreshToken());
+    dispatch(refresh());
   }, [dispatch]);
 
   return (
@@ -18,6 +19,7 @@ const App = (): JSX.Element => {
       <Header />
       <Routes>
         <Route path="login" element={<Login />} />
+        <Route path=":id" element={<Profile />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -61,12 +61,14 @@ export const getProfile =
     }
   };
 
-export const refreshToken =
+export const refresh =
   () =>
   async (dispatch: Dispatch): Promise<void> => {
     try {
-      const response = await api.auth.refreshToken();
+      let response = await api.auth.refreshToken();
       response && dispatch(loginSuccess(response.data.accessToken));
+      response = await api.auth.getProfile();
+      response && dispatch(loadingProfileSuccess(response.data));
     } catch (err: any) {
       console.error(err);
     }

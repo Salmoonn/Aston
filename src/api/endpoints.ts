@@ -1,9 +1,8 @@
 const Endpoints = {
   IMAGE: {
-    IMAGES: "/images",
-    IMAGES_ID: "/images/",
     IMG_ID: "/i/",
     AVATAR_ID: "/a/",
+    BANNER_ID: "/b/",
   },
   COLLECTION: {
     TOP_COLLECTION: "/topcollections",

@@ -1,0 +1,92 @@
+.profile-page {
+  position: relative;
+}
+
+.user-cover {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  height: 320px;
+  background: linear-gradient(
+    180deg,
+    rgba(151, 71, 255, 0) 21.88%,
+    #9747ff 95.31%
+  );
+  margin-bottom: 50px;
+}
+
+.user-cover-img {
+  z-index: -1;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+.user-avatar {
+  position: absolute;
+  top: 250px;
+  left: calc((100% - 1050px) / 2);
+  box-sizing: border-box;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 2px solid #2b2b2b;
+}
+
+.artist-stats {
+  display: flex;
+  width: 510px;
+  gap: 20px;
+}
+
+.artist-stats .h4 {
+  line-height: 140%;
+}
+
+.artist-stats > * {
+  width: 100%;
+}
+
+.artist-card-bg {
+  background: #3b3b3b;
+}
+
+.artist-card {
+  padding: 80px 0;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.footer-bg {
+  border-top: 2px solid #2b2b2b;
+}
+
+@media screen and (max-width: 1100px) {
+  .user-cover {
+    height: 280px;
+  }
+  .user-avatar {
+    top: 210px;
+    left: calc((100% - 690px) / 2);
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .user-cover {
+    height: 250px;
+  }
+  .user-avatar {
+    top: 180px;
+    left: calc((100% - 120px) / 2);
+  }
+
+  .artist-stats {
+    width: 100%;
+  }
+
+  .artist-card {
+    padding: 40px 0;
+  }
+}
