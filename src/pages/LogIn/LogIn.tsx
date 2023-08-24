@@ -9,38 +9,39 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { loginNotValidData } from "../../store/auth/authReducer";
 
-const Login = () => {
+const Login = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const isNotValidData = useSelector(
     (state: RootState) => state.auth.authData.isNotValidData
   );
 
-  const profileUserName = useSelector(
-    (state: RootState) => state.auth.profileData.profile?.name
+  const profile = useSelector(
+    (state: RootState) => state.auth.profileData.profile
   );
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
-
     dispatch(loginUser({ login, password }));
   };
 
-  const onSubmitLogin = (e: ChangeEvent<HTMLInputElement>) => {
+  const onSubmitLogin = (e: ChangeEvent<HTMLInputElement>): void => {
     setLogin(e.target.value);
     dispatch(loginNotValidData(false));
   };
-  const onSubmitPassword = (e: ChangeEvent<HTMLInputElement>) => {
+  const onSubmitPassword = (e: ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
     dispatch(loginNotValidData(false));
   };
 
-  return profileUserName ? (
-    <Navigate to={`/${profileUserName}`} />
-  ) : (
+  if (profile) {
+    return <Navigate to={`/${profile.name}`} />;
+  }
+
+  return (
     <div className="login">
       <div className="login-body column">
         <div className="login-title h2 work-sans">Log In</div>
