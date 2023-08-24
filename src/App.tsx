@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import Signup from "./pages/Signup";
 import { useAppDispatch } from "./store";
 import { refresh } from "./store/auth/authAction";
 
@@ -19,6 +20,7 @@ const App = (): JSX.Element => {
       <Header />
       <Routes>
         <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
         <Route path=":id" element={<Profile />} />
       </Routes>
       <Footer />
