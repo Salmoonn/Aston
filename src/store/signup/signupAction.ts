@@ -1,6 +1,6 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import api from "../../api";
-import { ISignUpRequest } from "../../api/signup/types";
+import { SignUpRequest } from "../../api/signup/types";
 import { getProfile } from "../auth/authAction";
 import { loginSuccess } from "../auth/authReducer";
 import {
@@ -12,7 +12,7 @@ import {
 } from "./signupReducer";
 
 export const SignupUser =
-  (data: ISignUpRequest) =>
+  (data: SignUpRequest) =>
   async (dispatch: Dispatch<any>): Promise<void> => {
     try {
       dispatch(signUpStart());
@@ -21,8 +21,6 @@ export const SignupUser =
 
       res.data.isNotValidLogin && dispatch(signUpNotValidLogin(true));
       res.data.isNotValidEmail && dispatch(signUpNotValidEmail(true));
-
-      // res.data.accessToken && dispatch(signUpSuccess());
 
       if (res.data.accessToken) {
         dispatch(signUpSuccess());
