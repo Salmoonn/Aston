@@ -1,5 +1,4 @@
 import "./Profile.css";
-import config from "../../config.json";
 
 import defaultAvatar from "../../images/defaultAvatar.png";
 
@@ -14,6 +13,7 @@ import ProfileCards from "./components/ProfileCards";
 import ProfileCollections from "./components/ProfileCollections";
 import { mergeItems } from "../../utils/mergeItems";
 import { createSrcAvatar, createSrcBanner } from "../../utils/createSrc";
+import { profileToInitialState } from "../../store/profile/profileReducer";
 
 const Profile = (): JSX.Element => {
   const { id } = useParams();
@@ -34,8 +34,9 @@ const Profile = (): JSX.Element => {
   const srcBanner = createSrcBanner(user?.login);
   const srcAvatar = createSrcAvatar(user?.login);
 
-  useEffect(() => {
-    id && dispatch(loadingProfile(id));
+  useEffect((): any => {
+    if (id) dispatch(loadingProfile(id));
+    return () => dispatch(profileToInitialState());
   }, [id, dispatch]);
 
   if (profile.isLoading) {
