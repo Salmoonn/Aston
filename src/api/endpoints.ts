@@ -19,7 +19,7 @@ const Endpoints = {
     GET_PROFILE: "/getprofile",
   },
   ITEM: {
-    GET_ITEM: "/getitem/",
+    GET_ITEM: "/item/",
   },
   SEARCH: {
     SEARCH_ITEM: "/searchitem",

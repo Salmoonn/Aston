@@ -6,4 +6,5 @@ export interface Item {
   highestBid: number;
   tags: string[] | null;
   collection: string[] | null;
+  description: string | null;
 }

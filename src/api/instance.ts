@@ -1,11 +1,16 @@
-import axios, { AxiosError } from "axios";
+import config from "../config.json";
+
 import api from ".";
+import axios, { AxiosError } from "axios";
 import { store } from "../store";
 import { logoutUser } from "../store/auth/authAction";
 import { loginSuccess } from "../store/auth/authReducer";
 import Endpoints from "./endpoints";
 
-export const axiosInstance = axios.create({});
+export const axiosInstance = axios.create({
+  baseURL: config.server,
+  withCredentials: true,
+});
 
 const urlSkipAuth = [
   Endpoints.SIGN_UP,
