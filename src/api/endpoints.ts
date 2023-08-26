@@ -21,6 +21,10 @@ const Endpoints = {
   ITEM: {
     GET_ITEM: "/getitem/",
   },
+  SEARCH: {
+    SEARCH_ITEM: "/searchitem",
+    SEARCH_COLLECTION: "/searchcollection",
+  },
 };
 
 export default Endpoints;

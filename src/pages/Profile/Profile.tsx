@@ -9,7 +9,7 @@ import ProfileInfo from "./components/ProfileInfo";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { loadingProfile } from "../../store/profile/profileAction";
-import TabBar from "./components/TabBar";
+import TabBar from "../../components/TabBar";
 import ProfileCards from "./components/ProfileCards";
 import ProfileCollections from "./components/ProfileCollections";
 import { mergeItems } from "../../utils/mergeItems";
@@ -18,6 +18,8 @@ import { createSrcAvatar, createSrcBanner } from "../../utils/createSrc";
 const Profile = (): JSX.Element => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+
+  const [tabBar, setTabBar] = useState(0);
 
   const profile = useSelector((state: RootState) => state.profile);
 
@@ -72,21 +74,35 @@ const Profile = (): JSX.Element => {
       </div>
       <ProfileInfo />
       <TabBar
-        created={items?.length || 0}
-        owned={items?.length || 0}
-        collection={collections?.length || 0}
+        props={[
+          { title: "Created", amt: items?.length || 0 },
+          { title: "Owned", amt: items?.length || 0 },
+          { title: "Collection", amt: collections?.length || 0 },
+        ]}
+        active={tabBar}
+        callback={setTabBar}
       />
-      {
-        {
-          created: items ? <ProfileCards items={items} /> : "There is not",
-          owned: items ? <ProfileCards items={items} /> : "There is not",
-          collection: collections ? (
-            <ProfileCollections collections={collections} />
-          ) : (
-            "There is not"
-          ),
-        }[profile.tabbar]
-      }
+      {tabBar === 0 ? (
+        items ? (
+          <ProfileCards items={items} />
+        ) : (
+          "There is not"
+        )
+      ) : null}
+      {tabBar === 1 ? (
+        items ? (
+          <ProfileCards items={items} />
+        ) : (
+          "There is not"
+        )
+      ) : null}
+      {tabBar === 2 ? (
+        collections ? (
+          <ProfileCollections collections={collections} />
+        ) : (
+          "There is not"
+        )
+      ) : null}
     </div>
   );
 };
