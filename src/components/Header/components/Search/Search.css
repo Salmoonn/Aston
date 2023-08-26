@@ -36,6 +36,10 @@
   outline: none;
 }
 
+.search-glass:hover {
+  cursor: pointer;
+}
+
 .search-list {
   z-index: 1;
   position: absolute;

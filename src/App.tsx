@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Login from "./pages/Login";
+import Marketplace from "./pages/Marketplace";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import { useAppDispatch } from "./store";
@@ -19,8 +20,10 @@ const App = (): JSX.Element => {
     <BrowserRouter>
       <Header />
       <Routes>
+        <Route index element={"Main"} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
+        <Route path="marketplace" element={<Marketplace />} />
         <Route path=":id" element={<Profile />} />
       </Routes>
       <Footer />
