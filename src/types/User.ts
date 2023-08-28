@@ -1,5 +1,5 @@
-import { Item } from "../types/Item";
-import { ICollection } from "../types/collection";
+import { ICollection } from "./collection";
+import { Item } from "./Item";
 
 export interface User {
   login: string;

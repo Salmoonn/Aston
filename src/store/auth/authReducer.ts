@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { User } from "../../types/User";
 
-export interface User {
-  login: string;
-  email: string;
-  name: string;
+export interface Private {
+  favorites: string[] | null;
+  history: string[] | null;
 }
 
 export interface AuthState {
@@ -14,7 +14,7 @@ export interface AuthState {
     error: string | null;
   };
   profileData: {
-    profile: User | null;
+    profile: (User & Private) | null;
     isLoading: boolean;
     error: string | null;
   };
