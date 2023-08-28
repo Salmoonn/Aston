@@ -7,8 +7,8 @@ import signupReducer from "./signup/signupReducer";
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    profile: profileReducer,
     signup: signupReducer,
+    profile: profileReducer,
   },
 });
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../types";
+import { User } from "../../types/User";
 
 export type TabBar = "created" | "owned" | "collection";
 
@@ -24,7 +24,7 @@ export const profileReducer = createSlice({
     profileStart(state) {
       state.isLoading = true;
     },
-    profileSuccess(state, action: PayloadAction<any>) {
+    profileSuccess(state, action: PayloadAction<User>) {
       state.isLoading = false;
       state.data = action.payload;
       state.error = null;
