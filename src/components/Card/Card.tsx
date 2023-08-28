@@ -3,18 +3,70 @@ import "./Card.css";
 import { Link } from "react-router-dom";
 import { Item } from "../../types/Item";
 import { createSrcAvatar, createSrcImg } from "../../utils/createSrc";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "../../store";
+import api from "../../api";
+import { getProfile } from "../../store/auth/authAction";
 
 interface CardProps {
   item: Item;
 }
 
 const Card = ({ item }: CardProps): JSX.Element => {
-  const srcImg = createSrcImg(item.id);
-  const srcAvatar = createSrcAvatar(item.creator);
+  const { id, creator } = item;
+
+  const dispatch = useAppDispatch();
+
+  const srcImg = createSrcImg(id);
+  const srcAvatar = createSrcAvatar(creator);
+
+  const profile = useSelector(
+    (state: RootState) => state.auth.profileData.profile
+  );
+
+  const [isHover, setIsHover] = useState(false);
+  const [isfavorites, setIsFavorites] = useState(false);
+
+  useEffect(() => {
+    setIsFavorites(profile?.favorites?.includes(id) || false);
+  }, [id, profile]);
+
+  const toggleFavorites = async (
+    e: React.MouseEvent<SVGSVGElement>
+  ): Promise<void> => {
+    e.preventDefault();
+    setIsFavorites(!isfavorites);
+
+    const res = await api.favorites.addToFavorites(id);
+    if (res.data.isAdd) setIsFavorites(true);
+    if (res.data.isDelete) setIsFavorites(false);
+
+    dispatch(getProfile());
+  };
 
   return (
-    <Link to={"/i/" + item.id}>
-      <div className="card smart">
+    <Link to={"/i/" + id}>
+      <div
+        className="card smart"
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
+      >
+        {creator !== profile?.login ? (
+          <svg
+            className="card-heart"
+            viewBox="0 0 24 24"
+            style={{
+              ...(isfavorites ? { fill: "#a259ff" } : { fill: "none" }),
+              ...(isHover
+                ? { visibility: "visible" }
+                : { visibility: "hidden" }),
+            }}
+            onClick={toggleFavorites}
+          >
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+        ) : null}
         <img className="card-image" src={srcImg} alt="card" />
         <div className="card-body">
           <div className="card-info">

@@ -5,6 +5,7 @@
   width: 330px;
   overflow: hidden;
   background: #2b2b2b;
+  position: relative;
 }
 
 .card-image {
@@ -59,3 +60,29 @@
   font-size: 22px;
   line-height: 160%;
 }
+
+.card-heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 50px;
+  width: 50px;
+  fill: #a259ff;
+  stroke: #a259ff;
+}
+
+/* .card-heart[data-isFavorites="true"] {
+}
+
+.card-heart[data-isFavorites="true"]:hover {
+  fill: #7d48c2;
+}
+
+.card-heart[data-isFavorites="false"] {
+  fill: none;
+}
+
+.card-heart[data-isFavorites="false"]:hover {
+  fill: none;
+  stroke: #7d48c2;
+} */
