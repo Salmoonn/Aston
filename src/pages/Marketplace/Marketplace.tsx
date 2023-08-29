@@ -6,9 +6,9 @@ import api from "../../api";
 import { Item } from "../../types/Item";
 import { ICollection } from "../../types/collection";
 import TabBar from "../../components/TabBar";
-import Card from "../../components/Card";
-import Collection from "../../components/Collection";
 import glass from "../../images/glass.svg";
+import Collections from "./components/Collections";
+import Items from "./components/Items";
 
 const Marketplace = (): JSX.Element => {
   const location = useLocation();
@@ -82,28 +82,19 @@ const Marketplace = (): JSX.Element => {
             { title: "NFTs", amt: items?.length || 0 },
             { title: "NFTs", amt: collections?.length || 0 },
           ]}
-          callback={setTabBar}
+          setTabBar={setTabBar}
           active={tabBar}
         />
         <div className="marketplace-main-body-bg">
           <div className="marketplace-main-body wrapper">
             {tabBar === 0 ? (
-              isLoadingItems ? (
-                <>Loading</>
-              ) : items ? (
-                items.map((e) => <Card key={e.id} item={e} />)
-              ) : (
-                "Not found"
-              )
+              <Items items={items} isLoading={isLoadingItems} />
             ) : null}
             {tabBar === 1 ? (
-              isLoadingICollections ? (
-                <div>Loading</div>
-              ) : collections ? (
-                collections.map((e) => <Collection key={e.id} collection={e} />)
-              ) : (
-                "Not found"
-              )
+              <Collections
+                collections={collections}
+                isLoading={isLoadingICollections}
+              />
             ) : null}
           </div>
         </div>

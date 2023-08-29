@@ -26,19 +26,9 @@ const Dropdown = (): JSX.Element => {
     setIsOpen(!isOpen);
   };
 
-  const handleClickProfile = (): void => {
+  const handleClickList = (src: string): void => {
     setIsOpen(false);
-    navigate(`/${profile?.login}`);
-  };
-
-  const handleClickFavorites = (): void => {
-    setIsOpen(false);
-    navigate("/favorites");
-  };
-
-  const handleClickHistory = (): void => {
-    setIsOpen(false);
-    navigate("/history");
+    navigate(`/${src}`);
   };
 
   const handleLogout = (): void => {
@@ -66,13 +56,22 @@ const Dropdown = (): JSX.Element => {
         className="dropdown-list work-sans column"
         style={{ visibility: isOpen ? "visible" : "hidden" }}
       >
-        <div className="dropdown-list-child" onClick={handleClickProfile}>
+        <div
+          className="dropdown-list-child"
+          onClick={() => handleClickList(profile?.login || "")}
+        >
           Profile
         </div>
-        <div className="dropdown-list-child" onClick={handleClickFavorites}>
+        <div
+          className="dropdown-list-child"
+          onClick={() => handleClickList("favorites")}
+        >
           Favorites
         </div>
-        <div className="dropdown-list-child" onClick={handleClickHistory}>
+        <div
+          className="dropdown-list-child"
+          onClick={() => handleClickList("history")}
+        >
           History
         </div>
         <div className="dropdown-list-child" onClick={handleLogout}>

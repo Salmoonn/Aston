@@ -70,19 +70,3 @@
   fill: #a259ff;
   stroke: #a259ff;
 }
-
-/* .card-heart[data-isFavorites="true"] {
-}
-
-.card-heart[data-isFavorites="true"]:hover {
-  fill: #7d48c2;
-}
-
-.card-heart[data-isFavorites="false"] {
-  fill: none;
-}
-
-.card-heart[data-isFavorites="false"]:hover {
-  fill: none;
-  stroke: #7d48c2;
-} */

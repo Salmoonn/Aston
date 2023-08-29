@@ -2,11 +2,11 @@ import "./TabBar.css";
 
 interface TabBarProps {
   props: { title: string; amt: number }[];
-  callback: React.Dispatch<React.SetStateAction<number>>;
+  setTabBar: React.Dispatch<React.SetStateAction<number>>;
   active?: number;
 }
 
-const TabBar = ({ props, callback, active }: TabBarProps): JSX.Element => {
+const TabBar = ({ props, setTabBar, active }: TabBarProps): JSX.Element => {
   return (
     <div className="tab-bar">
       <div className="tab-bar-body wrapper">
@@ -14,7 +14,7 @@ const TabBar = ({ props, callback, active }: TabBarProps): JSX.Element => {
           <button
             key={index}
             className="tab-bar-button"
-            onClick={(): void => callback(index)}
+            onClick={(): void => setTabBar(index)}
             data-active={active === index}
           >
             <div className="tab-bar-text work-sans">{elem.title}</div>
