@@ -4,21 +4,14 @@ import logo from "../../images/logo.svg";
 import logoName from "../../images/logoName.svg";
 import burgerMenu from "../../images/burgerMenu.svg";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { logoutUser } from "../../store/auth/authAction";
+import { RootState } from "../../store";
 import Search from "./components/Search";
 import Dropdown from "./components/Dropdown";
 
 const Header = (): JSX.Element => {
-  const dispatch = useAppDispatch();
-
   const IsLoggerIn = useSelector(
     (state: RootState) => !!state.auth.authData.accessToken
   );
-
-  const handleLogout = (): void => {
-    dispatch(logoutUser());
-  };
 
   return (
     <div className="header">

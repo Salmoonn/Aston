@@ -31,7 +31,7 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
   const addToFavorites = async (): Promise<void> => {
     setisAddToFavorites(!isAddToFavorites);
 
-    const res = await api.favorites.addToFavorites(id);
+    const res = await api.favorites.toggleFavorites(id);
     if (res.data.isAdd) setisAddToFavorites(true);
     if (res.data.isDelete) setisAddToFavorites(false);
 

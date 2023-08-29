@@ -40,7 +40,7 @@ const Card = ({ item }: CardProps): JSX.Element => {
     if (!profile) navigate("/login");
     setIsFavorites(!isfavorites);
 
-    const res = await api.favorites.addToFavorites(id);
+    const res = await api.favorites.toggleFavorites(id);
     if (res) {
       if (res.data.isAdd) setIsFavorites(true);
       if (res.data.isDelete) setIsFavorites(false);

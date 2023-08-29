@@ -26,7 +26,7 @@ const Endpoints = {
     SEARCH_COLLECTION: "/searchcollection",
   },
   FAVORITES: {
-    ADD_TO_FAVORITES: "/favorites",
+    TOGGLE_FAVORITES: "/favorites",
     GET_FAVORITES: "/getfavorites",
   },
   HISTORY: {
