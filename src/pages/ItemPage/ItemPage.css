@@ -1,0 +1,14 @@
+.item-cover {
+  height: 560px;
+  display: flex;
+}
+
+.item-cover img {
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+.item-page .card {
+  background: #3b3b3b;
+}

@@ -1,0 +1,34 @@
+.timer {
+  background: rgba(59, 59, 59, 0.5);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.timer-body {
+  color: white;
+  display: flex;
+  gap: 10px;
+  text-align: center;
+}
+
+.timer-time {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.timer-button {
+  margin-top: 20px;
+  height: 60px;
+  border-radius: 20px;
+  border: none;
+  background: #a259ff;
+  color: white;
+  font-size: 16px;
+  line-height: 140%;
+}

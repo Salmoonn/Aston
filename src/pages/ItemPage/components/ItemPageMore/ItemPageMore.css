@@ -1,0 +1,21 @@
+.item-page-more {
+  padding: 80px 0;
+  gap: 60px;
+}
+
+.item-page-more-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.item-page-more-headline {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-page-more-headline .title {
+  font-weight: 600;
+  font-size: 38px;
+  line-height: 120%;
+}
