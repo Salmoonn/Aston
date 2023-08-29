@@ -1,6 +1,6 @@
 import "./Card.css";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Item } from "../../types/Item";
 import { createSrcAvatar, createSrcImg } from "../../utils/createSrc";
 import { useEffect, useState } from "react";
@@ -17,6 +17,7 @@ const Card = ({ item }: CardProps): JSX.Element => {
   const { id, creator } = item;
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const srcImg = createSrcImg(id);
   const srcAvatar = createSrcAvatar(creator);
@@ -36,13 +37,15 @@ const Card = ({ item }: CardProps): JSX.Element => {
     e: React.MouseEvent<SVGSVGElement>
   ): Promise<void> => {
     e.preventDefault();
+    if (!profile) navigate("/login");
     setIsFavorites(!isfavorites);
 
     const res = await api.favorites.addToFavorites(id);
-    if (res.data.isAdd) setIsFavorites(true);
-    if (res.data.isDelete) setIsFavorites(false);
-
-    dispatch(getProfile());
+    if (res) {
+      if (res.data.isAdd) setIsFavorites(true);
+      if (res.data.isDelete) setIsFavorites(false);
+      dispatch(getProfile());
+    }
   };
 
   return (

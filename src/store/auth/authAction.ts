@@ -66,9 +66,10 @@ export const refresh =
   async (dispatch: Dispatch): Promise<void> => {
     try {
       let response = await api.auth.refreshToken();
-      response && dispatch(loginSuccess(response.data.accessToken));
+      if (response) dispatch(loginSuccess(response.data.accessToken));
+
       response = await api.auth.getProfile();
-      response && dispatch(loadingProfileSuccess(response.data));
+      if (response) dispatch(loadingProfileSuccess(response.data));
     } catch (err: any) {
       console.error(err);
     }

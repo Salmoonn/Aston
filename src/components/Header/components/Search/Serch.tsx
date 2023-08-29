@@ -6,8 +6,11 @@ import api from "../../../../api";
 import { Item } from "../../../../types/Item";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createSrcImg } from "../../../../utils/createSrc";
+import { useAppDispatch } from "../../../../store";
+import { getProfile } from "../../../../store/auth/authAction";
 
 const Search = (): JSX.Element | null => {
+  const dispatch = useAppDispatch();
   const location = useLocation();
 
   const [search, setSearch] = useState("");
@@ -20,6 +23,8 @@ const Search = (): JSX.Element | null => {
   const navigate = useNavigate();
 
   const submit = (): void => {
+    api.history.postHistory(search);
+    dispatch(getProfile());
     navigate("/marketplace", { state: { search: search } });
     setActive(false);
   };

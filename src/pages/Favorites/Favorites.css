@@ -1,0 +1,19 @@
+.favorites {
+  gap: 40px;
+}
+
+.favorites-headline {
+  font-size: 51px;
+  line-height: 110%;
+}
+
+.favorites-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 60px 0 80px;
+}
+
+.favorites .card {
+  background: #3b3b3b;
+}

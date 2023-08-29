@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Favorites from "./pages/Favorites";
+import History from "./pages/History";
 import ItemPage from "./pages/ItemPage";
 import Login from "./pages/Login";
 import Marketplace from "./pages/Marketplace";
@@ -25,6 +27,8 @@ const App = (): JSX.Element => {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="marketplace" element={<Marketplace />} />
+        <Route path="favorites" element={<Favorites />} />
+        <Route path="history" element={<History />} />
         <Route path="/i/:id" element={<ItemPage />} />
         <Route path=":id" element={<Profile />} />
       </Routes>

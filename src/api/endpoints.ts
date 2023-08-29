@@ -27,6 +27,10 @@ const Endpoints = {
   },
   FAVORITES: {
     ADD_TO_FAVORITES: "/favorites",
+    GET_FAVORITES: "/getfavorites",
+  },
+  HISTORY: {
+    POST_HISTORY: "/posthistory",
   },
 };
 

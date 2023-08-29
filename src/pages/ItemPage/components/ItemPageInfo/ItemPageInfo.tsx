@@ -52,7 +52,7 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
                 <button
                   className="item-info-other-addToFavorites smart work-sans"
                   onClick={addToFavorites}
-                  data-isAdd={isAddToFavorites}
+                  data-isadd={isAddToFavorites}
                 >
                   {isAddToFavorites ? "In Favorites" : "Add To Favorites"}
                 </button>
@@ -109,7 +109,7 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
           <button
             className="item-info-other-addToFavorites smart work-sans"
             onClick={addToFavorites}
-            data-isAdd={isAddToFavorites}
+            data-isadd={isAddToFavorites}
           >
             {isAddToFavorites ? "In Favorites" : "Add To Favorites"}
           </button>
