@@ -1,0 +1,16 @@
+.history-body {
+  gap: 10px;
+  padding: 20px 0;
+  display: flex;
+}
+
+.history-body-item {
+  background: #3b3b3b;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.history-body-item:hover {
+  background: #333;
+}

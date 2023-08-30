@@ -10,6 +10,7 @@ import { RootState, useAppDispatch } from "../../../../store";
 import { useEffect, useState } from "react";
 import api from "../../../../api";
 import { getProfile } from "../../../../store/auth/authAction";
+import ButtonFavorites from "./components/ButtonFavorites";
 
 const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -31,7 +32,7 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
   const addToFavorites = async (): Promise<void> => {
     setisAddToFavorites(!isAddToFavorites);
 
-    const res = await api.favorites.addToFavorites(id);
+    const res = await api.favorites.toggleFavorites(id);
     if (res.data.isAdd) setisAddToFavorites(true);
     if (res.data.isDelete) setisAddToFavorites(false);
 
@@ -49,13 +50,10 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
           <div className="item-info-created column">
             <div className="item-info-other only-mobile column">
               {profile?.login !== creator ? (
-                <button
-                  className="item-info-other-addToFavorites smart work-sans"
-                  onClick={addToFavorites}
-                  data-isAdd={isAddToFavorites}
-                >
-                  {isAddToFavorites ? "In Favorites" : "Add To Favorites"}
-                </button>
+                <ButtonFavorites
+                  isAddToFavorites={isAddToFavorites}
+                  addToFavorites={addToFavorites}
+                />
               ) : null}
               <ActionTime />
             </div>
@@ -106,13 +104,10 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
       </div>
       <div className="item-info-other not-mobile column">
         {profile?.login !== creator ? (
-          <button
-            className="item-info-other-addToFavorites smart work-sans"
-            onClick={addToFavorites}
-            data-isAdd={isAddToFavorites}
-          >
-            {isAddToFavorites ? "In Favorites" : "Add To Favorites"}
-          </button>
+          <ButtonFavorites
+            isAddToFavorites={isAddToFavorites}
+            addToFavorites={addToFavorites}
+          />
         ) : null}
         <ActionTime />
       </div>

@@ -6,9 +6,9 @@ import api from "../../api";
 import { Item } from "../../types/Item";
 import { ICollection } from "../../types/collection";
 import TabBar from "../../components/TabBar";
-import Card from "../../components/Card";
-import Collection from "../../components/Collection";
 import glass from "../../images/glass.svg";
+import Collections from "./components/Collections";
+import Items from "./components/Items";
 
 const Marketplace = (): JSX.Element => {
   const location = useLocation();
@@ -18,8 +18,8 @@ const Marketplace = (): JSX.Element => {
   const [search, setSearch] = useState(location.state?.search || "");
   const [tabBar, setTabBar] = useState(0);
 
-  const [isLoadingItems, setIsLoadingItems] = useState(false);
-  const [isLoadingICollections, setIsLoadingCollections] = useState(false);
+  // const [isLoadingItems, setIsLoadingItems] = useState(false);
+  // const [isLoadingICollections, setIsLoadingCollections] = useState(false);
 
   useEffect(() => {
     request(search);
@@ -36,23 +36,19 @@ const Marketplace = (): JSX.Element => {
   };
 
   const request = (params: string): void => {
-    setIsLoadingItems(true);
-    api.search
-      .searchItem(params)
-      .then(
-        (res) => setItems(res.data),
-        () => setItems(null)
-      )
-      .then(() => setIsLoadingItems(false));
+    // setIsLoadingItems(true);
+    api.search.searchItem(params).then(
+      (res) => setItems(res.data),
+      () => setItems(null)
+    );
+    // .then(() => setIsLoadingItems(false));
 
-    setIsLoadingCollections(true);
-    api.search
-      .searchCollection(params)
-      .then(
-        (res) => setCollections(res.data),
-        () => setItems(null)
-      )
-      .then(() => setIsLoadingCollections(false));
+    // setIsLoadingCollections(true);
+    api.search.searchCollection(params).then(
+      (res) => setCollections(res.data),
+      () => setItems(null)
+    );
+    // .then(() => setIsLoadingCollections(false));
   };
 
   return (
@@ -82,27 +78,17 @@ const Marketplace = (): JSX.Element => {
             { title: "NFTs", amt: items?.length || 0 },
             { title: "NFTs", amt: collections?.length || 0 },
           ]}
-          callback={setTabBar}
+          setTabBar={setTabBar}
           active={tabBar}
         />
         <div className="marketplace-main-body-bg">
           <div className="marketplace-main-body wrapper">
-            {tabBar === 0 ? (
-              isLoadingItems ? (
-                <>Loading</>
-              ) : items ? (
-                items.map((e) => <Card key={e.id} item={e} />)
-              ) : (
-                "Not found"
-              )
-            ) : null}
+            {tabBar === 0 ? items ? <Items items={items} /> : "No Items" : null}
             {tabBar === 1 ? (
-              isLoadingICollections ? (
-                <div>Loading</div>
-              ) : collections ? (
-                collections.map((e) => <Collection key={e.id} collection={e} />)
+              collections ? (
+                <Collections collections={collections} />
               ) : (
-                "Not found"
+                "No Collections"
               )
             ) : null}
           </div>

@@ -9,11 +9,10 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { loadingProfile } from "../../store/profile/profileAction";
 import TabBar from "../../components/TabBar";
-import ProfileCards from "./components/ProfileCards";
-import ProfileCollections from "./components/ProfileCollections";
 import { mergeItems } from "../../utils/mergeItems";
 import { createSrcAvatar, createSrcBanner } from "../../utils/createSrc";
 import { profileToInitialState } from "../../store/profile/profileReducer";
+import TabBarBody from "./components/TabBarBody";
 
 const Profile = (): JSX.Element => {
   const { id } = useParams();
@@ -81,29 +80,9 @@ const Profile = (): JSX.Element => {
           { title: "Collection", amt: collections?.length || 0 },
         ]}
         active={tabBar}
-        callback={setTabBar}
+        setTabBar={setTabBar}
       />
-      {tabBar === 0 ? (
-        items ? (
-          <ProfileCards items={items} />
-        ) : (
-          "There is not"
-        )
-      ) : null}
-      {tabBar === 1 ? (
-        items ? (
-          <ProfileCards items={items} />
-        ) : (
-          "There is not"
-        )
-      ) : null}
-      {tabBar === 2 ? (
-        collections ? (
-          <ProfileCollections collections={collections} />
-        ) : (
-          "There is not"
-        )
-      ) : null}
+      <TabBarBody index={tabBar} items={items} collections={collections} />
     </div>
   );
 };

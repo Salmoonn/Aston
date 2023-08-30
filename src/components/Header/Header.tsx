@@ -4,20 +4,14 @@ import logo from "../../images/logo.svg";
 import logoName from "../../images/logoName.svg";
 import burgerMenu from "../../images/burgerMenu.svg";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { logoutUser } from "../../store/auth/authAction";
+import { RootState } from "../../store";
 import Search from "./components/Search";
+import Dropdown from "./components/Dropdown";
 
 const Header = (): JSX.Element => {
-  const dispatch = useAppDispatch();
-
   const IsLoggerIn = useSelector(
     (state: RootState) => !!state.auth.authData.accessToken
   );
-
-  const handleLogout = (): void => {
-    dispatch(logoutUser());
-  };
 
   return (
     <div className="header">
@@ -45,17 +39,7 @@ const Header = (): JSX.Element => {
           </div>
         </Link>
         {IsLoggerIn ? (
-          <Link onClick={handleLogout} to="/">
-            <div className="header-logout smart">
-              <div className="header-sign-up-inner">
-                <img
-                  src="https://cdn.animaapp.com/projects/6357ce7c8a65b2f16659918c/releases/6357ceb6d40a1d649668f069/img/user-1@2x.svg"
-                  alt=""
-                />
-                <div className="button-text">Log Out</div>
-              </div>
-            </div>
-          </Link>
+          <Dropdown />
         ) : (
           <>
             <Link to="/login" className="only-desktop">

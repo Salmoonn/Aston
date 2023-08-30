@@ -8,12 +8,12 @@ import {
 } from "./profileReducer";
 
 export const loadingProfile =
-  (data: string) =>
+  (id: string) =>
   async (dispatch: Dispatch): Promise<void> => {
     try {
       dispatch(profileStart());
 
-      const response = await api.profile.getProfile(data);
+      const response = await api.profile.getProfile(id);
 
       response
         ? dispatch(profileSuccess(response.data))
