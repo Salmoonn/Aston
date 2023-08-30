@@ -122,3 +122,8 @@
   cursor: pointer;
   border: none;
 }
+
+.item-info-other-addToFavorites.isAddToFavorites {
+  background: none;
+  border: 3px solid #a259ff;
+}

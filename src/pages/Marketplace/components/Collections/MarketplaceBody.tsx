@@ -2,26 +2,17 @@ import Collection from "../../../../components/Collection";
 import { ICollection } from "../../../../types/collection";
 
 interface CollectionsProps {
-  collections: ICollection[] | null;
-  isLoading: boolean;
+  collections: ICollection[];
 }
 
-const Collections = ({
-  collections,
-  isLoading,
-}: CollectionsProps): JSX.Element => {
-  if (isLoading) return <>Loading</>;
-
-  if (collections)
-    return (
-      <>
-        {collections.map((e) => (
-          <Collection key={e.id} collection={e} />
-        ))}
-      </>
-    );
-
-  return <>Not found</>;
+const Collections = ({ collections }: CollectionsProps): JSX.Element => {
+  return (
+    <>
+      {collections.map((e) => (
+        <Collection key={e.id} collection={e} />
+      ))}
+    </>
+  );
 };
 
 export default Collections;

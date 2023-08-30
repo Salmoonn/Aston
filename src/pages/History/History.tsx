@@ -17,19 +17,19 @@ const History = (): JSX.Element => {
 
   return (
     <div className="history wrapper">
-      <div className="history-headline work-sans">History</div>
-      <div className="history-body">
+      <h1 className="history-headline work-sans">History</h1>
+      <ul className="history-body">
         {history
           ? history.map((e) => (
-              <div
+              <li
                 onClick={(): void => handleClick(e)}
                 className="history-body-item space-mono"
               >
                 {e}
-              </div>
+              </li>
             ))
           : "No history"}
-      </div>
+      </ul>
     </div>
   );
 };

@@ -2,23 +2,17 @@ import Card from "../../../../components/Card";
 import { Item } from "../../../../types/Item";
 
 interface ItemsProps {
-  items: Item[] | null;
-  isLoading: boolean;
+  items: Item[];
 }
 
-const Items = ({ items, isLoading }: ItemsProps): JSX.Element => {
-  if (isLoading) return <>Loading</>;
-
-  if (items)
-    return (
-      <>
-        {items.map((e) => (
-          <Card key={e.id} item={e} />
-        ))}
-      </>
-    );
-
-  return <>Not found</>;
+const Items = ({ items }: ItemsProps): JSX.Element => {
+  return (
+    <>
+      {items.map((e) => (
+        <Card key={e.id} item={e} />
+      ))}
+    </>
+  );
 };
 
 export default Items;

@@ -18,8 +18,8 @@ const Marketplace = (): JSX.Element => {
   const [search, setSearch] = useState(location.state?.search || "");
   const [tabBar, setTabBar] = useState(0);
 
-  const [isLoadingItems, setIsLoadingItems] = useState(false);
-  const [isLoadingICollections, setIsLoadingCollections] = useState(false);
+  // const [isLoadingItems, setIsLoadingItems] = useState(false);
+  // const [isLoadingICollections, setIsLoadingCollections] = useState(false);
 
   useEffect(() => {
     request(search);
@@ -36,23 +36,19 @@ const Marketplace = (): JSX.Element => {
   };
 
   const request = (params: string): void => {
-    setIsLoadingItems(true);
-    api.search
-      .searchItem(params)
-      .then(
-        (res) => setItems(res.data),
-        () => setItems(null)
-      )
-      .then(() => setIsLoadingItems(false));
+    // setIsLoadingItems(true);
+    api.search.searchItem(params).then(
+      (res) => setItems(res.data),
+      () => setItems(null)
+    );
+    // .then(() => setIsLoadingItems(false));
 
-    setIsLoadingCollections(true);
-    api.search
-      .searchCollection(params)
-      .then(
-        (res) => setCollections(res.data),
-        () => setItems(null)
-      )
-      .then(() => setIsLoadingCollections(false));
+    // setIsLoadingCollections(true);
+    api.search.searchCollection(params).then(
+      (res) => setCollections(res.data),
+      () => setItems(null)
+    );
+    // .then(() => setIsLoadingCollections(false));
   };
 
   return (
@@ -87,14 +83,13 @@ const Marketplace = (): JSX.Element => {
         />
         <div className="marketplace-main-body-bg">
           <div className="marketplace-main-body wrapper">
-            {tabBar === 0 ? (
-              <Items items={items} isLoading={isLoadingItems} />
-            ) : null}
+            {tabBar === 0 ? items ? <Items items={items} /> : "No Items" : null}
             {tabBar === 1 ? (
-              <Collections
-                collections={collections}
-                isLoading={isLoadingICollections}
-              />
+              collections ? (
+                <Collections collections={collections} />
+              ) : (
+                "No Collections"
+              )
             ) : null}
           </div>
         </div>
