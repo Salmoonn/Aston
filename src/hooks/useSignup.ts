@@ -1,0 +1,43 @@
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "../store";
+import { authAPI } from "../store/api/auth";
+import { signupAPI } from "../store/api/signup";
+import { setAccessToken, setProfile } from "../store/slices/authSlice";
+import { transformProfile } from "../utils/transformResponse";
+
+export const useSignup = () => {
+  const dispatch = useAppDispatch();
+
+  const [isNotValidLogin, setIsNotValidLogin] = useState(false);
+  const [isNotValidEmail, setIsNotValidEmail] = useState(false);
+
+  const handleLogin = {
+    isValid: !isNotValidLogin,
+    reset: (): void => setIsNotValidLogin(false),
+  };
+
+  const handleEmail = {
+    isValid: !isNotValidEmail,
+    reset: (): void => setIsNotValidEmail(false),
+  };
+
+  const [signup, { data, isLoading }] = signupAPI.useSignupMutation();
+  const [getProfile] = authAPI.useGetProfileMutation();
+
+  useEffect(() => {
+    if (data?.isNotValidLogin) setIsNotValidLogin(true);
+    if (data?.isNotValidEmail) setIsNotValidEmail(true);
+    if (data?.accessToken) {
+      dispatch(setAccessToken(data.accessToken));
+      getProfile(null)
+        .unwrap()
+        .then((res) => dispatch(setProfile(transformProfile(res))));
+    }
+  }, [data]);
+
+  const trySignup = (login: string, email: string, password: string): void => {
+    signup({ login, email, password });
+  };
+
+  return { trySignup, isLoading, handleLogin, handleEmail };
+};

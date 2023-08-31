@@ -3,28 +3,15 @@ import "./SignUp.css";
 import image from "../../images/signup.png";
 import user from "../../images/user.svg";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { RootState, useAppDispatch } from "../../store";
-import { SignupUser } from "../../store/signup/signupAction";
+import { RootState } from "../../store";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {
-  signUpNotValidEmail,
-  signUpNotValidLogin,
-} from "../../store/signup/signupReducer";
+import { useSignup } from "../../hooks/useSignup";
 
 const SignUp = (): JSX.Element => {
-  const dispatch = useAppDispatch();
+  const { trySignup, isLoading, handleLogin, handleEmail } = useSignup();
 
-  const profile = useSelector(
-    (state: RootState) => state.auth.profileData.profile
-  );
-  const isLoading = useSelector((state: RootState) => state.signup.isLoading);
-  const isNotValidLogin = useSelector(
-    (state: RootState) => state.signup.isNotValidLogin
-  );
-  const isNotValidEmail = useSelector(
-    (state: RootState) => state.signup.isNotValidEmail
-  );
+  const profile = useSelector((state: RootState) => state.auth.profile);
 
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
@@ -37,18 +24,18 @@ const SignUp = (): JSX.Element => {
     if (password !== confirmPassword || password.length < 8) {
       setIsNotValidPassword(true);
     } else if (!isLoading) {
-      dispatch(SignupUser({ login, email, password }));
+      trySignup(login, email, password);
     }
   };
 
   const onChangeLogin = (e: ChangeEvent<HTMLInputElement>): void => {
     setLogin(e.target.value);
-    dispatch(signUpNotValidLogin(false));
+    handleLogin.reset();
   };
 
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value);
-    dispatch(signUpNotValidEmail(false));
+    handleEmail.reset();
   };
 
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -82,7 +69,7 @@ const SignUp = (): JSX.Element => {
             <div className="signup-form-input">
               <img src={user} alt="user" />
               <input
-                data-error={isNotValidLogin}
+                data-error={!handleLogin.isValid}
                 type="text"
                 name="login"
                 value={login}
@@ -94,7 +81,7 @@ const SignUp = (): JSX.Element => {
             <div className="signup-form-input">
               <img src={user} alt="user" />
               <input
-                data-error={isNotValidEmail}
+                data-error={!handleEmail.isValid}
                 type="email"
                 name="email"
                 value={email}

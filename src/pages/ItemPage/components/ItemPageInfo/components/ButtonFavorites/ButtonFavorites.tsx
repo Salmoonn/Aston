@@ -1,19 +1,34 @@
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { RootState } from "../../../../../../store";
+
 interface ButtonFavoritesProps {
   isAddToFavorites: boolean;
-  addToFavorites: React.MouseEventHandler<HTMLButtonElement>;
+  toggleFavorites: () => void;
 }
 
 const ButtonFavorites = ({
   isAddToFavorites,
-  addToFavorites,
+  toggleFavorites,
 }: ButtonFavoritesProps): JSX.Element => {
+  const navigate = useNavigate();
+
+  const isLoggedIn = useSelector(
+    (state: RootState) => !!state.auth.accessToken
+  );
+
+  const handleClick = () => {
+    if (isLoggedIn) toggleFavorites();
+    else navigate("/login");
+  };
+
   return (
     <button
       className={
         "item-info-other-addToFavorites smart work-sans " +
         (isAddToFavorites ? "isAddToFavorites" : "")
       }
-      onClick={addToFavorites}
+      onClick={handleClick}
     >
       {isAddToFavorites ? "In Favorites" : "Add To Favorites"}
     </button>

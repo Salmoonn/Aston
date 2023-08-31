@@ -1,55 +1,27 @@
 import "./Marketplace.css";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import api from "../../api";
-import { Item } from "../../types/Item";
-import { ICollection } from "../../types/collection";
 import TabBar from "../../components/TabBar";
 import glass from "../../images/glass.svg";
 import Collections from "./components/Collections";
 import Items from "./components/Items";
+import { searchAPI } from "../../store/api/search";
 
 const Marketplace = (): JSX.Element => {
   const location = useLocation();
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
   const [search, setSearch] = useState(location.state?.search || "");
   const [tabBar, setTabBar] = useState(0);
 
-  // const [isLoadingItems, setIsLoadingItems] = useState(false);
-  // const [isLoadingICollections, setIsLoadingCollections] = useState(false);
+  const { data: items } = searchAPI.useSearchItemQuery(search);
+  const { data: collections } = searchAPI.useSearchCollectionQuery(search);
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    request(search);
     inputRef.current?.focus();
   }, []);
-
-  const [items, setItems] = useState<Item[] | null>(null);
-  const [collections, setCollections] = useState<ICollection[] | null>(null);
-
-  const inputOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const value = e.target.value;
-    setSearch(value);
-    request(value);
-  };
-
-  const request = (params: string): void => {
-    // setIsLoadingItems(true);
-    api.search.searchItem(params).then(
-      (res) => setItems(res.data),
-      () => setItems(null)
-    );
-    // .then(() => setIsLoadingItems(false));
-
-    // setIsLoadingCollections(true);
-    api.search.searchCollection(params).then(
-      (res) => setCollections(res.data),
-      () => setItems(null)
-    );
-    // .then(() => setIsLoadingCollections(false));
-  };
 
   return (
     <div className="marketplace">
@@ -67,7 +39,7 @@ const Marketplace = (): JSX.Element => {
             placeholder="Search your favorite NFTs"
             className="work-sans"
             value={search}
-            onChange={inputOnChange}
+            onChange={(e): void => setSearch(e.target.value)}
           />
           <img src={glass} alt="search" />
         </div>
@@ -76,7 +48,7 @@ const Marketplace = (): JSX.Element => {
         <TabBar
           props={[
             { title: "NFTs", amt: items?.length || 0 },
-            { title: "NFTs", amt: collections?.length || 0 },
+            { title: "Collections", amt: collections?.length || 0 },
           ]}
           setTabBar={setTabBar}
           active={tabBar}

@@ -1,1 +1,1 @@
-export { default } from "./MarketplaceBody";
+export { default } from "./Collections";

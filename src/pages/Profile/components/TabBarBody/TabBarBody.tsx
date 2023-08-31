@@ -1,12 +1,12 @@
-import { ICollection } from "../../../../types/collection";
-import { Item } from "../../../../types/Item";
+import { Collection } from "../../../../types/Types";
+import { Item } from "../../../../types/Types";
 import ProfileCards from "../ProfileCards";
 import ProfileCollections from "../ProfileCollections";
 
 interface TabBarProps {
   index: number;
   items: Item[] | null;
-  collections: ICollection[] | null;
+  collections: Collection[] | null;
 }
 
 const TabBarBody = ({

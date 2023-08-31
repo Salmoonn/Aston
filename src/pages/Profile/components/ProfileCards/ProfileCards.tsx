@@ -1,5 +1,5 @@
 import Card from "../../../../components/Card";
-import { Item } from "../../../../types/Item";
+import { Item } from "../../../../types/Types";
 
 interface ProfileCardProps {
   items: Item[];

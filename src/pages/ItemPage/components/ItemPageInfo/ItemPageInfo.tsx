@@ -1,43 +1,21 @@
 import "./ItemPageInfo.css";
 import globe from "../../../../images/globe.svg";
 
-import { Item } from "../../../../types/Item";
+import { Item } from "../../../../types/Types";
 import { Link } from "react-router-dom";
 import { createSrcAvatar } from "../../../../utils/createSrc";
 import ActionTime from "./components/ActionTime";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../../../store";
-import { useEffect, useState } from "react";
-import api from "../../../../api";
-import { getProfile } from "../../../../store/auth/authAction";
+import { RootState } from "../../../../store";
 import ButtonFavorites from "./components/ButtonFavorites";
+import { useToggleFavorites } from "../../../../hooks/useToggleFavorites";
 
 const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
-  const dispatch = useAppDispatch();
-
-  const profile = useSelector(
-    (state: RootState) => state.auth.profileData.profile
-  );
-
-  const [isAddToFavorites, setisAddToFavorites] = useState(false);
-
-  useEffect(() => {
-    setisAddToFavorites(profile?.favorites?.includes(item.id) || false);
-  }, [item, profile]);
-
   const { name, creator, description, tags, id } = item;
-
+  const profile = useSelector((state: RootState) => state.auth.profile);
+  const isInFavorites = !!profile?.favorites?.find((e) => e.id === id);
   const srcAvatar = createSrcAvatar(item.creator);
-
-  const addToFavorites = async (): Promise<void> => {
-    setisAddToFavorites(!isAddToFavorites);
-
-    const res = await api.favorites.toggleFavorites(id);
-    if (res.data.isAdd) setisAddToFavorites(true);
-    if (res.data.isDelete) setisAddToFavorites(false);
-
-    dispatch(getProfile());
-  };
+  const toggleFavorites = useToggleFavorites();
 
   return (
     <div className="item-info wrapper">
@@ -51,8 +29,8 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
             <div className="item-info-other only-mobile column">
               {profile?.login !== creator ? (
                 <ButtonFavorites
-                  isAddToFavorites={isAddToFavorites}
-                  addToFavorites={addToFavorites}
+                  isAddToFavorites={isInFavorites}
+                  toggleFavorites={(): void => toggleFavorites(id)}
                 />
               ) : null}
               <ActionTime />
@@ -105,8 +83,8 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
       <div className="item-info-other not-mobile column">
         {profile?.login !== creator ? (
           <ButtonFavorites
-            isAddToFavorites={isAddToFavorites}
-            addToFavorites={addToFavorites}
+            isAddToFavorites={isInFavorites}
+            toggleFavorites={(): void => toggleFavorites(id)}
           />
         ) : null}
         <ActionTime />

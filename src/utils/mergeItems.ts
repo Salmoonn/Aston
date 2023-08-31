@@ -1,9 +1,9 @@
-import { ICollection } from "../types/collection";
-import { Item } from "../types/Item";
+import { Collection } from "../types/Types";
+import { Item } from "../types/Types";
 
 export const mergeItems = (
   items: Item[] | null,
-  collections: ICollection[] | null
+  collections: Collection[] | null
 ): Item[] | null => {
   if (collections) {
     const newItems = collections.map((e) => e.body).flat();

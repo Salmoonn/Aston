@@ -10,7 +10,7 @@ import Dropdown from "./components/Dropdown";
 
 const Header = (): JSX.Element => {
   const IsLoggerIn = useSelector(
-    (state: RootState) => !!state.auth.authData.accessToken
+    (state: RootState) => !!state.auth.accessToken
   );
 
   return (

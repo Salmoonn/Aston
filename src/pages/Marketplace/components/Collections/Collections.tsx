@@ -1,5 +1,5 @@
 import Collection from "../../../../components/Collection";
-import { ICollection } from "../../../../types/collection";
+import { Collection as ICollection } from "../../../../types/Types";
 
 interface CollectionsProps {
   collections: ICollection[];

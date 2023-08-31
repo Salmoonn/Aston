@@ -2,29 +2,37 @@ import "./Search.css";
 
 import glass from "../../../../images/glass.svg";
 import React, { useEffect, useRef, useState } from "react";
-import api from "../../../../api";
-import { Item } from "../../../../types/Item";
+import { Item } from "../../../../types/Types";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createSrcImg } from "../../../../utils/createSrc";
-import { useAppDispatch } from "../../../../store";
-import { getProfile } from "../../../../store/auth/authAction";
+import { store, useAppDispatch } from "../../../../store";
+import { searchAPI } from "../../../../store/api/search";
+import { historyAPI } from "../../../../store/api/history";
+import { authAPI } from "../../../../store/api/auth";
+import { setProfile } from "../../../../store/slices/authSlice";
 
 const Search = (): JSX.Element | null => {
   const dispatch = useAppDispatch();
   const location = useLocation();
 
+  store.getState();
+
   const [search, setSearch] = useState("");
-  const [items, setItems] = useState<Item[] | null>(null);
   const [active, setActive] = useState(false);
-  const [isLoading, setIsloading] = useState(false);
+
+  const { data: items, isLoading } = searchAPI.useSearchItemQuery(search);
+  const [postHistory] = historyAPI.usePostHistoryMutation();
+  const [updateProfile] = authAPI.useGetProfileMutation();
 
   const refInput = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
 
   const submit = (): void => {
-    api.history.postHistory(search);
-    dispatch(getProfile());
+    postHistory(search);
+    updateProfile(null)
+      .unwrap()
+      .then((res) => dispatch(setProfile(res)));
     navigate("/marketplace", { state: { search: search } });
     setActive(false);
   };
@@ -36,20 +44,7 @@ const Search = (): JSX.Element | null => {
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setActive(true);
     const value = e.target.value;
-
     setSearch(value);
-    value ? request(value) : setItems(null);
-  };
-
-  const request = (params: string): void => {
-    setIsloading(true);
-    api.search
-      .searchItem(params)
-      .then(
-        (res) => setItems(res.data),
-        () => setItems(null)
-      )
-      .then(() => setIsloading(false));
   };
 
   useEffect(() => {

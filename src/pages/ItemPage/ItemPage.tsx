@@ -1,55 +1,35 @@
 import "./ItemPage.css";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Item } from "../../types/Item";
-import api from "../../api";
 import { createSrcImg } from "../../utils/createSrc";
 import ItemPageInfo from "./components/ItemPageInfo";
-import { mergeItems } from "../../utils/mergeItems";
 import ItemPageMore from "./components/ItemPageMore";
+import { itemAPI } from "../../store/api/item";
 
 const ItemPage = (): JSX.Element => {
   const { id } = useParams();
 
-  const [item, setItem] = useState<Item | null>(null);
-  const [moreItems, setMoreItems] = useState<Item[] | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const { data: item, isLoading } = itemAPI.useGetItemQuery(id || "");
+  const { data: moreItems } = itemAPI.useGetMoreItemsQuery(id || "");
 
   useEffect(() => {
-    if (id) getItem(id);
+    window.scrollTo(0, 0);
   }, [id]);
-
-  const getItem = async (id: string): Promise<void> => {
-    setIsLoading(true);
-    const item = (await api.item.getItem(id)).data;
-    setIsLoading(false);
-
-    setItem(item);
-    getMoreItems(item.creator);
-  };
-
-  const getMoreItems = async (creatorID: string): Promise<void> => {
-    const creator = (await api.profile.getProfile(creatorID)).data;
-    const moreItems = mergeItems(creator.items, creator.collections);
-    setMoreItems(moreItems);
-  };
 
   const srcImg = createSrcImg(id);
 
-  if (isLoading) return <div>Loading</div>;
+  if (isLoading) return <h4 className="work-sans">Loading...</h4>;
+
+  if (!item) return <h4 className="work-sans">Not item</h4>;
 
   return (
     <div className="item-page">
       <div className="item-cover">
         <img src={srcImg} alt="banner" />
       </div>
-      {item ? <ItemPageInfo item={item} /> : "Not found"}
-      {item && moreItems ? (
-        <ItemPageMore items={moreItems} id={item.id} />
-      ) : (
-        "Not found"
-      )}
+      <ItemPageInfo item={item} />
+      {moreItems ? <ItemPageMore items={moreItems} /> : "Not found"}
     </div>
   );
 };

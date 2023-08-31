@@ -8,7 +8,7 @@ const History = (): JSX.Element => {
   const navigate = useNavigate();
 
   const history = useSelector(
-    (state: RootState) => state.auth.profileData.profile?.history
+    (state: RootState) => state.auth.profile?.history
   );
 
   const handleClick = (e: string): void => {
@@ -20,8 +20,9 @@ const History = (): JSX.Element => {
       <h1 className="history-headline work-sans">History</h1>
       <ul className="history-body">
         {history
-          ? history.map((e) => (
+          ? history.map((e, i) => (
               <li
+                key={i}
                 onClick={(): void => handleClick(e)}
                 className="history-body-item space-mono"
               >

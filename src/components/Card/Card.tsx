@@ -1,51 +1,36 @@
 import "./Card.css";
 
 import { Link, useNavigate } from "react-router-dom";
-import { Item } from "../../types/Item";
+import { Item } from "../../types/Types";
 import { createSrcAvatar, createSrcImg } from "../../utils/createSrc";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import api from "../../api";
-import { getProfile } from "../../store/auth/authAction";
+import { RootState } from "../../store";
+import { useToggleFavorites } from "../../hooks/useToggleFavorites";
 
 interface CardProps {
   item: Item;
+  toggleFavorite?: () => void;
 }
 
-const Card = ({ item }: CardProps): JSX.Element => {
+const Card = ({ item, toggleFavorite }: CardProps): JSX.Element => {
   const { id, creator } = item;
 
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const profile = useSelector((state: RootState) => state.auth.profile);
+  const isfavorite = !!profile?.favorites?.find((e) => e.id === id);
+  const [isHover, setIsHover] = useState(false);
+  const toggleFavorites = useToggleFavorites();
 
   const srcImg = createSrcImg(id);
   const srcAvatar = createSrcAvatar(creator);
 
-  const profile = useSelector(
-    (state: RootState) => state.auth.profileData.profile
-  );
-
-  const [isHover, setIsHover] = useState(false);
-  const [isfavorites, setIsFavorites] = useState(false);
-
-  useEffect(() => {
-    setIsFavorites(profile?.favorites?.includes(id) || false);
-  }, [id, profile]);
-
-  const toggleFavorites = async (
-    e: React.MouseEvent<SVGSVGElement>
-  ): Promise<void> => {
+  const handleClick = (e: React.MouseEvent<SVGSVGElement>): void => {
     e.preventDefault();
-    if (!profile) navigate("/login");
-    setIsFavorites(!isfavorites);
-
-    const res = await api.favorites.toggleFavorites(id);
-    if (res) {
-      if (res.data.isAdd) setIsFavorites(true);
-      if (res.data.isDelete) setIsFavorites(false);
-      dispatch(getProfile());
-    }
+    if (!profile) {
+      navigate("/login");
+    } else toggleFavorites(id);
   };
 
   return (
@@ -60,12 +45,12 @@ const Card = ({ item }: CardProps): JSX.Element => {
             className="card-heart"
             viewBox="0 0 24 24"
             style={{
-              ...(isfavorites ? { fill: "#a259ff" } : { fill: "none" }),
+              ...(isfavorite ? { fill: "#a259ff" } : { fill: "none" }),
               ...(isHover
                 ? { visibility: "visible" }
                 : { visibility: "hidden" }),
             }}
-            onClick={toggleFavorites}
+            onClick={handleClick}
           >
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
           </svg>
