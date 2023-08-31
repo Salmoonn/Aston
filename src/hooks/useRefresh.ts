@@ -1,8 +1,6 @@
-// import { authAPI } from "../api/auth";
 import { useAppDispatch } from "../store";
 import { authAPI } from "../store/api/auth";
 import { setAccessToken, setProfile } from "../store/slices/authSlice";
-// import { setAccessToken, setProfile } from "../store/auth/authReducer";
 
 export const useRefresh = () => {
   const dispatch = useAppDispatch();
