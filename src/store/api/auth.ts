@@ -31,7 +31,7 @@ export const authAPI = createApi({
         credentials: "include",
       }),
     }),
-    logout: build.mutation({
+    logout: build.mutation<null, void>({
       query: () => Endpoints.AUTH.LOGOUT,
     }),
   }),

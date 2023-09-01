@@ -36,8 +36,8 @@ const Login = (): JSX.Element => {
   };
 
   useEffect(() => {
-    if (isLoggedIn) navigate(`/${profile?.login || ""}`);
-  }, [isLoggedIn]);
+    if (isLoggedIn && profile) navigate(`/${profile.login}`);
+  }, [isLoggedIn, profile, navigate]);
 
   return (
     <div className="login">

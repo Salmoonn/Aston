@@ -7,11 +7,10 @@ export const useLogout = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [logout] = authAPI.useLogoutMutation();
-  // const {startedTimeStamp} = authAPI.useGetProfileQuery()
 
   return (): void => {
     dispatch(setInitialState());
-    logout(null);
+    logout();
     navigate("/login");
   };
 };
