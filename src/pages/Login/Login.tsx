@@ -2,7 +2,7 @@ import "./Login.css";
 
 import image from "../../images/login.png";
 import user from "../../images/user.svg";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
 import { RootState } from "../../store";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +32,9 @@ const Login = (): JSX.Element => {
     setIsNotValidData(false);
   };
 
-  if (profile) navigate(`/${profile.login}`);
+  useEffect(() => {
+    if (profile) navigate(`/${profile.login}`);
+  }, []);
 
   return (
     <div className="login">
