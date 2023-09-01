@@ -14,6 +14,9 @@ const Login = (): JSX.Element => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
+  const isLoggedIn = useSelector(
+    (state: RootState) => !!state.auth.accessToken
+  );
   const profile = useSelector((state: RootState) => state.auth.profile);
 
   const { isNotValidData, setIsNotValidData, tryLogin } = useLogin();
@@ -33,8 +36,8 @@ const Login = (): JSX.Element => {
   };
 
   useEffect(() => {
-    if (profile) navigate(`/${profile.login}`);
-  }, []);
+    if (isLoggedIn) navigate(`/${profile?.login || ""}`);
+  }, [isLoggedIn]);
 
   return (
     <div className="login">
