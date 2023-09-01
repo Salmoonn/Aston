@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../store";
-import { authAPI } from "../store/api/auth";
+import { authAPI } from "../store/api/slice/auth";
 import { setProfile } from "../store/slices/authSlice";
 
 export const useDispatchProfile = (): (() => void) => {

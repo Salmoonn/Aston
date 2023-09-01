@@ -6,7 +6,7 @@ import TabBar from "../../components/TabBar";
 import glass from "../../images/glass.svg";
 import Collections from "./components/Collections";
 import Items from "./components/Items";
-import { searchAPI } from "../../store/api/search";
+import { searchAPI } from "../../store/api/slice/search";
 
 const Marketplace = (): JSX.Element => {
   const location = useLocation();

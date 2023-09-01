@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store";
-import { authAPI } from "../store/api/auth";
+import { authAPI } from "../store/api/slice/auth";
 import { setInitialState } from "../store/slices/authSlice";
 
 export const useLogout = () => {

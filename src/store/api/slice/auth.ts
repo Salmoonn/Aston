@@ -1,14 +1,14 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { LoginRequest } from "../../types/TypeRequest";
-import { LoginResponse, RefreshTokenResponse } from "../../types/TypeResponse";
-import { Profile } from "../../types/Types";
-import { transformProfile } from "../../utils/transformResponse";
-import Endpoints from "./endpoints";
-import { baseQueryWithReauth } from "./interceptors";
+import { LoginRequest } from "../../../types/TypeRequest";
+import {
+  LoginResponse,
+  RefreshTokenResponse,
+} from "../../../types/TypeResponse";
+import { Profile } from "../../../types/Types";
+import { transformProfile } from "../../../utils/transformResponse";
+import { api } from "..";
+import Endpoints from "../endpoints";
 
-export const authAPI = createApi({
-  reducerPath: "authAPI",
-  baseQuery: baseQueryWithReauth,
+export const authAPI = api.injectEndpoints({
   endpoints: (build) => ({
     login: build.mutation<LoginResponse, LoginRequest>({
       query: (body) => ({

@@ -9,7 +9,7 @@ import TabBar from "../../components/TabBar";
 import { mergeItems } from "../../utils/mergeItems";
 import { createSrcAvatar, createSrcBanner } from "../../utils/createSrc";
 import TabBarBody from "./components/TabBarBody";
-import { profileAPI } from "../../store/api/profile";
+import { profileAPI } from "../../store/api/slice/profile";
 
 const Profile = (): JSX.Element => {
   const { id = "" } = useParams();

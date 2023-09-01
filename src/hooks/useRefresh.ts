@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch } from "../store";
-import { authAPI } from "../store/api/auth";
+import { authAPI } from "../store/api/slice/auth";
 import { setAccessToken } from "../store/slices/authSlice";
 import { useDispatchProfile } from "./useDispatchProfile";
 

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { createSrcImg } from "../../utils/createSrc";
 import ItemPageInfo from "./components/ItemPageInfo";
 import ItemPageMore from "./components/ItemPageMore";
-import { itemAPI } from "../../store/api/item";
+import { itemAPI } from "../../store/api/slice/item";
 
 const ItemPage = (): JSX.Element => {
   const { id } = useParams();

@@ -1,16 +1,12 @@
-import config from "../../config.json";
-
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import Endpoints from "./endpoints";
-import { Collection, Item } from "../../types/Types";
+import Endpoints from "../endpoints";
+import { Collection, Item } from "../../../types/Types";
 import {
   transformCollections,
   transformItems,
-} from "../../utils/transformResponse";
+} from "../../../utils/transformResponse";
+import { api } from "..";
 
-export const searchAPI = createApi({
-  reducerPath: "searchAPI",
-  baseQuery: fetchBaseQuery({ baseUrl: config.server }),
+export const searchAPI = api.injectEndpoints({
   endpoints: (build) => ({
     searchItem: build.query<Item[] | null, string>({
       query: (search) => ({

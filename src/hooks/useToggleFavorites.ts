@@ -1,4 +1,4 @@
-import { favoritesAPI } from "../store/api/favorites";
+import { favoritesAPI } from "../store/api/slice/favorites";
 import { useDispatchProfile } from "./useDispatchProfile";
 
 export const useToggleFavorites = (): ((id: string) => void) => {

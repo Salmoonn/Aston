@@ -6,8 +6,8 @@ import { Item } from "../../../../types/Types";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createSrcImg } from "../../../../utils/createSrc";
 import { store } from "../../../../store";
-import { searchAPI } from "../../../../store/api/search";
-import { historyAPI } from "../../../../store/api/history";
+import { searchAPI } from "../../../../store/api/slice/search";
+import { historyAPI } from "../../../../store/api/slice/history";
 import { useDispatchProfile } from "../../../../hooks/useDispatchProfile";
 
 const Search = (): JSX.Element | null => {

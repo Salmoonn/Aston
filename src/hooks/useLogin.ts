@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { authAPI } from "../store/api/auth";
+import { authAPI } from "../store/api/slice/auth";
 import { useAppDispatch } from "../store";
 import { setAccessToken } from "../store/slices/authSlice";
 import { useDispatchProfile } from "./useDispatchProfile";

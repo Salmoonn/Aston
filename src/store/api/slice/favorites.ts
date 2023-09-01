@@ -1,15 +1,11 @@
-import Endpoints from "./endpoints";
+import Endpoints from "../endpoints";
 
-import { createApi } from "@reduxjs/toolkit/dist/query/react";
-import { baseQueryWithReauth } from "./interceptors";
-import { ToggleFavoritesResponse } from "../../types/TypeResponse";
-import { transformItems } from "../../utils/transformResponse";
-import { Item } from "../../types/Types";
+import { ToggleFavoritesResponse } from "../../../types/TypeResponse";
+import { transformItems } from "../../../utils/transformResponse";
+import { Item } from "../../../types/Types";
+import { api } from "..";
 
-export const favoritesAPI = createApi({
-  reducerPath: "favoritesAPI",
-  baseQuery: baseQueryWithReauth,
-  tagTypes: ["favorites"],
+export const favoritesAPI = api.injectEndpoints({
   endpoints: (build) => ({
     getFavorites: build.query<Item[], void>({
       query: () => ({

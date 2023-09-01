@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../store";
-import { signupAPI } from "../store/api/signup";
+import { signupAPI } from "../store/api/slice/signup";
 import { setAccessToken } from "../store/slices/authSlice";
 import { useDispatchProfile } from "./useDispatchProfile";
 
