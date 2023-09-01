@@ -1,20 +1,20 @@
+import { useEffect } from "react";
 import { useAppDispatch } from "../store";
 import { authAPI } from "../store/api/auth";
-import { setAccessToken, setProfile } from "../store/slices/authSlice";
+import { setAccessToken } from "../store/slices/authSlice";
+import { useDispatchProfile } from "./useDispatchProfile";
 
 export const useRefresh = () => {
   const dispatch = useAppDispatch();
-  const [refreshToken] = authAPI.useRefreshTokenMutation();
-  const [getProfile] = authAPI.useGetProfileMutation();
+  const dispatchProfile = useDispatchProfile();
+  const { data, refetch } = authAPI.useRefreshTokenQuery();
 
-  const refresh = async (): Promise<void> => {
-    try {
-      const accessToken = (await refreshToken(null).unwrap())?.accessToken;
-      if (accessToken) dispatch(setAccessToken(accessToken));
-      const profile = await getProfile(null).unwrap();
-      if (profile) dispatch(setProfile(profile));
-    } catch {}
-  };
+  useEffect(() => {
+    if (data) {
+      dispatch(setAccessToken(data.accessToken));
+      dispatchProfile();
+    }
+  }, [data]);
 
-  return refresh;
+  return refetch;
 };

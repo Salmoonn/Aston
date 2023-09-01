@@ -15,7 +15,7 @@ const Profile = (): JSX.Element => {
   const { id = "" } = useParams();
   const [tabBar, setTabBar] = useState(0);
 
-  const { data: user, isLoading } = profileAPI.useGetProfileQuery(id);
+  const { data: user, isLoading } = profileAPI.useGetUserQuery(id);
 
   let items = user?.items || null;
   const collections = user?.collections || null;

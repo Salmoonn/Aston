@@ -1,10 +1,8 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { LoginRequest } from "../../types/TypeRequest";
-import {
-  LoginResponse,
-  ProfileResponse,
-  RefreshTokenResponse,
-} from "../../types/TypeResponse";
+import { LoginResponse, RefreshTokenResponse } from "../../types/TypeResponse";
+import { Profile } from "../../types/Types";
+import { transformProfile } from "../../utils/transformResponse";
 import Endpoints from "./endpoints";
 import { baseQueryWithReauth } from "./interceptors";
 
@@ -20,17 +18,16 @@ export const authAPI = createApi({
         body,
       }),
     }),
-    getProfile: build.mutation<ProfileResponse, null>({
+    getProfile: build.query<Profile, void>({
       query: () => ({
         url: Endpoints.AUTH.PROFILE,
-        method: "GET",
         credentials: "include",
       }),
+      transformResponse: (res) => transformProfile(res),
     }),
-    refreshToken: build.mutation<RefreshTokenResponse, null>({
+    refreshToken: build.query<RefreshTokenResponse, void>({
       query: () => ({
         url: Endpoints.AUTH.REFRESH,
-        method: "GET",
         credentials: "include",
       }),
     }),

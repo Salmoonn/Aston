@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../store";
-import { authAPI } from "../store/api/auth";
 import { signupAPI } from "../store/api/signup";
-import { setAccessToken, setProfile } from "../store/slices/authSlice";
-import { transformProfile } from "../utils/transformResponse";
+import { setAccessToken } from "../store/slices/authSlice";
+import { useDispatchProfile } from "./useDispatchProfile";
 
 export const useSignup = () => {
   const dispatch = useAppDispatch();
@@ -22,16 +21,14 @@ export const useSignup = () => {
   };
 
   const [signup, { data, isLoading }] = signupAPI.useSignupMutation();
-  const [getProfile] = authAPI.useGetProfileMutation();
+  const dispatchProfile = useDispatchProfile();
 
   useEffect(() => {
     if (data?.isNotValidLogin) setIsNotValidLogin(true);
     if (data?.isNotValidEmail) setIsNotValidEmail(true);
     if (data?.accessToken) {
       dispatch(setAccessToken(data.accessToken));
-      getProfile(null)
-        .unwrap()
-        .then((res) => dispatch(setProfile(transformProfile(res))));
+      dispatchProfile();
     }
   }, [data]);
 

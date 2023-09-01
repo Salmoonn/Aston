@@ -2,22 +2,22 @@ import Endpoints from "./endpoints";
 
 import { createApi } from "@reduxjs/toolkit/dist/query/react";
 import { baseQueryWithReauth } from "./interceptors";
-import {
-  ItemResponse,
-  ToggleFavoritesResponse,
-} from "../../types/TypeResponse";
+import { ToggleFavoritesResponse } from "../../types/TypeResponse";
+import { transformItems } from "../../utils/transformResponse";
+import { Item } from "../../types/Types";
 
 export const favoritesAPI = createApi({
   reducerPath: "favoritesAPI",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["favorites"],
   endpoints: (build) => ({
-    getFavorites: build.query<ItemResponse[], null>({
+    getFavorites: build.query<Item[], void>({
       query: () => ({
         url: Endpoints.FAVORITES.GET_FAVORITES,
         credentials: "include",
       }),
       providesTags: ["favorites"],
+      transformResponse: transformItems,
     }),
     toggleFavorites: build.mutation<ToggleFavoritesResponse, string>({
       query: (itemId) => ({
@@ -26,7 +26,7 @@ export const favoritesAPI = createApi({
         body: { itemId },
         credentials: "include",
       }),
-      invalidatesTags: () => ["favorites"],
+      invalidatesTags: ["favorites"],
     }),
   }),
 });

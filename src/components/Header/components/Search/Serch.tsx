@@ -5,14 +5,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Item } from "../../../../types/Types";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createSrcImg } from "../../../../utils/createSrc";
-import { store, useAppDispatch } from "../../../../store";
+import { store } from "../../../../store";
 import { searchAPI } from "../../../../store/api/search";
 import { historyAPI } from "../../../../store/api/history";
-import { authAPI } from "../../../../store/api/auth";
-import { setProfile } from "../../../../store/slices/authSlice";
+import { useDispatchProfile } from "../../../../hooks/useDispatchProfile";
 
 const Search = (): JSX.Element | null => {
-  const dispatch = useAppDispatch();
   const location = useLocation();
 
   store.getState();
@@ -22,7 +20,7 @@ const Search = (): JSX.Element | null => {
 
   const { data: items, isLoading } = searchAPI.useSearchItemQuery(search);
   const [postHistory] = historyAPI.usePostHistoryMutation();
-  const [updateProfile] = authAPI.useGetProfileMutation();
+  const dispatchProfile = useDispatchProfile();
 
   const refInput = useRef<HTMLInputElement>(null);
 
@@ -30,9 +28,7 @@ const Search = (): JSX.Element | null => {
 
   const submit = (): void => {
     postHistory(search);
-    updateProfile(null)
-      .unwrap()
-      .then((res) => dispatch(setProfile(res)));
+    dispatchProfile();
     navigate("/marketplace", { state: { search: search } });
     setActive(false);
   };
