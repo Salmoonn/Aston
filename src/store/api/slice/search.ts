@@ -13,14 +13,14 @@ export const searchAPI = api.injectEndpoints({
         url: Endpoints.SEARCH.SEARCH_ITEM,
         params: { search },
       }),
-      transformResponse: transformItems,
+      transformResponse: (res) => (res ? transformItems(res) : res),
     }),
     searchCollection: build.query<Collection[] | null, string>({
       query: (search) => ({
         url: Endpoints.SEARCH.SEARCH_COLLECTION,
         params: { search },
       }),
-      transformResponse: transformCollections,
+      transformResponse: (res) => (res ? transformCollections(res) : res),
     }),
   }),
 });

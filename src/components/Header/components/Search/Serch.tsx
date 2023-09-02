@@ -5,26 +5,21 @@ import React, { useEffect, useRef, useState } from "react";
 import { Item } from "../../../../types/Types";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createSrcImg } from "../../../../utils/createSrc";
-import { store } from "../../../../store";
-import { searchAPI } from "../../../../store/api/slice/search";
 import { historyAPI } from "../../../../store/api/slice/history";
 import { useDispatchProfile } from "../../../../hooks/useDispatchProfile";
+import { useSearch } from "../../../../hooks/useSearch";
 
 const Search = (): JSX.Element | null => {
   const location = useLocation();
-
-  store.getState();
+  const navigate = useNavigate();
+  const refInput = useRef<HTMLInputElement>(null);
+  const dispatchProfile = useDispatchProfile();
+  const { items, searching } = useSearch();
 
   const [search, setSearch] = useState("");
   const [active, setActive] = useState(false);
 
-  const { data: items, isLoading } = searchAPI.useSearchItemQuery(search);
   const [postHistory] = historyAPI.usePostHistoryMutation();
-  const dispatchProfile = useDispatchProfile();
-
-  const refInput = useRef<HTMLInputElement>(null);
-
-  const navigate = useNavigate();
 
   const submit = (): void => {
     postHistory(search);
@@ -41,6 +36,7 @@ const Search = (): JSX.Element | null => {
     setActive(true);
     const value = e.target.value;
     setSearch(value);
+    searching(value);
   };
 
   useEffect(() => {
@@ -80,11 +76,7 @@ const Search = (): JSX.Element | null => {
         className="search-list column"
         style={{ visibility: active ? "visible" : "hidden" }}
       >
-        {isLoading ? (
-          <div className="work-sans" style={{ color: "black" }}>
-            Loading
-          </div>
-        ) : items ? (
+        {items ? (
           items.map((e) => <SearchItem key={e.id} item={e} />)
         ) : (
           <div className="work-sans" style={{ color: "black" }}>
