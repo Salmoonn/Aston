@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
 import "./Button1.css";
+
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import eye from "../../images/eye.svg";
 import rocketLaunch from "../../images/rocketLaunch.svg";
@@ -34,6 +36,13 @@ const Button1 = ({ src, text, visible, svg }: Button1Props): JSX.Element => {
       </div>
     </Link>
   );
+};
+
+Button1.prototype = {
+  src: PropTypes.string,
+  text: PropTypes.string,
+  visible: PropTypes.string,
+  svg: PropTypes.string,
 };
 
 export default Button1;

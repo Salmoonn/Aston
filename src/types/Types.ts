@@ -41,3 +41,9 @@ export interface Profile extends User {
   favorites: Item[] | null;
   history: string[] | null;
 }
+
+export interface Size {
+  isDesktop: boolean;
+  isLaptop: boolean;
+  isMobile: boolean;
+}
