@@ -6,16 +6,20 @@ import TabBar from "../../components/TabBar";
 import glass from "../../images/glass.svg";
 import Collections from "./components/Collections";
 import Items from "./components/Items";
-import { searchAPI } from "../../store/api/slice/search";
+import { useSearch } from "../../hooks/useSearch";
 
 const Marketplace = (): JSX.Element => {
   const location = useLocation();
+  const { items, collections, searching } = useSearch();
 
   const [search, setSearch] = useState(location.state?.search || "");
   const [tabBar, setTabBar] = useState(0);
 
-  const { data: items } = searchAPI.useSearchItemQuery(search);
-  const { data: collections } = searchAPI.useSearchCollectionQuery(search);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    setSearch(value);
+    searching(value);
+  };
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -39,7 +43,7 @@ const Marketplace = (): JSX.Element => {
             placeholder="Search your favorite NFTs"
             className="work-sans"
             value={search}
-            onChange={(e): void => setSearch(e.target.value)}
+            onChange={handleChange}
           />
           <img src={glass} alt="search" />
         </div>

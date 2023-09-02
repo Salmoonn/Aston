@@ -6,6 +6,8 @@ export const useSearch = () => {
   const [search, setSearch] = useState("");
   const [searchRequest, setSearchRequest] = useState("");
   const { data: items } = searchAPI.useSearchItemQuery(searchRequest);
+  const { data: collections } =
+    searchAPI.useSearchCollectionQuery(searchRequest);
 
   const request = useDebounce(setSearchRequest, 300);
 
@@ -14,5 +16,5 @@ export const useSearch = () => {
     request(search);
   };
 
-  return { items, searching };
+  return { items, collections, searching };
 };
