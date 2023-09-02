@@ -2,44 +2,42 @@ import "./Login.css";
 
 import image from "../../images/login.png";
 import user from "../../images/user.svg";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { RootState, useAppDispatch } from "../../store";
-import { loginUser } from "../../store/auth/authAction";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useLogin } from "../../hooks/useLogin";
+import { RootState } from "../../store";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
-import { loginNotValidData } from "../../store/auth/authReducer";
 
 const Login = (): JSX.Element => {
-  const dispatch = useAppDispatch();
-
-  const isNotValidData = useSelector(
-    (state: RootState) => state.auth.authData.isNotValidData
-  );
-
-  const profile = useSelector(
-    (state: RootState) => state.auth.profileData.profile
-  );
+  const navigate = useNavigate();
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
+  const isLoggedIn = useSelector(
+    (state: RootState) => !!state.auth.accessToken
+  );
+  const profile = useSelector((state: RootState) => state.auth.profile);
+
+  const { isNotValidData, setIsNotValidData, tryLogin } = useLogin();
+
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
-    dispatch(loginUser({ login, password }));
+    tryLogin(login, password);
   };
 
   const onSubmitLogin = (e: ChangeEvent<HTMLInputElement>): void => {
     setLogin(e.target.value);
-    dispatch(loginNotValidData(false));
+    setIsNotValidData(false);
   };
   const onSubmitPassword = (e: ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
-    dispatch(loginNotValidData(false));
+    setIsNotValidData(false);
   };
 
-  if (profile) {
-    return <Navigate to={`/${profile.name}`} />;
-  }
+  useEffect(() => {
+    if (isLoggedIn && profile) navigate(`/${profile.login}`);
+  }, [isLoggedIn, profile, navigate]);
 
   return (
     <div className="login">

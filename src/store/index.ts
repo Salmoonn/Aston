@@ -1,15 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import authReducer from "./auth/authReducer";
-import profileReducer from "./profile/profileReducer";
-import signupReducer from "./signup/signupReducer";
+import authReducer from "./slices/authSlice";
+import { api } from "./api";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    signup: signupReducer,
-    profile: profileReducer,
+    [api.reducerPath]: api.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -2,20 +2,18 @@ import "./Dropdown.css";
 
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RootState, useAppDispatch } from "../../../../store";
+import { RootState } from "../../../../store";
 import { createSrcAvatar } from "../../../../utils/createSrc";
 import { useState } from "react";
-import { logoutUser } from "../../../../store/auth/authAction";
+import { useLogout } from "../../../../hooks/useLogout";
 
 import arrowRight from "../../../../images/arrowRight.svg";
 
 const Dropdown = (): JSX.Element => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const logout = useLogout();
 
-  const profile = useSelector(
-    (state: RootState) => state.auth.profileData.profile
-  );
+  const profile = useSelector((state: RootState) => state.auth.profile);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -32,7 +30,8 @@ const Dropdown = (): JSX.Element => {
   };
 
   const handleLogout = (): void => {
-    dispatch(logoutUser());
+    setIsOpen(false);
+    logout();
   };
 
   return (

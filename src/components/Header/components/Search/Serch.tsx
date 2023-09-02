@@ -2,29 +2,33 @@ import "./Search.css";
 
 import glass from "../../../../images/glass.svg";
 import React, { useEffect, useRef, useState } from "react";
-import api from "../../../../api";
-import { Item } from "../../../../types/Item";
+import { Item } from "../../../../types/Types";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createSrcImg } from "../../../../utils/createSrc";
-import { useAppDispatch } from "../../../../store";
-import { getProfile } from "../../../../store/auth/authAction";
+import { store } from "../../../../store";
+import { searchAPI } from "../../../../store/api/slice/search";
+import { historyAPI } from "../../../../store/api/slice/history";
+import { useDispatchProfile } from "../../../../hooks/useDispatchProfile";
 
 const Search = (): JSX.Element | null => {
-  const dispatch = useAppDispatch();
   const location = useLocation();
 
+  store.getState();
+
   const [search, setSearch] = useState("");
-  const [items, setItems] = useState<Item[] | null>(null);
   const [active, setActive] = useState(false);
-  const [isLoading, setIsloading] = useState(false);
+
+  const { data: items, isLoading } = searchAPI.useSearchItemQuery(search);
+  const [postHistory] = historyAPI.usePostHistoryMutation();
+  const dispatchProfile = useDispatchProfile();
 
   const refInput = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
 
   const submit = (): void => {
-    api.history.postHistory(search);
-    dispatch(getProfile());
+    postHistory(search);
+    dispatchProfile();
     navigate("/marketplace", { state: { search: search } });
     setActive(false);
   };
@@ -36,20 +40,7 @@ const Search = (): JSX.Element | null => {
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setActive(true);
     const value = e.target.value;
-
     setSearch(value);
-    value ? request(value) : setItems(null);
-  };
-
-  const request = (params: string): void => {
-    setIsloading(true);
-    api.search
-      .searchItem(params)
-      .then(
-        (res) => setItems(res.data),
-        () => setItems(null)
-      )
-      .then(() => setIsloading(false));
   };
 
   useEffect(() => {

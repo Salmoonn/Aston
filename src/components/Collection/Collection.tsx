@@ -2,7 +2,7 @@ import "./Collection.css";
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ICollection } from "../../types/collection";
+import { Collection as ICollection } from "../../types/Types";
 import { createSrcAvatar } from "../../utils/createSrc";
 import { createSrcImages } from "./utils/createSrcImages";
 

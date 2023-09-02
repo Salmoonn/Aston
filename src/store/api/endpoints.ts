@@ -8,8 +8,8 @@ const Endpoints = {
     TOP_COLLECTION: "/topcollections",
     GET_COLLECTION: "/c/",
   },
-  SIGN_UP: "/signup",
   AUTH: {
+    SIGNUP: "/signup",
     LOGIN: "/login",
     PROFILE: "/profile",
     REFRESH: "/refresh",
@@ -20,13 +20,14 @@ const Endpoints = {
   },
   ITEM: {
     GET_ITEM: "/item",
+    GET_MORE_ITEMS: "/moreitems",
   },
   SEARCH: {
     SEARCH_ITEM: "/searchitem",
     SEARCH_COLLECTION: "/searchcollection",
   },
   FAVORITES: {
-    TOGGLE_FAVORITES: "/favorites",
+    TOGGLE_FAVORITES: "/togglefavorites",
     GET_FAVORITES: "/getfavorites",
   },
   HISTORY: {

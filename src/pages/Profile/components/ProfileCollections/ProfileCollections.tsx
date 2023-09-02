@@ -1,6 +1,6 @@
 import "./ProfileCollections.css";
 import Collection from "../../../../components/Collection";
-import { ICollection } from "../../../../types/collection";
+import { Collection as ICollection } from "../../../../types/Types";
 
 interface ProfileCollectionsProps {
   collections: ICollection[];

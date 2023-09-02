@@ -1,5 +1,5 @@
-import Endpoints from "../api/endpoints";
 import config from "../config.json";
+import Endpoints from "../store/api/endpoints";
 
 export const createSrcBanner = (
   login: string | undefined

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import { useRefresh } from "./hooks/useRefresh";
 import Favorites from "./pages/Favorites";
 import History from "./pages/History";
 import ItemPage from "./pages/ItemPage";
@@ -11,19 +12,18 @@ import Main from "./pages/Main";
 import Marketplace from "./pages/Marketplace";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
-import { RootState, useAppDispatch } from "./store";
-import { refresh } from "./store/auth/authAction";
+import { RootState } from "./store";
 
 const App = (): JSX.Element => {
-  const dispatch = useAppDispatch();
-
   const isLoggedIn = useSelector(
-    (state: RootState) => !!state.auth.authData.accessToken
+    (state: RootState) => !!state.auth.accessToken
   );
 
+  const refresh = useRefresh();
+
   useEffect(() => {
-    dispatch(refresh());
-  }, [dispatch]);
+    refresh();
+  }, []);
 
   return (
     <BrowserRouter>
