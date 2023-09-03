@@ -10,17 +10,18 @@ import Endpoints from "./endpoints";
 import { RootState } from "..";
 import { setAccessToken, setInitialState } from "../slices/authSlice";
 
-const baseQuery = fetchBaseQuery({
-  baseUrl: config.server,
-  credentials: "include",
-  prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).auth.accessToken;
-    if (token) {
-      headers.set("authorization", `Bearer ${token}`);
-    }
-    return headers;
-  },
-});
+const baseQuery: BaseQueryFn<string | FetchArgs, any, FetchBaseQueryError> =
+  fetchBaseQuery({
+    baseUrl: config.server,
+    credentials: "include",
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).auth.accessToken;
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
+  });
 
 export const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
@@ -34,13 +35,13 @@ export const baseQueryWithReauth: BaseQueryFn<
     "originalStatus" in result.error &&
     result.error.originalStatus === 401
   ) {
-    const refreshResult = (await baseQuery(
+    const refreshResult = await baseQuery(
       Endpoints.AUTH.REFRESH,
       api,
       extraOptions
-    )) as { data?: { accessToken: string } };
+    );
 
-    if (refreshResult?.data) {
+    if (refreshResult?.data?.accessToken) {
       api.dispatch(setAccessToken(refreshResult.data.accessToken));
 
       result = await baseQuery(args, api, extraOptions);
