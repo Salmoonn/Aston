@@ -1,5 +1,5 @@
 import { AnyAction, Dispatch, MiddlewareAPI } from "@reduxjs/toolkit";
-import authSlice, { setInitialState, setProfile } from "../slices/authSlice";
+import { setInitialState, setProfile } from "../slices/authSlice";
 
 export const logger =
   (store: MiddlewareAPI) => (next: Dispatch) => (action: AnyAction) => {

@@ -5,6 +5,7 @@ import {
   transformItems,
 } from "../../../utils/transformResponse";
 import { api } from "..";
+import { CollectionResponse, ItemResponse } from "../../../types/TypeResponse";
 
 export const searchAPI = api.injectEndpoints({
   endpoints: (build) => ({
@@ -13,14 +14,16 @@ export const searchAPI = api.injectEndpoints({
         url: Endpoints.SEARCH.SEARCH_ITEM,
         params: { search },
       }),
-      transformResponse: (res) => (res ? transformItems(res) : res),
+      transformResponse: (res: ItemResponse[] | null) =>
+        res ? transformItems(res) : res,
     }),
     searchCollection: build.query<Collection[] | null, string>({
       query: (search) => ({
         url: Endpoints.SEARCH.SEARCH_COLLECTION,
         params: { search },
       }),
-      transformResponse: (res) => (res ? transformCollections(res) : res),
+      transformResponse: (res: CollectionResponse[] | null) =>
+        res ? transformCollections(res) : res,
     }),
   }),
 });
