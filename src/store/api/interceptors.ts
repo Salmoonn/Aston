@@ -1,11 +1,16 @@
 import config from "../../config.json";
 
-import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  BaseQueryFn,
+  FetchArgs,
+  fetchBaseQuery,
+  FetchBaseQueryError,
+} from "@reduxjs/toolkit/query/react";
 import Endpoints from "./endpoints";
 import { RootState } from "..";
 import { setAccessToken, setInitialState } from "../slices/authSlice";
 
-const baseQuery: any = fetchBaseQuery({
+const baseQuery = fetchBaseQuery({
   baseUrl: config.server,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
@@ -17,21 +22,25 @@ const baseQuery: any = fetchBaseQuery({
   },
 });
 
-export const baseQueryWithReauth = async (
-  args: any,
-  api: any,
-  extraOptions: any
-): Promise<any> => {
+export const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
-  if (result?.error?.originalStatus === 401) {
-    const refreshResult = await baseQuery(
+  if (
+    result?.error &&
+    "originalStatus" in result.error &&
+    result.error.originalStatus === 401
+  ) {
+    const refreshResult = (await baseQuery(
       Endpoints.AUTH.REFRESH,
       api,
       extraOptions
-    );
+    )) as { data?: { accessToken: string } };
 
-    if (refreshResult?.data?.accessToken) {
+    if (refreshResult?.data) {
       api.dispatch(setAccessToken(refreshResult.data.accessToken));
 
       result = await baseQuery(args, api, extraOptions);

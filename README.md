@@ -19,9 +19,9 @@
 
 - Используем Modern Redux with Redux Toolkit: [store](https://github.com/Salmoonn/Aston/blob/master/src/store/index.ts).
 - Используем слайсы: [authSlice](https://github.com/Salmoonn/Aston/blob/master/src/store/slices/authSlice.ts).
-  <!-- - Есть хотя бы одна кастомная мидлвара: . -->
-- Используется RTK Query: [authAPI](https://github.com/Salmoonn/Aston/blob/master/src/store/api/slice/auth.ts)
-- Используется Transforming Responses: [transformResponse](https://github.com/Salmoonn/Aston/blob/master/src/utils/transformResponse.ts)
+- Есть хотя бы одна кастомная мидлвара: [logger](https://github.com/Salmoonn/Aston/blob/master/src/store/middleware/logger.ts).
+- Используется RTK Query: [authAPI](https://github.com/Salmoonn/Aston/blob/master/src/store/api/slice/auth.ts).
+- Используется Transforming Responses: [transformResponse](https://github.com/Salmoonn/Aston/blob/master/src/utils/transformResponse.ts).
 
 ## 2 уровень (необязательный)
 
