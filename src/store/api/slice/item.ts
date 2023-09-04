@@ -5,6 +5,7 @@ import {
 } from "../../../utils/transformResponse";
 import { Item } from "../../../types/Types";
 import { api } from "..";
+import { ItemResponse } from "../../../types/TypeResponse";
 
 export const itemAPI = api.injectEndpoints({
   endpoints: (build) => ({
@@ -20,7 +21,8 @@ export const itemAPI = api.injectEndpoints({
         url: Endpoints.ITEM.GET_MORE_ITEMS,
         params: { id },
       }),
-      transformResponse: (res) => (res ? transformItems(res) : null),
+      transformResponse: (res: ItemResponse[] | null) =>
+        res ? transformItems(res) : null,
     }),
   }),
 });

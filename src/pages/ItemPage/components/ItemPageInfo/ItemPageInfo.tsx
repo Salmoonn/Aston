@@ -15,7 +15,7 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
   const profile = useSelector((state: RootState) => state.auth.profile);
   const isInFavorites = !!profile?.favorites?.find((e) => e.id === id);
   const srcAvatar = createSrcAvatar(creator);
-  const toggleFavorites = useToggleFavorites();
+  const { toggleFavorites, isLoading } = useToggleFavorites();
 
   const date = new Date(minted);
 
@@ -33,6 +33,7 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
             <div className="item-info-other only-mobile column">
               {profile?.login !== creator ? (
                 <ButtonFavorites
+                  isLoading={isLoading}
                   isAddToFavorites={isInFavorites}
                   toggleFavorites={(): void => toggleFavorites(id)}
                 />
@@ -89,6 +90,7 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
       <div className="item-info-other not-mobile column">
         {profile?.login !== creator ? (
           <ButtonFavorites
+            isLoading={isLoading}
             isAddToFavorites={isInFavorites}
             toggleFavorites={(): void => toggleFavorites(id)}
           />

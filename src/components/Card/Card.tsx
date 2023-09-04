@@ -21,16 +21,18 @@ const Card = ({ item, toggleFavorite }: CardProps): JSX.Element => {
   const profile = useSelector((state: RootState) => state.auth.profile);
   const isfavorite = !!profile?.favorites?.find((e) => e.id === id);
   const [isHover, setIsHover] = useState(false);
-  const toggleFavorites = useToggleFavorites();
+  const { toggleFavorites, isLoading } = useToggleFavorites();
 
   const srcImg = createSrcImg(id);
   const srcAvatar = createSrcAvatar(creator);
 
   const handleClick = (e: React.MouseEvent<SVGSVGElement>): void => {
     e.preventDefault();
-    if (!profile) {
-      navigate("/login");
-    } else toggleFavorites(id);
+    if (!isLoading) {
+      if (!profile) {
+        navigate("/login");
+      } else toggleFavorites(id);
+    }
   };
 
   return (
@@ -49,6 +51,7 @@ const Card = ({ item, toggleFavorite }: CardProps): JSX.Element => {
               ...(isHover
                 ? { visibility: "visible" }
                 : { visibility: "hidden" }),
+              ...(isLoading ? { cursor: "not-allowed" } : {}),
             }}
             onClick={handleClick}
           >

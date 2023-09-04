@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import image from "../../../../images/start.gif";
 import rocket from "../../../../images/rocketLaunch2.svg";
 
-const HeroSection = (): JSX.Element => {
+export const HeroSection = (): JSX.Element => {
   return (
     <div className="hero wrapper">
       <div className="hero-info column">
@@ -48,5 +48,3 @@ const HeroSection = (): JSX.Element => {
     </div>
   );
 };
-
-export default HeroSection;

@@ -5,11 +5,13 @@ import { RootState } from "../../../../../../store";
 interface ButtonFavoritesProps {
   isAddToFavorites: boolean;
   toggleFavorites: () => void;
+  isLoading: boolean;
 }
 
 const ButtonFavorites = ({
   isAddToFavorites,
   toggleFavorites,
+  isLoading,
 }: ButtonFavoritesProps): JSX.Element => {
   const navigate = useNavigate();
 
@@ -24,6 +26,7 @@ const ButtonFavorites = ({
 
   return (
     <button
+      style={isLoading ? { cursor: "not-allowed" } : {}}
       className={
         "item-info-other-addToFavorites smart work-sans " +
         (isAddToFavorites ? "isAddToFavorites" : "")

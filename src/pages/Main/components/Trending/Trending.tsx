@@ -3,7 +3,7 @@ import "./Trending.css";
 import Collection from "../../../../components/Collection";
 import { collectionAPI } from "../../../../store/api/slice/collection";
 
-const Trending = (): JSX.Element => {
+export const Trending = (): JSX.Element => {
   const { data: collections } = collectionAPI.useGetTopCollectionsQuery();
 
   return (
@@ -24,5 +24,3 @@ const Trending = (): JSX.Element => {
     </div>
   );
 };
-
-export default Trending;

@@ -48,3 +48,8 @@ export interface Size {
   isLaptop: boolean;
   isMobile: boolean;
 }
+
+export interface UserLite extends Omit<User, "items" | "collections"> {
+  items: string[] | null;
+  collections: string[] | null;
+}
