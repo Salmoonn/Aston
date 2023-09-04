@@ -7,19 +7,23 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { createSrcImg } from "../../../../utils/createSrc";
 import { historyAPI } from "../../../../store/api/slice/history";
 import { useDispatchProfile } from "../../../../hooks/useDispatchProfile";
-import { useSearch } from "../../../../hooks/useSearch";
+import { searchAPI } from "../../../../store/api/slice/search";
+import { useDebounce } from "../../../../hooks/useDebounce";
 
 const Search = (): JSX.Element | null => {
   const location = useLocation();
   const navigate = useNavigate();
   const refInput = useRef<HTMLInputElement>(null);
   const dispatchProfile = useDispatchProfile();
-  const { items, searching } = useSearch();
 
   const [search, setSearch] = useState("");
   const [active, setActive] = useState(false);
 
   const [postHistory] = historyAPI.usePostHistoryMutation();
+
+  const [searchRequest, setSearchRequest] = useState("");
+  const { data: items } = searchAPI.useSearchItemQuery(searchRequest);
+  const refetch = useDebounce(setSearchRequest, 300);
 
   const submit = (): void => {
     postHistory(search);
@@ -36,7 +40,7 @@ const Search = (): JSX.Element | null => {
     setActive(true);
     const value = e.target.value;
     setSearch(value);
-    searching(value);
+    refetch(value);
   };
 
   useEffect(() => {

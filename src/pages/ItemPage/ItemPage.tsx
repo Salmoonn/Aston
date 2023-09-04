@@ -29,7 +29,7 @@ const ItemPage = (): JSX.Element => {
         <img src={srcImg} alt="banner" />
       </div>
       <ItemPageInfo item={item} />
-      {moreItems ? <ItemPageMore items={moreItems} /> : "Not found"}
+      <ItemPageMore items={moreItems} creator={item.creator} />
     </div>
   );
 };

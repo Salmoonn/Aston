@@ -1,0 +1,32 @@
+.trending {
+  gap: 60px;
+  padding: 80px 0;
+}
+
+.trending-head {
+  gap: 10px;
+}
+
+.trending-card-frame img {
+  height: 100%
+}
+
+.trending-cards {
+  display: flex;
+  justify-content: space-between;
+}
+
+.collection-info {
+  gap: 10px;
+}
+
+@media screen and (max-width: 740px) {
+  .trending {
+    padding: 40px 0;
+    gap: 40px;
+  }
+  .trending-card {
+    width: 315px;
+  }
+
+}

@@ -19,6 +19,11 @@
   gap: 10px;
 }
 
+.header-li-topcreators,
+.header-li-connect {
+  cursor: not-allowed;
+}
+
 .header-li-button {
   padding: 12px 20px;
 }

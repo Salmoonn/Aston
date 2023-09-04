@@ -1,5 +1,13 @@
+import HeroSection from "./components/HeroSection";
+import Trending from "./components/Trending";
+
 const Main = (): JSX.Element => {
-  return <div>Main</div>;
+  return (
+    <>
+      <HeroSection />
+      <Trending />
+    </>
+  );
 };
 
 export default Main;

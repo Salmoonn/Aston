@@ -14,6 +14,7 @@ export interface ItemResponse {
   tags: string[] | null;
   collection: string[] | null;
   description: string | null;
+  minted: number;
 }
 
 export interface UserResponse {
