@@ -28,7 +28,12 @@ const ActionTime = (): JSX.Element => {
           <div className="caption-space">Seconds</div>
         </div>
       </div>
-      <button className="timer-button work-sans">Place Bid</button>
+      <button
+        className="timer-button work-sans"
+        style={{ cursor: "not-allowed" }}
+      >
+        Place Bid
+      </button>
     </div>
   );
 };

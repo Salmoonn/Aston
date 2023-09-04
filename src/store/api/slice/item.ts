@@ -15,12 +15,12 @@ export const itemAPI = api.injectEndpoints({
       }),
       transformResponse: transformItem,
     }),
-    getMoreItems: build.query<Item[], string>({
+    getMoreItems: build.query<Item[] | null, string>({
       query: (id) => ({
         url: Endpoints.ITEM.GET_MORE_ITEMS,
         params: { id },
       }),
-      transformResponse: transformItems,
+      transformResponse: (res) => (res ? transformItems(res) : null),
     }),
   }),
 });

@@ -11,18 +11,22 @@ import ButtonFavorites from "./components/ButtonFavorites";
 import { useToggleFavorites } from "../../../../hooks/useToggleFavorites";
 
 const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
-  const { name, creator, description, tags, id } = item;
+  const { name, creator, description, tags, id, minted } = item;
   const profile = useSelector((state: RootState) => state.auth.profile);
   const isInFavorites = !!profile?.favorites?.find((e) => e.id === id);
-  const srcAvatar = createSrcAvatar(item.creator);
+  const srcAvatar = createSrcAvatar(creator);
   const toggleFavorites = useToggleFavorites();
+
+  const date = new Date(minted);
 
   return (
     <div className="item-info wrapper">
       <div className="item-info-body column">
         <div className="item-info-headline column">
           <div className="h2 work-sans">{name}</div>
-          <div className="item-minted work-sans">Minted On</div>
+          <div className="item-minted work-sans">
+            Minted On {date.toDateString()}
+          </div>
         </div>
         <div className="item-info-additional column">
           <div className="item-info-created column">
@@ -68,14 +72,16 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
           </div>
           <div className="item-info-tags column">
             <div className="item-info-tags-title work-sans">Tags</div>
-            <div className="item-tags">
-              {tags?.map((e, i) => (
-                <Link to="" key={i}>
-                  <div className="item-tag work-sans">
-                    {e.toLocaleUpperCase()}
-                  </div>
-                </Link>
-              ))}
+            <div className="item-tags work-sans">
+              {tags
+                ? tags.map((e, i) => (
+                    <div key={i} style={{ cursor: "not-allowed" }}>
+                      <div className="item-tag work-sans">
+                        {e.toLocaleUpperCase()}
+                      </div>
+                    </div>
+                  ))
+                : "Not tags"}
             </div>
           </div>
         </div>
