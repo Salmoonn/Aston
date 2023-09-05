@@ -42,6 +42,10 @@ const App = (): JSX.Element => {
     refresh();
   }, []);
 
+  useEffect(() => {
+    return window.removeEventListener("resize", resize);
+  }, []);
+
   useEffect(() => () => window.removeEventListener("resize", resize), []);
 
   return (
