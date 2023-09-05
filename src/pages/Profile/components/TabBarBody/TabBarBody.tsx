@@ -1,9 +1,9 @@
-import { Collection } from "../../../../types/Types";
-import { Item } from "../../../../types/Types";
+import type { Collection } from "../../../../types/Types";
+import type { Item } from "../../../../types/Types";
 import { ProfileCards } from "../ProfileCards";
 import { ProfileCollections } from "../ProfileCollections";
 
-interface TabBarProps {
+interface Props {
   index: number;
   items: Item[] | null;
   collections: Collection[] | null;
@@ -13,7 +13,7 @@ export const TabBarBody = ({
   index,
   items,
   collections,
-}: TabBarProps): JSX.Element => {
+}: Props): JSX.Element => {
   switch (index) {
     case 0: {
       if (items) return <ProfileCards items={items} />;

@@ -1,32 +1,50 @@
 import "./History.css";
-
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "../../store";
+import { useAppDispatch } from "../../store";
+import { historyAPI } from "../../store/api/slice/history";
+import { removeHistory } from "../../store/slices/authSlice";
+import { useGetHistory } from "../../hooks/useGetHistory";
 
 export const History = (): JSX.Element => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const history = useSelector(
-    (state: RootState) => state.auth.profile?.history
-  );
+  const history = useGetHistory();
 
-  const handleClick = (e: string): void => {
-    navigate("/marketplace", { state: { search: e } });
+  const [deleteHistory, { isLoading }] = historyAPI.useDeleteHistoryMutation();
+
+  const handleClickItem = (elem: string): void => {
+    navigate("/marketplace", { state: { search: elem } });
+  };
+
+  const handleClickClear = (): void => {
+    if (!isLoading) {
+      deleteHistory();
+      dispatch(removeHistory());
+    }
   };
 
   return (
     <div className="history wrapper">
-      <h1 className="history-headline work-sans">History</h1>
+      <div className="history-headline">
+        <h1 className="work-sans">History</h1>
+        <button
+          className="history-button work-sans smart"
+          onClick={handleClickClear}
+          style={isLoading ? { cursor: "not-allowed" } : {}}
+        >
+          clear history
+        </button>
+      </div>
       <ul className="history-body">
         {history
-          ? history.map((e, i) => (
+          ? history.map((elem, index) => (
               <li
-                key={i}
-                onClick={(): void => handleClick(e)}
+                key={index}
+                onClick={(): void => handleClickItem(elem)}
                 className="history-body-item space-mono"
               >
-                {e}
+                {elem}
               </li>
             ))
           : "No history"}

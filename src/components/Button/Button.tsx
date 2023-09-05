@@ -7,19 +7,14 @@ import eye from "../../images/eye.svg";
 import rocketLaunch from "../../images/rocketLaunch.svg";
 import arrowRight from "../../images/arrowRight.svg";
 
-interface ButtonProps {
+interface Props {
   src: string;
   text?: string;
   visible?: "not-mobile" | "only-mobile";
   svg?: "eye" | "rocketLaunch" | "arrowRight";
 }
 
-export const Button = ({
-  src,
-  text,
-  visible,
-  svg,
-}: ButtonProps): JSX.Element => {
+export const Button = ({ src, text, visible, svg }: Props): JSX.Element => {
   let imgSvg;
 
   switch (svg) {

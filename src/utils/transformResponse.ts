@@ -1,16 +1,16 @@
-import {
+import type {
   CollectionResponse,
   ItemResponse,
   ProfileResponse,
   UserResponse,
 } from "../types/TypeResponse";
-import { Collection, Item, Profile, User } from "../types/Types";
+import type { Collection, Item, Profile, User } from "../types/Types";
 
 export const transformCollection = (
-  collection: CollectionResponse
+  collection: CollectionResponse,
 ): Collection => collection;
 export const transformCollections = (
-  collections: CollectionResponse[]
+  collections: CollectionResponse[],
 ): Collection[] => collections.map(transformCollection);
 
 export const transformItem = (item: ItemResponse): Item => item;

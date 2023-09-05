@@ -1,17 +1,15 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { useEffect, useState, createContext } from "react";
-import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { useDebounce } from "./hooks/useDebounce";
 import { useRefresh } from "./hooks/useRefresh";
-import { RootState } from "./store";
-import { Size as SizeType } from "./types/Types";
 import { getSize } from "./utils/getSize";
+import type { Size as SizeType } from "./types/Types";
 
-const Favorites = lazy(() => import("./pages/Favorites"));
-const History = lazy(() => import("./pages/History"));
+const FavoritesRoute = lazy(() => import("./components/FavoritesRoute"));
+const HistoryRoute = lazy(() => import("./components/HistoryRoute"));
 const ItemPage = lazy(() => import("./pages/ItemPage"));
 const Login = lazy(() => import("./pages/Login"));
 const Main = lazy(() => import("./pages/Main"));
@@ -19,30 +17,26 @@ const Marketplace = lazy(() => import("./pages/Marketplace"));
 const Profile = lazy(() => import("./pages/Profile"));
 const Signup = lazy(() => import("./pages/Signup"));
 
-export const Size = createContext({} as SizeType);
+const initSize = {
+  isDesktop: true,
+  isLaptop: false,
+  isMobile: false,
+};
+export const Size = createContext(initSize);
 
-const App = (): JSX.Element => {
-  const isLoggedIn = useSelector(
-    (state: RootState) => !!state.auth.accessToken
-  );
-
-  const [size, setSize] = useState<SizeType>({
-    isDesktop: true,
-    isLaptop: false,
-    isMobile: false,
-  });
-
+export const App = (): JSX.Element => {
+  const [size, setSize] = useState<SizeType>(initSize);
   const resize = useDebounce(() => setSize(getSize()), 300);
-
-  window.addEventListener("resize", resize);
-
   const refresh = useRefresh();
 
   useEffect(() => {
     refresh();
   }, []);
 
-  useEffect(() => () => window.removeEventListener("resize", resize), []);
+  useEffect(() => {
+    window.addEventListener("resize", resize);
+    return window.removeEventListener("resize", resize);
+  }, []);
 
   return (
     <Size.Provider value={size}>
@@ -54,14 +48,8 @@ const App = (): JSX.Element => {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="marketplace" element={<Marketplace />} />
-            <Route
-              path="favorites"
-              element={isLoggedIn ? <Favorites /> : <Login />}
-            />
-            <Route
-              path="history"
-              element={isLoggedIn ? <History /> : <Login />}
-            />
+            <Route path="favorites" element={<FavoritesRoute />} />
+            <Route path="history" element={<HistoryRoute />} />
             <Route path="/i/:id" element={<ItemPage />} />
             <Route path=":id" element={<Profile />} />
           </Routes>
@@ -71,5 +59,3 @@ const App = (): JSX.Element => {
     </Size.Provider>
   );
 };
-
-export default App;

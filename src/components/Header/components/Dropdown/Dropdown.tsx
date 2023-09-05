@@ -1,24 +1,23 @@
 import "./Dropdown.css";
 
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "../../../../store";
 import { createSrcAvatar } from "../../../../utils/createSrc";
 import { useState } from "react";
 import { useLogout } from "../../../../hooks/useLogout";
 
 import arrowRight from "../../../../images/arrowRight.svg";
+import { useGetProfile } from "../../../../hooks/useGetProfile";
 
 export const Dropdown = (): JSX.Element => {
   const navigate = useNavigate();
   const logout = useLogout();
 
-  const profile = useSelector((state: RootState) => state.auth.profile);
+  const profile = useGetProfile();
 
   const [isOpen, setIsOpen] = useState(false);
 
   const [isLoadedAvatar, setIsLoadedAvatar] = useState(false);
-  const srcAvatar = createSrcAvatar(profile?.login);
+  const srcAvatar = profile ? createSrcAvatar(profile.login) : "";
 
   const handleClick = (): void => {
     setIsOpen(!isOpen);
@@ -61,16 +60,10 @@ export const Dropdown = (): JSX.Element => {
         >
           Profile
         </div>
-        <div
-          className="dropdown-list-child"
-          onClick={() => handleClickList("favorites")}
-        >
+        <div className="dropdown-list-child" onClick={() => handleClickList("favorites")}>
           Favorites
         </div>
-        <div
-          className="dropdown-list-child"
-          onClick={() => handleClickList("history")}
-        >
+        <div className="dropdown-list-child" onClick={() => handleClickList("history")}>
           History
         </div>
         <div className="dropdown-list-child" onClick={handleLogout}>

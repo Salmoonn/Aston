@@ -1,14 +1,12 @@
 import "./Search.css";
-
 import glass from "../../../../images/glass.svg";
 import React, { useEffect, useRef, useState } from "react";
-import { Item } from "../../../../types/Types";
 import { useLocation, useNavigate } from "react-router-dom";
-import { createSrcImg } from "../../../../utils/createSrc";
 import { historyAPI } from "../../../../store/api/slice/history";
 import { useDispatchProfile } from "../../../../hooks/useDispatchProfile";
 import { searchAPI } from "../../../../store/api/slice/search";
 import { useDebounce } from "../../../../hooks/useDebounce";
+import { SearchItem } from "./components/SearchItem";
 
 export const Search = (): JSX.Element | null => {
   const location = useLocation();
@@ -43,17 +41,17 @@ export const Search = (): JSX.Element | null => {
     refetch(value);
   };
 
-  useEffect(() => {
-    document.addEventListener("click", handleClick);
-  }, [active]);
-
-  const handleClick = (e: any): void => {
+  const handleClick = (e: MouseEvent): void => {
     setActive(false);
     document.removeEventListener("click", handleClick);
   };
 
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+  }, [active]);
+
   const searchOnClick = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ): void => {
     if (!active) {
       e.stopPropagation();
@@ -88,21 +86,6 @@ export const Search = (): JSX.Element | null => {
           </div>
         )}
       </div>
-    </div>
-  );
-};
-
-const SearchItem = ({ item }: { item: Item }): JSX.Element => {
-  const navigate = useNavigate();
-
-  const handleClick = (): void => {
-    navigate(`/i/${item.id}`);
-  };
-
-  return (
-    <div className="search-list-elem" onClick={handleClick}>
-      <img src={createSrcImg(item.id)} alt="preview" className="search-img" />
-      <div className="search-item-name work-sans">{item.name}</div>
     </div>
   );
 };

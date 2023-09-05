@@ -25,8 +25,8 @@ export const Profile = (): JSX.Element => {
   const [isLoadingBanner, setIsLoadingBanner] = useState(false);
   const [isLoadingAvatar, setIsLoadingAvatar] = useState(false);
 
-  const srcBanner = createSrcBanner(user?.login);
-  const srcAvatar = createSrcAvatar(user?.login);
+  const srcBanner = user ? createSrcBanner(user.login) : "";
+  const srcAvatar = user ? createSrcAvatar(user.login) : "";
 
   if (isLoading) {
     return <div>Loading</div>;

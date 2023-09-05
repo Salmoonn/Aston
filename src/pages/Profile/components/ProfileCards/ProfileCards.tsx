@@ -1,11 +1,11 @@
 import { Card } from "../../../../components/Card";
-import { Item } from "../../../../types/Types";
+import type { Item } from "../../../../types/Types";
 
-interface ProfileCardProps {
+interface Props {
   items: Item[];
 }
 
-export const ProfileCards = ({ items }: ProfileCardProps): JSX.Element => {
+export const ProfileCards = ({ items }: Props): JSX.Element => {
   return (
     <div className="artist-card-bg">
       <div className="artist-card wrapper">

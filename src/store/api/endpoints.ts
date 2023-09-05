@@ -33,6 +33,7 @@ const Endpoints = {
   },
   HISTORY: {
     POST_HISTORY: "/posthistory",
+    DELETE_HISTORY: "deletehistory",
   },
 };
 

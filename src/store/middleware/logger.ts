@@ -1,4 +1,4 @@
-import { AnyAction, Dispatch, MiddlewareAPI } from "@reduxjs/toolkit";
+import type { AnyAction, Dispatch, MiddlewareAPI } from "@reduxjs/toolkit";
 import { setInitialState, setProfile } from "../slices/authSlice";
 
 export const logger =
@@ -9,7 +9,7 @@ export const logger =
         JSON.stringify({
           login: action.payload.login,
           roles: action.payload.roles,
-        })
+        }),
       );
     }
     if (action.type === setInitialState.type) {

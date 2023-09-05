@@ -11,7 +11,7 @@ export const SubForm = (): JSX.Element => {
         name="email"
         placeholder="Enter your email here"
       />
-      <button className="subBut smart">
+      <button className="subBut smart" style={{ cursor: "not-allowed" }}>
         <img src={image} alt="post" />
         <div className="work-sans">Subscribe</div>
       </button>

@@ -1,14 +1,12 @@
 import "./ProfileCollections.css";
 import { Collection } from "../../../../components/Collection";
-import { Collection as ICollection } from "../../../../types/Types";
+import type { Collection as ICollection } from "../../../../types/Types";
 
-interface ProfileCollectionsProps {
+interface Props {
   collections: ICollection[];
 }
 
-export const ProfileCollections = ({
-  collections,
-}: ProfileCollectionsProps): JSX.Element => {
+export const ProfileCollections = ({ collections }: Props): JSX.Element => {
   return (
     <div className="profileCollections-bg">
       <div className="profileCollections wrapper">

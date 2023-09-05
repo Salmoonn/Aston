@@ -1,25 +1,23 @@
 import "./Card.css";
-
-import { Link, useNavigate } from "react-router-dom";
-import { Item } from "../../types/Types";
-import { createSrcAvatar, createSrcImg } from "../../utils/createSrc";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { Link, useNavigate } from "react-router-dom";
+import { createSrcAvatar, createSrcImg } from "../../utils/createSrc";
 import { useToggleFavorites } from "../../hooks/useToggleFavorites";
+import type { RootState } from "../../store";
+import type { Item } from "../../types/Types";
 
-interface CardProps {
+interface Props {
   item: Item;
-  toggleFavorite?: () => void;
 }
 
-export const Card = ({ item, toggleFavorite }: CardProps): JSX.Element => {
+export const Card = ({ item }: Props): JSX.Element => {
   const { id, creator } = item;
 
   const navigate = useNavigate();
 
   const profile = useSelector((state: RootState) => state.auth.profile);
-  const isfavorite = !!profile?.favorites?.find((e) => e.id === id);
+  const isFavorite = !!profile?.favorites?.find((e) => e.id === id);
   const [isHover, setIsHover] = useState(false);
   const { toggleFavorites, isLoading } = useToggleFavorites();
 
@@ -47,7 +45,7 @@ export const Card = ({ item, toggleFavorite }: CardProps): JSX.Element => {
             className="card-heart"
             viewBox="0 0 24 24"
             style={{
-              ...(isfavorite ? { fill: "#a259ff" } : { fill: "none" }),
+              ...(isFavorite ? { fill: "#a259ff" } : { fill: "none" }),
               ...(isHover
                 ? { visibility: "visible" }
                 : { visibility: "hidden" }),

@@ -1,11 +1,14 @@
 import Endpoints from "../endpoints";
-import { Collection, Item } from "../../../types/Types";
+import type { Collection, Item } from "../../../types/Types";
 import {
   transformCollections,
   transformItems,
 } from "../../../utils/transformResponse";
 import { api } from "..";
-import { CollectionResponse, ItemResponse } from "../../../types/TypeResponse";
+import type {
+  CollectionResponse,
+  ItemResponse,
+} from "../../../types/TypeResponse";
 
 export const searchAPI = api.injectEndpoints({
   endpoints: (build) => ({

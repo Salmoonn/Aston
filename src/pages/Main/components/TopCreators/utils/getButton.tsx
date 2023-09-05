@@ -1,7 +1,7 @@
 import { Button } from "../../../../../components/Button";
 
 export const getButton = (
-  visible: "not-mobile" | "only-mobile"
+  visible: "not-mobile" | "only-mobile",
 ): JSX.Element => {
   return (
     <Button

@@ -1,5 +1,4 @@
 import "./Trending.css";
-
 import { Collection } from "../../../../components/Collection";
 import { collectionAPI } from "../../../../store/api/slice/collection";
 
@@ -11,7 +10,7 @@ export const Trending = (): JSX.Element => {
       <div className="trending-head column">
         <h3 className="work-sans">Trending Collection</h3>
         <div className="body-work">
-          Chechout our weekly update trending collection.
+          Checkout our weekly update trending collection.
         </div>
       </div>
       <div className="trending-cards">

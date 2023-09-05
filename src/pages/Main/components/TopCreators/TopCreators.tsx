@@ -1,5 +1,4 @@
 import "./TopCreators.css";
-
 import { userAPI } from "../../../../store/api/slice/user";
 import { UserCard } from "./components/UserCard";
 import { getButton } from "./utils/getButton";
