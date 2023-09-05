@@ -1,22 +1,11 @@
 import "./TopCreators.css";
 
 import { userAPI } from "../../../../store/api/slice/user";
-import Button1 from "../../../../components/Button";
 import { UserCard } from "./components/UserCard";
+import { getButton } from "./utils/getButton";
 
 export const TopCreators = (): JSX.Element => {
   const { data: topUsers } = userAPI.useGetTopUserQuery();
-
-  const getButton = (visible: "not-mobile" | "only-mobile"): JSX.Element => {
-    return (
-      <Button1
-        src="topcreators"
-        svg="rocketLaunch"
-        text="View Rankings"
-        visible={visible}
-      />
-    );
-  };
 
   return (
     <div className="top-creators wrapper column">

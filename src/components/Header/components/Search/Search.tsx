@@ -10,7 +10,7 @@ import { useDispatchProfile } from "../../../../hooks/useDispatchProfile";
 import { searchAPI } from "../../../../store/api/slice/search";
 import { useDebounce } from "../../../../hooks/useDebounce";
 
-const Search = (): JSX.Element | null => {
+export const Search = (): JSX.Element | null => {
   const location = useLocation();
   const navigate = useNavigate();
   const refInput = useRef<HTMLInputElement>(null);
@@ -95,7 +95,7 @@ const Search = (): JSX.Element | null => {
 const SearchItem = ({ item }: { item: Item }): JSX.Element => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     navigate(`/i/${item.id}`);
   };
 
@@ -106,5 +106,3 @@ const SearchItem = ({ item }: { item: Item }): JSX.Element => {
     </div>
   );
 };
-
-export default Search;

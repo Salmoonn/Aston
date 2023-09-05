@@ -57,8 +57,6 @@ export interface ToggleFavoritesResponse {
   isDelete?: true;
 }
 
-export interface PostHistoryResponse {}
-
 export interface SignupResponse {
   isNotValidLogin?: true;
   isNotValidEmail?: true;

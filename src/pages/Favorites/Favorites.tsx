@@ -1,10 +1,10 @@
 import "./Favorites.css";
 
-import Card from "../../components/Card";
+import { Card } from "../../components/Card";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
-const Favorites = (): JSX.Element => {
+export const Favorites = (): JSX.Element => {
   const favoritesItems = useSelector(
     (state: RootState) => state.auth.profile?.favorites
   );
@@ -20,5 +20,3 @@ const Favorites = (): JSX.Element => {
     </div>
   );
 };
-
-export default Favorites;

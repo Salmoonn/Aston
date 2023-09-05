@@ -1,7 +1,6 @@
 import { LoginRequest } from "../../../types/TypeRequest";
 import {
   LoginResponse,
-  ProfileResponse,
   RefreshTokenResponse,
 } from "../../../types/TypeResponse";
 import { Profile } from "../../../types/Types";
@@ -24,7 +23,7 @@ export const authAPI = api.injectEndpoints({
         url: Endpoints.AUTH.PROFILE,
         credentials: "include",
       }),
-      transformResponse: (res: ProfileResponse) => transformProfile(res),
+      transformResponse: transformProfile,
     }),
     refreshToken: build.query<RefreshTokenResponse, void>({
       query: () => ({

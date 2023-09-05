@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../store";
 
-const History = (): JSX.Element => {
+export const History = (): JSX.Element => {
   const navigate = useNavigate();
 
   const history = useSelector(
@@ -34,5 +34,3 @@ const History = (): JSX.Element => {
     </div>
   );
 };
-
-export default History;

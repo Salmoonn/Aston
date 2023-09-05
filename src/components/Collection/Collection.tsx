@@ -10,7 +10,7 @@ interface CollectionProps {
   collection: ICollection;
 }
 
-const Collection = ({ collection }: CollectionProps): JSX.Element => {
+export const Collection = ({ collection }: CollectionProps): JSX.Element => {
   const [isLoadingMainPhoto, setIsloadingMainPhoto] = useState(false);
   const [isLoadingOther1Photo, setIsloadingOther1Photo] = useState(false);
   const [isLoadingOther2Photo, setIsloadingOther2Photo] = useState(false);
@@ -67,5 +67,3 @@ const Collection = ({ collection }: CollectionProps): JSX.Element => {
     </div>
   );
 };
-
-export default Collection;

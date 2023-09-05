@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import { UserLite } from "../../../../../../types/Types";
 import { createSrcAvatar } from "../../../../../../utils/createSrc";
 
-interface UserCard {
+interface UserCardProps {
   user: UserLite;
   number: number;
 }
 
-export const UserCard = ({ user, number }: UserCard): JSX.Element => {
+export const UserCard = ({ user, number }: UserCardProps): JSX.Element => {
   const { login, name, totalSale } = user;
 
   const srcAvatar = createSrcAvatar(login);

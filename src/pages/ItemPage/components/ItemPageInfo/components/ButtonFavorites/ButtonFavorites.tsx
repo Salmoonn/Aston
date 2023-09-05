@@ -8,7 +8,7 @@ interface ButtonFavoritesProps {
   isLoading: boolean;
 }
 
-const ButtonFavorites = ({
+export const ButtonFavorites = ({
   isAddToFavorites,
   toggleFavorites,
   isLoading,
@@ -19,7 +19,7 @@ const ButtonFavorites = ({
     (state: RootState) => !!state.auth.accessToken
   );
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     if (isLoggedIn) toggleFavorites();
     else navigate("/login");
   };
@@ -37,5 +37,3 @@ const ButtonFavorites = ({
     </button>
   );
 };
-
-export default ButtonFavorites;

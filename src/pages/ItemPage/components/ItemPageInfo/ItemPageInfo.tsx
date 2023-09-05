@@ -4,13 +4,13 @@ import globe from "../../../../images/globe.svg";
 import { Item } from "../../../../types/Types";
 import { Link } from "react-router-dom";
 import { createSrcAvatar } from "../../../../utils/createSrc";
-import ActionTime from "./components/ActionTime";
+import { ActionTime } from "./components/ActionTime";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
-import ButtonFavorites from "./components/ButtonFavorites";
+import { ButtonFavorites } from "./components/ButtonFavorites";
 import { useToggleFavorites } from "../../../../hooks/useToggleFavorites";
 
-const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
+export const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
   const { name, creator, description, tags, id, minted } = item;
   const profile = useSelector((state: RootState) => state.auth.profile);
   const isInFavorites = !!profile?.favorites?.find((e) => e.id === id);
@@ -18,6 +18,19 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
   const { toggleFavorites, isLoading } = useToggleFavorites();
 
   const date = new Date(minted);
+
+  const getButtonFavorites = (): JSX.Element | null => {
+    if (profile?.login !== creator) {
+      return (
+        <ButtonFavorites
+          isLoading={isLoading}
+          isAddToFavorites={isInFavorites}
+          toggleFavorites={(): void => toggleFavorites(id)}
+        />
+      );
+    }
+    return null;
+  };
 
   return (
     <div className="item-info wrapper">
@@ -31,13 +44,7 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
         <div className="item-info-additional column">
           <div className="item-info-created column">
             <div className="item-info-other only-mobile column">
-              {profile?.login !== creator ? (
-                <ButtonFavorites
-                  isLoading={isLoading}
-                  isAddToFavorites={isInFavorites}
-                  toggleFavorites={(): void => toggleFavorites(id)}
-                />
-              ) : null}
+              {getButtonFavorites()}
               <ActionTime />
             </div>
             <div className="title">Created By</div>
@@ -88,17 +95,9 @@ const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
         </div>
       </div>
       <div className="item-info-other not-mobile column">
-        {profile?.login !== creator ? (
-          <ButtonFavorites
-            isLoading={isLoading}
-            isAddToFavorites={isInFavorites}
-            toggleFavorites={(): void => toggleFavorites(id)}
-          />
-        ) : null}
+        {getButtonFavorites()}
         <ActionTime />
       </div>
     </div>
   );
 };
-
-export default ItemPageInfo;

@@ -2,16 +2,16 @@ import "./Profile.css";
 
 import defaultAvatar from "../../images/defaultAvatar.png";
 
-import ProfileInfo from "./components/ProfileInfo";
+import { ProfileInfo } from "./components/ProfileInfo";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import TabBar from "../../components/TabBar";
+import { TabBar } from "../../components/TabBar";
 import { mergeItems } from "../../utils/mergeItems";
 import { createSrcAvatar, createSrcBanner } from "../../utils/createSrc";
-import TabBarBody from "./components/TabBarBody";
+import { TabBarBody } from "./components/TabBarBody";
 import { userAPI } from "../../store/api/slice/user";
 
-const Profile = (): JSX.Element => {
+export const Profile = (): JSX.Element => {
   const { id = "" } = useParams();
   const [tabBar, setTabBar] = useState(0);
 

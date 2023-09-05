@@ -1,7 +1,8 @@
 import "./SubForm.css";
+
 import image from "../../images/post.svg";
 
-const SubForm = () => {
+export const SubForm = (): JSX.Element => {
   return (
     <div className="subForm">
       <input
@@ -11,11 +12,9 @@ const SubForm = () => {
         placeholder="Enter your email here"
       />
       <button className="subBut smart">
-        <img src={image} />
+        <img src={image} alt="post" />
         <div className="work-sans">Subscribe</div>
       </button>
     </div>
   );
 };
-
-export default SubForm;

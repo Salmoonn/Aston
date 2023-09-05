@@ -2,14 +2,14 @@ import "./Marketplace.css";
 
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import TabBar from "../../components/TabBar";
+import { TabBar } from "../../components/TabBar";
 import glass from "../../images/glass.svg";
-import Collections from "./components/Collections";
-import Items from "./components/Items";
+import { Collections } from "./components/Collections";
+import { Items } from "./components/Items";
 import { searchAPI } from "../../store/api/slice/search";
 import { useDebounce } from "../../hooks/useDebounce";
 
-const Marketplace = (): JSX.Element => {
+export const Marketplace = (): JSX.Element => {
   const location = useLocation();
 
   const [search, setSearch] = useState(location.state?.search || "");

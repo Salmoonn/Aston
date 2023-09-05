@@ -1,7 +1,7 @@
 import { Collection } from "../../../../types/Types";
 import { Item } from "../../../../types/Types";
-import ProfileCards from "../ProfileCards";
-import ProfileCollections from "../ProfileCollections";
+import { ProfileCards } from "../ProfileCards";
+import { ProfileCollections } from "../ProfileCollections";
 
 interface TabBarProps {
   index: number;
@@ -9,7 +9,7 @@ interface TabBarProps {
   collections: Collection[] | null;
 }
 
-const TabBarBody = ({
+export const TabBarBody = ({
   index,
   items,
   collections,
@@ -31,5 +31,3 @@ const TabBarBody = ({
 
   return <div>Error</div>;
 };
-
-export default TabBarBody;

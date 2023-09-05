@@ -1,1 +1,1 @@
-export { default } from "./ActionTime";
+export { ActionTime } from "./ActionTime";

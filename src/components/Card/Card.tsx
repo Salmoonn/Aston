@@ -13,7 +13,7 @@ interface CardProps {
   toggleFavorite?: () => void;
 }
 
-const Card = ({ item, toggleFavorite }: CardProps): JSX.Element => {
+export const Card = ({ item, toggleFavorite }: CardProps): JSX.Element => {
   const { id, creator } = item;
 
   const navigate = useNavigate();
@@ -90,5 +90,3 @@ const Card = ({ item, toggleFavorite }: CardProps): JSX.Element => {
     </Link>
   );
 };
-
-export default Card;

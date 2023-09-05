@@ -1,6 +1,5 @@
 import Endpoints from "../endpoints";
 
-import { ToggleFavoritesResponse } from "../../../types/TypeResponse";
 import {
   transformItems,
   transformProfile,

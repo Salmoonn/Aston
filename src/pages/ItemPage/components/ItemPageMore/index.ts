@@ -1,1 +1,1 @@
-export { default } from "./ItemPageMore";
+export { ItemPageMore } from "./ItemPageMore";

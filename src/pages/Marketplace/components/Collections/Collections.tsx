@@ -1,11 +1,11 @@
-import Collection from "../../../../components/Collection";
+import { Collection } from "../../../../components/Collection";
 import { Collection as ICollection } from "../../../../types/Types";
 
 interface CollectionsProps {
   collections: ICollection[];
 }
 
-const Collections = ({ collections }: CollectionsProps): JSX.Element => {
+export const Collections = ({ collections }: CollectionsProps): JSX.Element => {
   return (
     <>
       {collections.map((e) => (
@@ -14,5 +14,3 @@ const Collections = ({ collections }: CollectionsProps): JSX.Element => {
     </>
   );
 };
-
-export default Collections;

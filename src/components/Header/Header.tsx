@@ -6,15 +6,15 @@ import { RootState } from "../../store";
 import { useContext } from "react";
 import { Size } from "../../App";
 
-import Search from "./components/Search";
-import Dropdown from "./components/Dropdown";
+import { Search } from "./components/Search";
+import { Dropdown } from "./components/Dropdown";
 
 import logo from "../../images/logo.svg";
 import logoName from "../../images/logoName.svg";
 import burgerMenu from "../../images/burgerMenu.svg";
 import user from "../../images/user2.svg";
 
-const Header = (): JSX.Element => {
+export const Header = (): JSX.Element => {
   const size = useContext(Size);
 
   const IsLoggerIn = useSelector(
@@ -29,7 +29,7 @@ const Header = (): JSX.Element => {
           <img src={logoName} className="header-logo-text" alt="logoName" />
         </div>
       </Link>
-      {size.isDesktop && <Search />}
+      {size.isDesktop ? <Search /> : null}
       <div className="header-menu">
         <Link to="/marketplace" className="header-li only-desktop">
           <div className="header-li-button smart">
@@ -72,5 +72,3 @@ const Header = (): JSX.Element => {
     </div>
   );
 };
-
-export default Header;

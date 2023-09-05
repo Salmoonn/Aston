@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./ActionTime.css";
 
-const ActionTime = (): JSX.Element => {
+export const ActionTime = (): JSX.Element => {
   const time = new Date().setHours(0, 0, 0, 0) + 24 * 60 * 60 * 1000;
   const [timer, setTimer] = useState(new Date(time - +new Date()));
 
@@ -37,5 +37,3 @@ const ActionTime = (): JSX.Element => {
     </div>
   );
 };
-
-export default ActionTime;

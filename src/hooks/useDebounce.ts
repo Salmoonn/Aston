@@ -1,8 +1,11 @@
-import { debounce } from "lodash";
+import { debounce, DebouncedFunc } from "lodash";
 import { useEffect, useMemo } from "react";
 import useLatest from "use-latest";
 
-export const useDebounce = (cb: Function, ms: number) => {
+export const useDebounce = (
+  cb: Function,
+  ms: number
+): DebouncedFunc<(...args: any) => any> => {
   const lastCb = useLatest(cb);
 
   const debouncedFn = useMemo(
@@ -10,6 +13,6 @@ export const useDebounce = (cb: Function, ms: number) => {
     [ms, lastCb]
   );
 
-  useEffect(() => () => debouncedFn.cancel(), [debouncedFn]);
+  useEffect(() => (): void => debouncedFn.cancel(), [debouncedFn]);
   return debouncedFn;
 };

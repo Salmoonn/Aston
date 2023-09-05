@@ -2,7 +2,7 @@ import { HeroSection } from "./components/HeroSection";
 import { TopCreators } from "./components/TopCreators";
 import { Trending } from "./components/Trending";
 
-const Main = (): JSX.Element => {
+export const Main = (): JSX.Element => {
   return (
     <>
       <HeroSection />
@@ -11,5 +11,3 @@ const Main = (): JSX.Element => {
     </>
   );
 };
-
-export default Main;

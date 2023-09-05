@@ -1,11 +1,11 @@
-import Card from "../../../../components/Card";
+import { Card } from "../../../../components/Card";
 import { Item } from "../../../../types/Types";
 
 interface ItemsProps {
   items: Item[];
 }
 
-const Items = ({ items }: ItemsProps): JSX.Element => {
+export const Items = ({ items }: ItemsProps): JSX.Element => {
   return (
     <>
       {items.map((e) => (
@@ -14,5 +14,3 @@ const Items = ({ items }: ItemsProps): JSX.Element => {
     </>
   );
 };
-
-export default Items;
