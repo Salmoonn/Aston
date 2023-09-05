@@ -1,11 +1,11 @@
-import Card from "../../../../components/Card";
+import { Card } from "../../../../components/Card";
 import { Item } from "../../../../types/Types";
 
 interface ProfileCardProps {
   items: Item[];
 }
 
-const ProfileCards = ({ items }: ProfileCardProps): JSX.Element => {
+export const ProfileCards = ({ items }: ProfileCardProps): JSX.Element => {
   return (
     <div className="artist-card-bg">
       <div className="artist-card wrapper">
@@ -16,5 +16,3 @@ const ProfileCards = ({ items }: ProfileCardProps): JSX.Element => {
     </div>
   );
 };
-
-export default ProfileCards;

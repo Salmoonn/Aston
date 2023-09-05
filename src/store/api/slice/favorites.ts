@@ -1,8 +1,10 @@
 import Endpoints from "../endpoints";
 
-import { ToggleFavoritesResponse } from "../../../types/TypeResponse";
-import { transformItems } from "../../../utils/transformResponse";
-import { Item } from "../../../types/Types";
+import {
+  transformItems,
+  transformProfile,
+} from "../../../utils/transformResponse";
+import { Item, Profile } from "../../../types/Types";
 import { api } from "..";
 
 export const favoritesAPI = api.injectEndpoints({
@@ -15,13 +17,14 @@ export const favoritesAPI = api.injectEndpoints({
       providesTags: ["favorites"],
       transformResponse: transformItems,
     }),
-    toggleFavorites: build.mutation<ToggleFavoritesResponse, string>({
+    toggleFavorites: build.mutation<Profile, string>({
       query: (itemId) => ({
         url: Endpoints.FAVORITES.TOGGLE_FAVORITES,
         method: "POST",
         body: { itemId },
         credentials: "include",
       }),
+      transformResponse: transformProfile,
       invalidatesTags: ["favorites"],
     }),
   }),

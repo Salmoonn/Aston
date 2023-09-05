@@ -1,12 +1,12 @@
 import "./ProfileCollections.css";
-import Collection from "../../../../components/Collection";
+import { Collection } from "../../../../components/Collection";
 import { Collection as ICollection } from "../../../../types/Types";
 
 interface ProfileCollectionsProps {
   collections: ICollection[];
 }
 
-const ProfileCollections = ({
+export const ProfileCollections = ({
   collections,
 }: ProfileCollectionsProps): JSX.Element => {
   return (
@@ -19,5 +19,3 @@ const ProfileCollections = ({
     </div>
   );
 };
-
-export default ProfileCollections;

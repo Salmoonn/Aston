@@ -15,8 +15,9 @@ const Endpoints = {
     REFRESH: "/refresh",
     LOGOUT: "/logout",
   },
-  PROFILE: {
-    GET_PROFILE: "/getprofile",
+  USER: {
+    GET_USER: "/user",
+    GET_TOP_USERS: "/topusers",
   },
   ITEM: {
     GET_ITEM: "/item",

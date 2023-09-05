@@ -14,6 +14,7 @@ export interface ItemResponse {
   tags: string[] | null;
   collection: string[] | null;
   description: string | null;
+  minted: number;
 }
 
 export interface UserResponse {
@@ -55,8 +56,6 @@ export interface ToggleFavoritesResponse {
   isAdd?: true;
   isDelete?: true;
 }
-
-export interface PostHistoryResponse {}
 
 export interface SignupResponse {
   isNotValidLogin?: true;

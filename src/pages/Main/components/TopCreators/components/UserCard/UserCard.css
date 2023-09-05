@@ -1,0 +1,54 @@
+.top-creators-user-card {
+  position: relative;
+  padding: 20px;
+  background: #3b3b3b;
+  box-sizing: border-box;
+  width: 240px;
+  border-radius: 20px;
+  gap: 20px;
+}
+
+.top-creators-user-card-header {
+  display: flex;
+  gap: 15px;
+}
+
+.top-creators-user-card-number {
+  background: #2b2b2b;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+}
+
+.top-creators-user-card-number p {
+  color: #858585;
+}
+
+.user-card-avatar {
+  border-radius: 100%;
+  width: 120px;
+  height: 120px;
+  height: auto;
+}
+
+.top-creators-user-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.top-creators-total-sale {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.top-creators-EHT {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+}

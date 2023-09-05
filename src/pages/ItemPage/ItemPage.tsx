@@ -3,11 +3,11 @@ import "./ItemPage.css";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { createSrcImg } from "../../utils/createSrc";
-import ItemPageInfo from "./components/ItemPageInfo";
-import ItemPageMore from "./components/ItemPageMore";
+import { ItemPageInfo } from "./components/ItemPageInfo";
+import { ItemPageMore } from "./components/ItemPageMore";
 import { itemAPI } from "../../store/api/slice/item";
 
-const ItemPage = (): JSX.Element => {
+export const ItemPage = (): JSX.Element => {
   const { id } = useParams();
 
   const { data: item, isLoading } = itemAPI.useGetItemQuery(id || "");
@@ -29,9 +29,7 @@ const ItemPage = (): JSX.Element => {
         <img src={srcImg} alt="banner" />
       </div>
       <ItemPageInfo item={item} />
-      {moreItems ? <ItemPageMore items={moreItems} /> : "Not found"}
+      <ItemPageMore items={moreItems} creator={item.creator} />
     </div>
   );
 };
-
-export default ItemPage;

@@ -1,1 +1,1 @@
-export { default } from "./ProfileCollections";
+export { ProfileCollections } from "./ProfileCollections";

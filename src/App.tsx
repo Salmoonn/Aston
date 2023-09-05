@@ -2,8 +2,8 @@ import React, { lazy, Suspense } from "react";
 import { useEffect, useState, createContext } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import { Footer } from "./components/Footer";
+import { Header } from "./components/Header";
 import { useDebounce } from "./hooks/useDebounce";
 import { useRefresh } from "./hooks/useRefresh";
 import { RootState } from "./store";
@@ -45,6 +45,8 @@ const App = (): JSX.Element => {
   useEffect(() => {
     return window.removeEventListener("resize", resize);
   }, []);
+
+  useEffect(() => () => window.removeEventListener("resize", resize), []);
 
   return (
     <Size.Provider value={size}>

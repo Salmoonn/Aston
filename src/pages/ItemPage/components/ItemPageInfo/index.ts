@@ -1,1 +1,1 @@
-export { default } from "./ItemPageInfo";
+export { ItemPageInfo } from "./ItemPageInfo";

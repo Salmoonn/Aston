@@ -14,6 +14,7 @@ export interface Item {
   tags: string[] | null;
   collection: string[] | null;
   description: string | null;
+  minted: number;
 }
 
 export interface User {
@@ -46,4 +47,9 @@ export interface Size {
   isDesktop: boolean;
   isLaptop: boolean;
   isMobile: boolean;
+}
+
+export interface UserLite extends Omit<User, "items" | "collections"> {
+  items: string[] | null;
+  collections: string[] | null;
 }

@@ -6,7 +6,11 @@ interface TabBarProps {
   active?: number;
 }
 
-const TabBar = ({ props, setTabBar, active }: TabBarProps): JSX.Element => {
+export const TabBar = ({
+  props,
+  setTabBar,
+  active,
+}: TabBarProps): JSX.Element => {
   return (
     <div className="tab-bar">
       <div className="tab-bar-body wrapper">
@@ -25,5 +29,3 @@ const TabBar = ({ props, setTabBar, active }: TabBarProps): JSX.Element => {
     </div>
   );
 };
-
-export default TabBar;

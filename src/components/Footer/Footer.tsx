@@ -8,15 +8,15 @@ import instagram from "../../images/instagram.svg";
 import { Link } from "react-router-dom";
 import { SubForm, SubForm2 } from "../SubForm";
 
-const Footer = () => {
+export const Footer = (): JSX.Element => {
   return (
     <div className="footer-bg">
       <div className="footer wrapper">
         <div className="footer-info">
           <div className="footer-info-info">
             <div className="footer-logo">
-              <img src={logo} />
-              <img src={logoName} />
+              <img src={logo} alt="logo" />
+              <img src={logoName} alt="logo name" />
             </div>
             <div className="footer-additional-info">
               <div className="base-body-work">
@@ -77,5 +77,3 @@ const Footer = () => {
     </div>
   );
 };
-
-export default Footer;

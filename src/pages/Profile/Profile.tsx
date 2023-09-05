@@ -2,20 +2,20 @@ import "./Profile.css";
 
 import defaultAvatar from "../../images/defaultAvatar.png";
 
-import ProfileInfo from "./components/ProfileInfo";
+import { ProfileInfo } from "./components/ProfileInfo";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import TabBar from "../../components/TabBar";
+import { TabBar } from "../../components/TabBar";
 import { mergeItems } from "../../utils/mergeItems";
 import { createSrcAvatar, createSrcBanner } from "../../utils/createSrc";
-import TabBarBody from "./components/TabBarBody";
-import { profileAPI } from "../../store/api/slice/profile";
+import { TabBarBody } from "./components/TabBarBody";
+import { userAPI } from "../../store/api/slice/user";
 
-const Profile = (): JSX.Element => {
+export const Profile = (): JSX.Element => {
   const { id = "" } = useParams();
   const [tabBar, setTabBar] = useState(0);
 
-  const { data: user, isLoading } = profileAPI.useGetUserQuery(id);
+  const { data: user, isLoading } = userAPI.useGetUserQuery(id);
 
   let items = user?.items || null;
   const collections = user?.collections || null;

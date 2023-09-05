@@ -16,7 +16,7 @@ interface ProfileInfoProps {
   user: User;
 }
 
-const ProfileInfo = ({ user }: ProfileInfoProps): JSX.Element => {
+export const ProfileInfo = ({ user }: ProfileInfoProps): JSX.Element => {
   return (
     <div className="artist-info wrapper">
       <div className="artist-info-body column">
@@ -47,12 +47,10 @@ const ProfileInfo = ({ user }: ProfileInfoProps): JSX.Element => {
             <div className="text work-sans">Followers</div>
           </div>
         </div>
-
         <div className="artist-bio column">
           <div className="h5 space-mono">Bio</div>
           <div className="text work-sans">{user.bio}</div>
         </div>
-
         <div className="artist-links column">
           <div className="h5 space-mono">Links</div>
           <div className="artist-links-icons row">
@@ -89,5 +87,3 @@ const ProfileInfo = ({ user }: ProfileInfoProps): JSX.Element => {
     </div>
   );
 };
-
-export default ProfileInfo;

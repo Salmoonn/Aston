@@ -1,11 +1,17 @@
+import { useDispatch } from "react-redux";
 import { favoritesAPI } from "../store/api/slice/favorites";
-import { useDispatchProfile } from "./useDispatchProfile";
+import { setProfile } from "../store/slices/authSlice";
 
-export const useToggleFavorites = (): ((id: string) => void) => {
-  const [toggleFavorites] = favoritesAPI.useToggleFavoritesMutation();
-  const dispatchProfile = useDispatchProfile();
+export const useToggleFavorites = () => {
+  const dispatch = useDispatch();
+  const [toggleFavoritesAPI, { isLoading }] =
+    favoritesAPI.useToggleFavoritesMutation();
 
-  return (id: string): void => {
-    toggleFavorites(id).unwrap().then(dispatchProfile);
+  const toggleFavorites = (id: string) => {
+    toggleFavoritesAPI(id)
+      .unwrap()
+      .then((res) => dispatch(setProfile(res)));
   };
+
+  return { toggleFavorites, isLoading };
 };

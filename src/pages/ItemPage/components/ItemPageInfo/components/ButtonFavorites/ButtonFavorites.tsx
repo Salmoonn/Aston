@@ -5,11 +5,13 @@ import { RootState } from "../../../../../../store";
 interface ButtonFavoritesProps {
   isAddToFavorites: boolean;
   toggleFavorites: () => void;
+  isLoading: boolean;
 }
 
-const ButtonFavorites = ({
+export const ButtonFavorites = ({
   isAddToFavorites,
   toggleFavorites,
+  isLoading,
 }: ButtonFavoritesProps): JSX.Element => {
   const navigate = useNavigate();
 
@@ -17,13 +19,14 @@ const ButtonFavorites = ({
     (state: RootState) => !!state.auth.accessToken
   );
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     if (isLoggedIn) toggleFavorites();
     else navigate("/login");
   };
 
   return (
     <button
+      style={isLoading ? { cursor: "not-allowed" } : {}}
       className={
         "item-info-other-addToFavorites smart work-sans " +
         (isAddToFavorites ? "isAddToFavorites" : "")
@@ -34,5 +37,3 @@ const ButtonFavorites = ({
     </button>
   );
 };
-
-export default ButtonFavorites;

@@ -8,7 +8,7 @@ import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useSignup } from "../../hooks/useSignup";
 
-const SignUp = (): JSX.Element => {
+export const SignUp = (): JSX.Element => {
   const { trySignup, isLoading, handleLogin, handleEmail } = useSignup();
 
   const profile = useSelector((state: RootState) => state.auth.profile);
@@ -127,5 +127,3 @@ const SignUp = (): JSX.Element => {
     </div>
   );
 };
-
-export default SignUp;

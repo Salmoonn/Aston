@@ -1,5 +1,3 @@
-const SubForm2 = () => {
-  return <div></div>;
+export const SubForm2 = (): JSX.Element => {
+  return <div>SubForm2</div>;
 };
-
-export default SubForm2;

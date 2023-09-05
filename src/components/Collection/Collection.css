@@ -22,6 +22,7 @@
   height: 330px;
   width: 330px;
   background-color: #3b3b3b;
+  cursor: not-allowed;
 }
 
 .collection-photo-other {
@@ -29,6 +30,7 @@
   height: 100px;
   width: 100px;
   background-color: #3b3b3b;
+  cursor: not-allowed;
 }
 
 .collection-frame {
@@ -45,6 +47,7 @@
   height: 100%;
   background-color: #a259ff;
   border-radius: 20px;
+  cursor: not-allowed;
 }
 
 .collection-artist-card {

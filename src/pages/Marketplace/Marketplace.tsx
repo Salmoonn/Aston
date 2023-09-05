@@ -2,23 +2,29 @@ import "./Marketplace.css";
 
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import TabBar from "../../components/TabBar";
+import { TabBar } from "../../components/TabBar";
 import glass from "../../images/glass.svg";
-import Collections from "./components/Collections";
-import Items from "./components/Items";
-import { useSearch } from "../../hooks/useSearch";
+import { Collections } from "./components/Collections";
+import { Items } from "./components/Items";
+import { searchAPI } from "../../store/api/slice/search";
+import { useDebounce } from "../../hooks/useDebounce";
 
-const Marketplace = (): JSX.Element => {
+export const Marketplace = (): JSX.Element => {
   const location = useLocation();
-  const { items, collections, searching } = useSearch();
 
   const [search, setSearch] = useState(location.state?.search || "");
   const [tabBar, setTabBar] = useState(0);
 
+  const [searchRequest, setSearchRequest] = useState("");
+  const { data: items } = searchAPI.useSearchItemQuery(searchRequest);
+  const { data: collections } =
+    searchAPI.useSearchCollectionQuery(searchRequest);
+  const refetch = useDebounce(setSearchRequest, 300);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     setSearch(value);
-    searching(value);
+    refetch(value);
   };
 
   const inputRef = useRef<HTMLInputElement>(null);

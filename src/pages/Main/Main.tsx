@@ -1,5 +1,13 @@
-const Main = (): JSX.Element => {
-  return <div>Main</div>;
-};
+import { HeroSection } from "./components/HeroSection";
+import { TopCreators } from "./components/TopCreators";
+import { Trending } from "./components/Trending";
 
-export default Main;
+export const Main = (): JSX.Element => {
+  return (
+    <>
+      <HeroSection />
+      <Trending />
+      <TopCreators />
+    </>
+  );
+};

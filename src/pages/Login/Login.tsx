@@ -8,7 +8,7 @@ import { RootState } from "../../store";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const Login = (): JSX.Element => {
+export const Login = (): JSX.Element => {
   const navigate = useNavigate();
 
   const [login, setLogin] = useState("");
@@ -81,5 +81,3 @@ const Login = (): JSX.Element => {
     </div>
   );
 };
-
-export default Login;

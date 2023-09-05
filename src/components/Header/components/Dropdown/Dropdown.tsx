@@ -9,7 +9,7 @@ import { useLogout } from "../../../../hooks/useLogout";
 
 import arrowRight from "../../../../images/arrowRight.svg";
 
-const Dropdown = (): JSX.Element => {
+export const Dropdown = (): JSX.Element => {
   const navigate = useNavigate();
   const logout = useLogout();
 
@@ -80,5 +80,3 @@ const Dropdown = (): JSX.Element => {
     </div>
   );
 };
-
-export default Dropdown;
