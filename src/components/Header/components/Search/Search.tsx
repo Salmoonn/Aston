@@ -21,7 +21,7 @@ export const Search = (): JSX.Element | null => {
 
   const [searchRequest, setSearchRequest] = useState("");
   const { data: items } = searchAPI.useSearchItemQuery(searchRequest);
-  const refetch = useDebounce(setSearchRequest, 300);
+  const refetch = useDebounce<string>(setSearchRequest, 300);
 
   const submit = (): void => {
     postHistory(search);

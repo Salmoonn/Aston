@@ -8,7 +8,6 @@ import { useGetHistory } from "../../hooks/useGetHistory";
 export const History = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
   const history = useGetHistory();
 
   const [deleteHistory, { isLoading }] = historyAPI.useDeleteHistoryMutation();

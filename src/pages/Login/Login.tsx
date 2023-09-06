@@ -2,20 +2,12 @@ import "./Login.css";
 import image from "../../images/login.png";
 import user from "../../images/user.svg";
 import type { ChangeEvent, FormEvent } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
-import { useNavigate } from "react-router-dom";
-import { useIsLoggedIn } from "../../hooks/useIsLoggedIn";
-import { useGetProfile } from "../../hooks/useGetProfile";
 
 export const Login = (): JSX.Element => {
-  const navigate = useNavigate();
-
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-
-  const isLoggedIn = useIsLoggedIn();
-  const profile = useGetProfile();
 
   const { isNotValidData, setIsNotValidData, tryLogin } = useLogin();
 
@@ -32,12 +24,6 @@ export const Login = (): JSX.Element => {
     setPassword(e.target.value);
     setIsNotValidData(false);
   };
-
-  useEffect(() => {
-    if (isLoggedIn && profile) {
-      navigate(`/${profile.login}`);
-    }
-  }, [isLoggedIn, navigate, profile]);
 
   return (
     <div className="login">

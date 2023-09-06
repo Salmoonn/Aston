@@ -19,7 +19,7 @@ export const Marketplace = (): JSX.Element => {
   const { data: items } = searchAPI.useSearchItemQuery(searchRequest);
   const { data: collections } =
     searchAPI.useSearchCollectionQuery(searchRequest);
-  const refetch = useDebounce(setSearchRequest, 300);
+  const refetch = useDebounce<string>(setSearchRequest, 300);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;

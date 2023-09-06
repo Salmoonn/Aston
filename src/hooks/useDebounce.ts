@@ -3,10 +3,10 @@ import { debounce } from "lodash";
 import { useEffect, useMemo } from "react";
 import useLatest from "use-latest";
 
-export const useDebounce = (
+export const useDebounce = <T = unknown>(
   cb: Function,
   ms: number,
-): DebouncedFunc<(...args: unknown[]) => unknown> => {
+): DebouncedFunc<(...args: T[]) => T> => {
   const lastCb = useLatest(cb);
 
   const debouncedFn = useMemo(

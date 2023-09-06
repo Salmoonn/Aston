@@ -13,7 +13,6 @@ export const ButtonFavorites = ({
   isLoading,
 }: Props): JSX.Element => {
   const navigate = useNavigate();
-
   const isLoggedIn = useIsLoggedIn();
 
   const handleClick = (): void => {

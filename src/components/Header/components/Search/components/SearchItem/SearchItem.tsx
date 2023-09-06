@@ -7,10 +7,12 @@ interface Props {
 }
 
 export const SearchItem = ({ item }: Props): JSX.Element => {
+  const { id } = item;
+
   const navigate = useNavigate();
 
   const handleClick = (): void => {
-    navigate(`/i/${item.id}`);
+    navigate(`/i/${id}`);
   };
 
   return (

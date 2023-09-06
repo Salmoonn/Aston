@@ -7,7 +7,7 @@ export const useToggleFavorites = () => {
   const [toggleFavoritesAPI, { isLoading }] =
     favoritesAPI.useToggleFavoritesMutation();
 
-  const toggleFavorites = (id: string) => {
+  const toggleFavorites = (id: string): void => {
     toggleFavoritesAPI(id)
       .unwrap()
       .then((res) => dispatch(setProfile(res)));

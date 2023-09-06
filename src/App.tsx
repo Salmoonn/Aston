@@ -11,11 +11,11 @@ import type { Size as SizeType } from "./types/Types";
 const FavoritesRoute = lazy(() => import("./components/FavoritesRoute"));
 const HistoryRoute = lazy(() => import("./components/HistoryRoute"));
 const ItemPage = lazy(() => import("./pages/ItemPage"));
-const Login = lazy(() => import("./pages/Login"));
+const LoginRoute = lazy(() => import("./components/LoginRoute"));
 const Main = lazy(() => import("./pages/Main"));
 const Marketplace = lazy(() => import("./pages/Marketplace"));
 const Profile = lazy(() => import("./pages/Profile"));
-const Signup = lazy(() => import("./pages/Signup"));
+const SignUpRoute = lazy(() => import("./components/SignUpRoute"));
 
 const initSize = {
   isDesktop: true,
@@ -45,8 +45,8 @@ export const App = (): JSX.Element => {
         <Suspense fallback={<h4>Loading...</h4>}>
           <Routes>
             <Route index element={<Main />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
+            <Route path="login" element={<LoginRoute />} />
+            <Route path="signup" element={<SignUpRoute />} />
             <Route path="marketplace" element={<Marketplace />} />
             <Route path="favorites" element={<FavoritesRoute />} />
             <Route path="history" element={<HistoryRoute />} />

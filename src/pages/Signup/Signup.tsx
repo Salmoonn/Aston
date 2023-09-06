@@ -1,18 +1,12 @@
 import "./SignUp.css";
-
 import image from "../../images/signup.png";
 import user from "../../images/user.svg";
 import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
-import type { RootState } from "../../store";
-import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useSignup } from "../../hooks/useSignup";
 
 export const SignUp = (): JSX.Element => {
   const { trySignup, isLoading, handleLogin, handleEmail } = useSignup();
-
-  const profile = useSelector((state: RootState) => state.auth.profile);
 
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
@@ -47,10 +41,6 @@ export const SignUp = (): JSX.Element => {
     setConfirmPassword(e.target.value);
     setIsNotValidPassword(false);
   };
-
-  if (profile) {
-    return <Navigate to={`/${profile.name}`} />;
-  }
 
   return (
     <div className="signup">

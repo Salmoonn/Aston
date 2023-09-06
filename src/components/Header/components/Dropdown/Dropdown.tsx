@@ -1,10 +1,8 @@
 import "./Dropdown.css";
-
 import { useNavigate } from "react-router-dom";
 import { createSrcAvatar } from "../../../../utils/createSrc";
 import { useState } from "react";
 import { useLogout } from "../../../../hooks/useLogout";
-
 import arrowRight from "../../../../images/arrowRight.svg";
 import { useGetProfile } from "../../../../hooks/useGetProfile";
 
@@ -60,10 +58,16 @@ export const Dropdown = (): JSX.Element => {
         >
           Profile
         </div>
-        <div className="dropdown-list-child" onClick={() => handleClickList("favorites")}>
+        <div
+          className="dropdown-list-child"
+          onClick={() => handleClickList("favorites")}
+        >
           Favorites
         </div>
-        <div className="dropdown-list-child" onClick={() => handleClickList("history")}>
+        <div
+          className="dropdown-list-child"
+          onClick={() => handleClickList("history")}
+        >
           History
         </div>
         <div className="dropdown-list-child" onClick={handleLogout}>

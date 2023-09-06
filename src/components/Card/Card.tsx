@@ -1,11 +1,10 @@
 import "./Card.css";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { createSrcAvatar, createSrcImg } from "../../utils/createSrc";
 import { useToggleFavorites } from "../../hooks/useToggleFavorites";
-import type { RootState } from "../../store";
 import type { Item } from "../../types/Types";
+import { useGetProfile } from "../../hooks/useGetProfile";
 
 interface Props {
   item: Item;
@@ -15,8 +14,7 @@ export const Card = ({ item }: Props): JSX.Element => {
   const { id, creator } = item;
 
   const navigate = useNavigate();
-
-  const profile = useSelector((state: RootState) => state.auth.profile);
+  const profile = useGetProfile();
   const isFavorite = !!profile?.favorites?.find((e) => e.id === id);
   const [isHover, setIsHover] = useState(false);
   const { toggleFavorites, isLoading } = useToggleFavorites();
@@ -29,7 +27,9 @@ export const Card = ({ item }: Props): JSX.Element => {
     if (!isLoading) {
       if (!profile) {
         navigate("/login");
-      } else toggleFavorites(id);
+      } else {
+        toggleFavorites(id);
+      }
     }
   };
 
