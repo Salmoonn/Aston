@@ -2,7 +2,8 @@
 
 ## Команды
 
-- запуск - `npm start`
+- запуск клиента - `npm start`
+- запуск [сервера](https://github.com/Salmoonn/AstonServer) - `npm start`
 
 ## 1 уровень (необходимый минимум)
 
