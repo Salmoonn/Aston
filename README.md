@@ -16,7 +16,7 @@
 - Есть применение Контекст API: [Size](https://github.com/Salmoonn/Aston/blob/master/src/App.tsx).
 - Есть применение предохранителя: [index](https://github.com/Salmoonn/Aston/blob/master/src/index.tsx).
 - Есть хотя бы один кастомный хук: [useLogin](https://github.com/Salmoonn/Aston/blob/master/src/hooks/useLogin.ts).
-- Хотя бы несколько компонентов используют PropTypes: [Button1](https://github.com/Salmoonn/Aston/blob/matser/src/components/Button/Button1.tsx) .
+- Хотя бы несколько компонентов используют PropTypes: [Button](https://github.com/Salmoonn/Aston/blob/master/src/components/Button/Button.tsx) .
 - Поиск не триггерит много запросов к серверу [debounce](https://github.com/Salmoonn/Aston/blob/master/src/hooks/useDebounce.ts)
 - Есть применение lazy + Suspense: [App](https://github.com/Salmoonn/Aston/blob/matser/src/App.tsx).
 
