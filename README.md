@@ -17,7 +17,7 @@
 - Есть применение предохранителя: [index](https://github.com/Salmoonn/Aston/blob/search/src/index.tsx).
 - Есть хотя бы один кастомный хук: [useLogin](https://github.com/Salmoonn/Aston/blob/master/src/hooks/useLogin.ts).
 - Хотя бы несколько компонентов используют PropTypes: [Button1](https://github.com/Salmoonn/Aston/blob/search/src/components/Button/Button1.tsx) .
-- Поиск не триггерит много запросов к серверу
+- Поиск не триггерит много запросов к серверу [debounce](https://github.com/Salmoonn/Aston/blob/master/src/hooks/useDebounce.ts)
 - Есть применение lazy + Suspense: [App](https://github.com/Salmoonn/Aston/blob/search/src/App.tsx).
 
 ### Redux
