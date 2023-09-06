@@ -1,8 +1,7 @@
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "../../../../../../store";
+import { useIsLoggedIn } from "../../../../../../hooks/useIsLoggedIn";
 
-interface ButtonFavoritesProps {
+interface Props {
   isAddToFavorites: boolean;
   toggleFavorites: () => void;
   isLoading: boolean;
@@ -12,16 +11,17 @@ export const ButtonFavorites = ({
   isAddToFavorites,
   toggleFavorites,
   isLoading,
-}: ButtonFavoritesProps): JSX.Element => {
+}: Props): JSX.Element => {
   const navigate = useNavigate();
 
-  const isLoggedIn = useSelector(
-    (state: RootState) => !!state.auth.accessToken
-  );
+  const isLoggedIn = useIsLoggedIn();
 
   const handleClick = (): void => {
-    if (isLoggedIn) toggleFavorites();
-    else navigate("/login");
+    if (isLoggedIn) {
+      toggleFavorites();
+    } else {
+      navigate("/login");
+    }
   };
 
   return (

@@ -1,16 +1,12 @@
 import "./TabBar.css";
 
-interface TabBarProps {
+interface Props {
   props: { title: string; amt: number }[];
-  setTabBar: React.Dispatch<React.SetStateAction<number>>;
+  setTabBar: (index: number) => void;
   active?: number;
 }
 
-export const TabBar = ({
-  props,
-  setTabBar,
-  active,
-}: TabBarProps): JSX.Element => {
+export const TabBar = ({ props, setTabBar, active }: Props): JSX.Element => {
   return (
     <div className="tab-bar">
       <div className="tab-bar-body wrapper">

@@ -2,8 +2,9 @@ import "./SignUp.css";
 
 import image from "../../images/signup.png";
 import user from "../../images/user.svg";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { RootState } from "../../store";
+import type { ChangeEvent, FormEvent } from "react";
+import { useState } from "react";
+import type { RootState } from "../../store";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useSignup } from "../../hooks/useSignup";

@@ -4,7 +4,7 @@ import {
   transformItems,
   transformProfile,
 } from "../../../utils/transformResponse";
-import { Item, Profile } from "../../../types/Types";
+import type { Item, Profile } from "../../../types/Types";
 import { api } from "..";
 
 export const favoritesAPI = api.injectEndpoints({

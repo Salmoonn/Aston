@@ -19,7 +19,9 @@ export const useLogin = () => {
       dispatch(setAccessToken(loginData?.accessToken));
       dispatchProfile();
     }
-    if (loginData?.isNotValidData) setIsNotValidData(true);
+    if (loginData?.isNotValidData) {
+      setIsNotValidData(true);
+    }
   }, [loginData]);
 
   return { isNotValidData, setIsNotValidData, tryLogin };

@@ -1,13 +1,10 @@
 import "./Favorites.css";
 
 import { Card } from "../../components/Card";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { useGetFavorites } from "../../hooks/useGetFavorites";
 
 export const Favorites = (): JSX.Element => {
-  const favoritesItems = useSelector(
-    (state: RootState) => state.auth.profile?.favorites
-  );
+  const favoritesItems = useGetFavorites();
 
   return (
     <div className="favorites wrapper column">

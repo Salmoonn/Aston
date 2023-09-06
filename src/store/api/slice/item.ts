@@ -3,9 +3,9 @@ import {
   transformItem,
   transformItems,
 } from "../../../utils/transformResponse";
-import { Item } from "../../../types/Types";
+import type { Item } from "../../../types/Types";
 import { api } from "..";
-import { ItemResponse } from "../../../types/TypeResponse";
+import type { ItemResponse } from "../../../types/TypeResponse";
 
 export const itemAPI = api.injectEndpoints({
   endpoints: (build) => ({

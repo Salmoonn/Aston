@@ -1,7 +1,5 @@
 import "./ProfileInfo.css";
-
 import { Link } from "react-router-dom";
-
 import globe from "../../../../images/globe.svg";
 import discord from "../../../../images/discord.svg";
 import youtube from "../../../../images/youtube.svg";
@@ -9,18 +7,17 @@ import twitter from "../../../../images/twitter.svg";
 import instagram from "../../../../images/instagram.svg";
 import copy from "../../../../images/copy.svg";
 import plus from "../../../../images/plus.svg";
+import type { User } from "../../../../types/Types";
 
-import { User } from "../../../../types/Types";
-
-interface ProfileInfoProps {
+interface Props {
   user: User;
 }
 
-export const ProfileInfo = ({ user }: ProfileInfoProps): JSX.Element => {
+export const ProfileInfo = ({ user }: Props): JSX.Element => {
   return (
     <div className="artist-info wrapper">
       <div className="artist-info-body column">
-        <div className="artis-name h2 work-sans">{user.name}</div>
+        <div className="artist-name h2 work-sans">{user.name}</div>
         <div className="not-desktop">
           <div className="artist-info-button">
             <button className="artist-but-link smart">
@@ -34,15 +31,15 @@ export const ProfileInfo = ({ user }: ProfileInfoProps): JSX.Element => {
           </div>
         </div>
         <div className="artist-stats">
-          <div className="astist-volume">
+          <div className="artist-volume">
             <div className="h4 space-mono">{user.volume}</div>
             <div className="text work-sans">Volume</div>
           </div>
-          <div className="astist-sold">
+          <div className="artist-sold">
             <div className="h4 space-mono">{user.sold}</div>
             <div className="text work-sans">NFTs Sold</div>
           </div>
-          <div className="astist-follow">
+          <div className="artist-follow">
             <div className="h4 space-mono">{user.followers}</div>
             <div className="text work-sans">Followers</div>
           </div>

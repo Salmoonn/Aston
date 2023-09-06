@@ -1,15 +1,14 @@
 import "./UserCard.css";
-
 import { Link } from "react-router-dom";
-import { UserLite } from "../../../../../../types/Types";
 import { createSrcAvatar } from "../../../../../../utils/createSrc";
+import type { UserLite } from "../../../../../../types/Types";
 
-interface UserCardProps {
+interface Props {
   user: UserLite;
   number: number;
 }
 
-export const UserCard = ({ user, number }: UserCardProps): JSX.Element => {
+export const UserCard = ({ user, number }: Props): JSX.Element => {
   const { login, name, totalSale } = user;
 
   const srcAvatar = createSrcAvatar(login);

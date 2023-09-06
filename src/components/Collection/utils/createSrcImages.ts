@@ -1,6 +1,6 @@
 import config from "../../../config.json";
 import Endpoints from "../../../store/api/endpoints";
-import { Collection } from "../../../types/Types";
+import type { Collection } from "../../../types/Types";
 
 export const createSrcImages = (collection: Collection): string[] => {
   return collection.body

@@ -1,5 +1,4 @@
 import "./ItemPage.css";
-
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { createSrcImg } from "../../utils/createSrc";
@@ -17,7 +16,7 @@ export const ItemPage = (): JSX.Element => {
     window.scrollTo(0, 0);
   }, [id]);
 
-  const srcImg = createSrcImg(id);
+  const srcImg = id ? createSrcImg(id) : "";
 
   if (isLoading) return <h4 className="work-sans">Loading...</h4>;
 

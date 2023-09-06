@@ -6,7 +6,8 @@ export const ActionTime = (): JSX.Element => {
   const [timer, setTimer] = useState(new Date(time - +new Date()));
 
   useEffect(() => {
-    setInterval(() => setTimer(new Date(time - +new Date())), 1000);
+    const id = setInterval(() => setTimer(new Date(time - +new Date())), 1000);
+    return clearInterval(id);
   }, []);
 
   return (
@@ -28,10 +29,7 @@ export const ActionTime = (): JSX.Element => {
           <div className="caption-space">Seconds</div>
         </div>
       </div>
-      <button
-        className="timer-button work-sans"
-        style={{ cursor: "not-allowed" }}
-      >
+      <button className="timer-button work-sans" style={{ cursor: "not-allowed" }}>
         Place Bid
       </button>
     </div>

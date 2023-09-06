@@ -1,5 +1,5 @@
 import { api } from "..";
-import { Collection } from "../../../types/Types";
+import type { Collection } from "../../../types/Types";
 import { transformCollections } from "../../../utils/transformResponse";
 import Endpoints from "../endpoints";
 

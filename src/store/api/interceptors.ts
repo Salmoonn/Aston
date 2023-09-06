@@ -1,13 +1,12 @@
 import config from "../../config.json";
-
-import {
+import type {
   BaseQueryFn,
   FetchArgs,
-  fetchBaseQuery,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
+import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Endpoints from "./endpoints";
-import { RootState } from "..";
+import type { RootState } from "..";
 import { setAccessToken, setInitialState } from "../slices/authSlice";
 
 const baseQuery = fetchBaseQuery({
@@ -37,7 +36,7 @@ export const baseQueryWithReauth: BaseQueryFn<
     const refreshResult = (await baseQuery(
       Endpoints.AUTH.REFRESH,
       api,
-      extraOptions
+      extraOptions,
     )) as { data?: { accessToken: string } };
 
     if (refreshResult?.data) {

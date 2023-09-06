@@ -1,11 +1,11 @@
 import { Card } from "../../../../components/Card";
-import { Item } from "../../../../types/Types";
+import type { Item } from "../../../../types/Types";
 
-interface ItemsProps {
+interface Props {
   items: Item[];
 }
 
-export const Items = ({ items }: ItemsProps): JSX.Element => {
+export const Items = ({ items }: Props): JSX.Element => {
   return (
     <>
       {items.map((e) => (

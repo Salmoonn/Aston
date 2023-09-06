@@ -1,5 +1,5 @@
 import Endpoints from "../endpoints";
-import { User, UserLite } from "../../../types/Types";
+import type { User, UserLite } from "../../../types/Types";
 import { transformUser } from "../../../utils/transformResponse";
 import { api } from "..";
 

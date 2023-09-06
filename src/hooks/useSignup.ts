@@ -24,8 +24,12 @@ export const useSignup = () => {
   const dispatchProfile = useDispatchProfile();
 
   useEffect(() => {
-    if (data?.isNotValidLogin) setIsNotValidLogin(true);
-    if (data?.isNotValidEmail) setIsNotValidEmail(true);
+    if (data?.isNotValidLogin) {
+      setIsNotValidLogin(true);
+    }
+    if (data?.isNotValidEmail) {
+      setIsNotValidEmail(true);
+    }
     if (data?.accessToken) {
       dispatch(setAccessToken(data.accessToken));
       dispatchProfile();
