@@ -1,6 +1,6 @@
 import "./Card.css";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { createSrcAvatar, createSrcImg } from "../../utils/createSrc";
 import { useToggleFavorites } from "../../hooks/useToggleFavorites";
 import type { Item } from "../../types/Types";
@@ -12,8 +12,6 @@ interface Props {
 
 export const Card = ({ item }: Props): JSX.Element => {
   const { id, creator } = item;
-
-  const navigate = useNavigate();
   const profile = useGetProfile();
   const isFavorite = !!profile?.favorites?.find((e) => e.id === id);
   const [isHover, setIsHover] = useState(false);
@@ -24,13 +22,7 @@ export const Card = ({ item }: Props): JSX.Element => {
 
   const handleClick = (e: React.MouseEvent<SVGSVGElement>): void => {
     e.preventDefault();
-    if (!isLoading) {
-      if (!profile) {
-        navigate("/login");
-      } else {
-        toggleFavorites(id);
-      }
-    }
+    toggleFavorites(id);
   };
 
   return (
