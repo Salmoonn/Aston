@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Profile } from "../../types/Types";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { Profile } from "../../types/Types";
 
 interface AuthState {
   accessToken: null | string;
@@ -21,11 +21,16 @@ export const authReducer = createSlice({
     setProfile(state, action: PayloadAction<Profile>) {
       state.profile = action.payload;
     },
+    removeHistory(state) {
+      if (state.profile) {
+        state.profile.history = null;
+      }
+    },
     setInitialState: () => initialState,
   },
 });
 
-export const { setAccessToken, setProfile, setInitialState } =
+export const { setAccessToken, setProfile, setInitialState, removeHistory } =
   authReducer.actions;
 
 export default authReducer.reducer;

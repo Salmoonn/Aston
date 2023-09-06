@@ -1,12 +1,12 @@
 import "./Login.css";
-
 import image from "../../images/login.png";
 import user from "../../images/user.svg";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
+import { useEffect, useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
-import { RootState } from "../../store";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useIsLoggedIn } from "../../hooks/useIsLoggedIn";
+import { useGetProfile } from "../../hooks/useGetProfile";
 
 export const Login = (): JSX.Element => {
   const navigate = useNavigate();
@@ -14,10 +14,8 @@ export const Login = (): JSX.Element => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const isLoggedIn = useSelector(
-    (state: RootState) => !!state.auth.accessToken
-  );
-  const profile = useSelector((state: RootState) => state.auth.profile);
+  const isLoggedIn = useIsLoggedIn();
+  const profile = useGetProfile();
 
   const { isNotValidData, setIsNotValidData, tryLogin } = useLogin();
 
@@ -36,8 +34,10 @@ export const Login = (): JSX.Element => {
   };
 
   useEffect(() => {
-    if (isLoggedIn && profile) navigate(`/${profile.login}`);
-  }, [isLoggedIn, profile, navigate]);
+    if (isLoggedIn && profile) {
+      navigate(`/${profile.login}`);
+    }
+  }, [isLoggedIn, navigate, profile]);
 
   return (
     <div className="login">

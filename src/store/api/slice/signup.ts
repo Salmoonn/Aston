@@ -1,6 +1,6 @@
 import Endpoints from "../endpoints";
-import { SignUpRequest } from "../../../types/TypeRequest";
-import { SignupResponse } from "../../../types/TypeResponse";
+import type { SignUpRequest } from "../../../types/TypeRequest";
+import type { SignupResponse } from "../../../types/TypeResponse";
 import { api } from "..";
 
 export const signupAPI = api.injectEndpoints({

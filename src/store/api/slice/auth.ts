@@ -1,9 +1,9 @@
-import { LoginRequest } from "../../../types/TypeRequest";
-import {
+import type { LoginRequest } from "../../../types/TypeRequest";
+import type {
   LoginResponse,
   RefreshTokenResponse,
 } from "../../../types/TypeResponse";
-import { Profile } from "../../../types/Types";
+import type { Profile } from "../../../types/Types";
 import { transformProfile } from "../../../utils/transformResponse";
 import { api } from "..";
 import Endpoints from "../endpoints";

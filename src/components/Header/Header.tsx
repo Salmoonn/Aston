@@ -1,14 +1,10 @@
 import "./Header.css";
-
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
 import { useContext } from "react";
 import { Size } from "../../App";
-
+import { useIsLoggedIn } from "../../hooks/useIsLoggedIn";
 import { Search } from "./components/Search";
 import { Dropdown } from "./components/Dropdown";
-
 import logo from "../../images/logo.svg";
 import logoName from "../../images/logoName.svg";
 import burgerMenu from "../../images/burgerMenu.svg";
@@ -17,9 +13,7 @@ import user from "../../images/user2.svg";
 export const Header = (): JSX.Element => {
   const size = useContext(Size);
 
-  const IsLoggerIn = useSelector(
-    (state: RootState) => !!state.auth.accessToken
-  );
+  const IsLoggerIn = useIsLoggedIn();
 
   return (
     <div className="header">
@@ -38,7 +32,7 @@ export const Header = (): JSX.Element => {
         </Link>
         <div className="header-li-topcreators only-desktop ">
           <div className="header-li-button smart">
-            <div className="work-sans">Topcreators</div>
+            <div className="work-sans">Ranking</div>
           </div>
         </div>
         <div className="header-li-connect only-desktop ">

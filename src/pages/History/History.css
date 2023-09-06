@@ -4,6 +4,26 @@
   display: flex;
 }
 
+.history-headline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.history-button {
+  background: #3b3b3b;
+  padding: 0 30px;
+  border: 3px solid #a559ff;
+  border-radius: 20px;
+  height: 50px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+}
+
+.history-button:hover {
+  background: #393939;
+}
+
 .history-body-item {
   background: #3b3b3b;
   padding: 10px;

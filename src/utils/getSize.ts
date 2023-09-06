@@ -1,4 +1,4 @@
-import { Size } from "../types/Types";
+import type { Size } from "../types/Types";
 
 export const getSize = (): Size => {
   const result = {

@@ -1,18 +1,21 @@
 import "./ItemPageInfo.css";
 import globe from "../../../../images/globe.svg";
 
-import { Item } from "../../../../types/Types";
+import type { Item } from "../../../../types/Types";
 import { Link } from "react-router-dom";
 import { createSrcAvatar } from "../../../../utils/createSrc";
 import { ActionTime } from "./components/ActionTime";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../store";
 import { ButtonFavorites } from "./components/ButtonFavorites";
 import { useToggleFavorites } from "../../../../hooks/useToggleFavorites";
+import { useGetProfile } from "../../../../hooks/useGetProfile";
 
-export const ItemPageInfo = ({ item }: { item: Item }): JSX.Element => {
+interface Props {
+  item: Item;
+}
+
+export const ItemPageInfo = ({ item }: Props): JSX.Element => {
   const { name, creator, description, tags, id, minted } = item;
-  const profile = useSelector((state: RootState) => state.auth.profile);
+  const profile = useGetProfile();
   const isInFavorites = !!profile?.favorites?.find((e) => e.id === id);
   const srcAvatar = createSrcAvatar(creator);
   const { toggleFavorites, isLoading } = useToggleFavorites();

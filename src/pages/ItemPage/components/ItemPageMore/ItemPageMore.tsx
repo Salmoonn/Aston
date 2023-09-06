@@ -1,18 +1,14 @@
 import "./ItemPageMore.css";
-
 import { Card } from "../../../../components/Card";
-import { Item } from "../../../../types/Types";
+import type { Item } from "../../../../types/Types";
 import { getButton } from "./utils/getButton";
 
-interface ItemPageMoreProps {
+interface Props {
   items: Item[] | null | undefined;
   creator: string;
 }
 
-export const ItemPageMore = ({
-  items,
-  creator,
-}: ItemPageMoreProps): JSX.Element => {
+export const ItemPageMore = ({ items, creator }: Props): JSX.Element => {
   return (
     <div className="item-page-more wrapper column">
       <div className="item-page-more-headline">

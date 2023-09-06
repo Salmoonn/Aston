@@ -1,7 +1,5 @@
 import "./HeroSection.css";
-
 import { Link } from "react-router-dom";
-
 import image from "../../../../images/start.gif";
 import rocket from "../../../../images/rocketLaunch2.svg";
 

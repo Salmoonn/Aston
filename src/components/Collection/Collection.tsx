@@ -2,18 +2,18 @@ import "./Collection.css";
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Collection as ICollection } from "../../types/Types";
+import type { Collection as ICollection } from "../../types/Types";
 import { createSrcAvatar } from "../../utils/createSrc";
 import { createSrcImages } from "./utils/createSrcImages";
 
-interface CollectionProps {
+interface Props {
   collection: ICollection;
 }
 
-export const Collection = ({ collection }: CollectionProps): JSX.Element => {
-  const [isLoadingMainPhoto, setIsloadingMainPhoto] = useState(false);
-  const [isLoadingOther1Photo, setIsloadingOther1Photo] = useState(false);
-  const [isLoadingOther2Photo, setIsloadingOther2Photo] = useState(false);
+export const Collection = ({ collection }: Props): JSX.Element => {
+  const [isLoadingMainPhoto, setIsLoadingMainPhoto] = useState(false);
+  const [isLoadingOther1Photo, setIsLoadingOther1Photo] = useState(false);
+  const [isLoadingOther2Photo, setIsLoadingOther2Photo] = useState(false);
 
   const srcImg = createSrcImages(collection);
   const srcAvatar = createSrcAvatar(collection.creator);
@@ -23,25 +23,25 @@ export const Collection = ({ collection }: CollectionProps): JSX.Element => {
       <div className="collection-photos">
         <img
           src={srcImg ? srcImg[0] : ""}
-          alt="collectin main"
+          alt="collection main"
           className="collection-photo-main smart"
           style={{ visibility: isLoadingMainPhoto ? "visible" : "hidden" }}
-          onLoad={() => setIsloadingMainPhoto(true)}
+          onLoad={() => setIsLoadingMainPhoto(true)}
         />
         <div className="collection-frame">
           <img
             src={srcImg ? srcImg[1] : ""}
-            alt="collectin other"
+            alt="collection other"
             className="collection-photo-other smart"
             style={{ visibility: isLoadingOther1Photo ? "visible" : "hidden" }}
-            onLoad={() => setIsloadingOther1Photo(true)}
+            onLoad={() => setIsLoadingOther1Photo(true)}
           />
           <img
             src={srcImg ? srcImg[2] : ""}
-            alt="collectin other"
+            alt="collection other"
             className="collection-photo-other smart"
             style={{ visibility: isLoadingOther2Photo ? "visible" : "hidden" }}
-            onLoad={() => setIsloadingOther2Photo(true)}
+            onLoad={() => setIsLoadingOther2Photo(true)}
           />
           <Link to="/">
             <div className="collection-frame-number smart">
