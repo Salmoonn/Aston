@@ -20,6 +20,7 @@ export const Login = (): JSX.Element => {
     setLogin(e.target.value);
     setIsNotValidData(false);
   };
+
   const onSubmitPassword = (e: ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
     setIsNotValidData(false);

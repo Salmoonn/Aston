@@ -18,14 +18,14 @@ export const authAPI = api.injectEndpoints({
         body,
       }),
     }),
-    getProfile: build.query<Profile, void>({
+    refreshProfile: build.mutation<Profile, void>({
       query: () => ({
         url: Endpoints.AUTH.PROFILE,
         credentials: "include",
       }),
       transformResponse: transformProfile,
     }),
-    refreshToken: build.query<RefreshTokenResponse, void>({
+    refreshToken: build.mutation<RefreshTokenResponse, void>({
       query: () => ({
         url: Endpoints.AUTH.REFRESH,
         credentials: "include",

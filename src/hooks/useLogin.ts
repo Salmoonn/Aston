@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { authAPI } from "../store/api/slice/auth";
 import { useAppDispatch } from "../store";
 import { setAccessToken } from "../store/slices/authSlice";
-import { useDispatchProfile } from "./useDispatchProfile";
+import { useRefreshProfile } from "./useRefreshProfile";
 
 export const useLogin = () => {
   const dispatch = useAppDispatch();
   const [isNotValidData, setIsNotValidData] = useState(false);
   const [postLogin, { data: loginData }] = authAPI.useLoginMutation();
-  const dispatchProfile = useDispatchProfile();
+  const refreshProfile = useRefreshProfile();
 
   const tryLogin = (login: string, password: string): void => {
     postLogin({ login, password });
@@ -16,13 +16,14 @@ export const useLogin = () => {
 
   useEffect(() => {
     if (loginData?.accessToken) {
+      localStorage.setItem("refreshToken", "isExist");
       dispatch(setAccessToken(loginData?.accessToken));
-      dispatchProfile();
+      refreshProfile();
     }
     if (loginData?.isNotValidData) {
       setIsNotValidData(true);
     }
-  }, [loginData]);
+  }, [dispatch, loginData, refreshProfile]);
 
   return { isNotValidData, setIsNotValidData, tryLogin };
 };

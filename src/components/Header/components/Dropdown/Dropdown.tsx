@@ -9,11 +9,8 @@ import { useGetProfile } from "../../../../hooks/useGetProfile";
 export const Dropdown = (): JSX.Element => {
   const navigate = useNavigate();
   const logout = useLogout();
-
   const profile = useGetProfile();
-
   const [isOpen, setIsOpen] = useState(false);
-
   const [isLoadedAvatar, setIsLoadedAvatar] = useState(false);
   const srcAvatar = profile ? createSrcAvatar(profile.login) : "";
 

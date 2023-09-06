@@ -13,7 +13,7 @@ export const History = (): JSX.Element => {
   const [deleteHistory, { isLoading }] = historyAPI.useDeleteHistoryMutation();
 
   const handleClickItem = (elem: string): void => {
-    navigate("/marketplace", { state: { search: elem } });
+    navigate(`/marketplace?search=${elem}`);
   };
 
   const handleClickClear = (): void => {

@@ -1,6 +1,6 @@
 import "./Marketplace.css";
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { TabBar } from "../../components/TabBar";
 import { Collections } from "./components/Collections";
 import { Items } from "./components/Items";
@@ -9,9 +9,9 @@ import { useDebounce } from "../../hooks/useDebounce";
 import glass from "../../images/glass.svg";
 
 export const Marketplace = (): JSX.Element => {
-  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [search, setSearch] = useState(location.state?.search || "");
+  const [search, setSearch] = useState(searchParams.get("search") || "");
   const [tabBar, setTabBar] = useState(0);
 
   const [searchRequest, setSearchRequest] = useState(search);
@@ -25,6 +25,10 @@ export const Marketplace = (): JSX.Element => {
     const { value } = e.target;
     setSearch(value);
     refetch(value);
+  };
+
+  const handleClick = (): void => {
+    setSearchParams(`search=${search}`);
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -51,7 +55,12 @@ export const Marketplace = (): JSX.Element => {
             value={search}
             onChange={handleChange}
           />
-          <img src={glass} alt="search" />
+          <img
+            src={glass}
+            alt="search"
+            onClick={handleClick}
+            style={{ cursor: "pointer" }}
+          />
         </div>
       </div>
       <div className="marketplace-main">

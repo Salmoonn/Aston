@@ -1,20 +1,23 @@
-import { useEffect } from "react";
 import { useAppDispatch } from "../store";
-import { authAPI } from "../store/api/slice/auth";
-import { setAccessToken } from "../store/slices/authSlice";
-import { useDispatchProfile } from "./useDispatchProfile";
+import { setLoading } from "../store/slices/authSlice";
+import { useRefreshProfile } from "./useRefreshProfile";
+import { useRefreshToken } from "./useRefreshToken";
 
-export const useRefresh = () => {
+export const useRefresh = (): (() => Promise<void>) => {
   const dispatch = useAppDispatch();
-  const dispatchProfile = useDispatchProfile();
-  const { data, refetch } = authAPI.useRefreshTokenQuery();
+  const refreshToken = useRefreshToken();
+  const refreshProfile = useRefreshProfile();
 
-  useEffect(() => {
-    if (data) {
-      dispatch(setAccessToken(data.accessToken));
-      dispatchProfile();
+  const refresh = async (): Promise<void> => {
+    if (localStorage.getItem("refreshToken") === "isExist") {
+      dispatch(setLoading(true));
+      await refreshToken();
+      await refreshProfile();
+      dispatch(setLoading(false));
+    } else {
+      dispatch(setLoading(false));
     }
-  }, [data]);
+  };
 
-  return refetch;
+  return refresh;
 };

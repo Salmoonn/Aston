@@ -7,7 +7,7 @@ import type {
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Endpoints from "./endpoints";
 import type { RootState } from "..";
-import { setAccessToken, setInitialState } from "../slices/authSlice";
+import { setAccessToken, logout } from "../slices/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: config.server,
@@ -40,12 +40,14 @@ export const baseQueryWithReauth: BaseQueryFn<
     )) as { data?: { accessToken: string } };
 
     if (refreshResult?.data) {
+      localStorage.setItem("refreshToken", "isExist");
       api.dispatch(setAccessToken(refreshResult.data.accessToken));
 
       result = await baseQuery(args, api, extraOptions);
     } else {
+      localStorage.setItem("refreshToken", "isNotExists");
       await baseQuery(Endpoints.AUTH.LOGOUT, api, extraOptions);
-      api.dispatch(setInitialState());
+      api.dispatch(logout());
     }
   }
   return result;
