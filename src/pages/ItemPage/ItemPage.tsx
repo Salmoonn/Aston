@@ -5,6 +5,8 @@ import { createSrcImg } from "../../utils/createSrc";
 import { ItemPageInfo } from "./components/ItemPageInfo";
 import { ItemPageMore } from "./components/ItemPageMore";
 import { itemAPI } from "../../store/api/slice/item";
+import { Loading } from "../../components/Loading/Loading";
+import { AnimLoading } from "../../components/AnimLoading/AnimLoading";
 
 export const ItemPage = (): JSX.Element => {
   const { id } = useParams();
@@ -18,9 +20,13 @@ export const ItemPage = (): JSX.Element => {
 
   const srcImg = id ? createSrcImg(id) : "";
 
-  if (isLoading) return <h4 className="work-sans">Loading...</h4>;
+  if (isLoading) {
+    return <AnimLoading />;
+  }
 
-  if (!item) return <h4 className="work-sans">Not item</h4>;
+  if (!item) {
+    return <h4 className="work-sans">Not item</h4>;
+  }
 
   return (
     <div className="item-page">
