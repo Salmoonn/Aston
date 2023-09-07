@@ -8,6 +8,7 @@ import { useRefresh } from "./hooks/useRefresh";
 import { getSize } from "./utils/getSize";
 import type { Size as SizeType } from "./types/Types";
 import { Loading } from "./components/Loading/Loading";
+import { AnimLoading } from "./components/AnimLoading/AnimLoading";
 
 const FavoritesRoute = lazy(() => import("./components/FavoritesRoute"));
 const HistoryRoute = lazy(() => import("./components/HistoryRoute"));
@@ -44,7 +45,7 @@ export const App = (): JSX.Element => {
       <BrowserRouter>
         <Loading>
           <Header />
-          <Suspense fallback={<h4>Loading...</h4>}>
+          <Suspense fallback={<AnimLoading />}>
             <Routes>
               <Route index element={<Main />} />
               <Route path="login" element={<LoginRoute />} />

@@ -1,0 +1,20 @@
+.anim-loading-wrapper {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.anim-loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: anim 1s infinite;
+  transform: scale(1.7, 1.7);
+}
+
+@keyframes anim {
+  50% {
+    filter: opacity(0.5);
+  }
+}

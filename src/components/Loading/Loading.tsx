@@ -1,4 +1,5 @@
 import { useIsLoading } from "../../hooks/useGetIsLoading";
+import { AnimLoading } from "../AnimLoading/AnimLoading";
 
 interface Props {
   children: JSX.Element[] | JSX.Element;
@@ -7,7 +8,7 @@ interface Props {
 export const Loading = ({ children }: Props): JSX.Element => {
   const isLoading = useIsLoading();
 
-  if (isLoading) return <h3>Loading</h3>;
+  if (isLoading) return <AnimLoading />;
 
   return <>{children}</>;
 };
