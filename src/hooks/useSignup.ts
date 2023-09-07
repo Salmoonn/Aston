@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "../store";
 import { signupAPI } from "../store/api/slice/signup";
 import { setAccessToken } from "../store/slices/authSlice";
-import { useDispatchProfile } from "./useDispatchProfile";
+import { useRefreshProfile } from "./useRefreshProfile";
 
 export const useSignup = () => {
   const dispatch = useAppDispatch();
-
+  const refreshProfile = useRefreshProfile();
   const [isNotValidLogin, setIsNotValidLogin] = useState(false);
   const [isNotValidEmail, setIsNotValidEmail] = useState(false);
 
@@ -21,7 +21,6 @@ export const useSignup = () => {
   };
 
   const [signup, { data, isLoading }] = signupAPI.useSignupMutation();
-  const dispatchProfile = useDispatchProfile();
 
   useEffect(() => {
     if (data?.isNotValidLogin) {
@@ -32,7 +31,7 @@ export const useSignup = () => {
     }
     if (data?.accessToken) {
       dispatch(setAccessToken(data.accessToken));
-      dispatchProfile();
+      refreshProfile();
     }
   }, [data]);
 

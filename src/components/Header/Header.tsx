@@ -12,7 +12,6 @@ import user from "../../images/user2.svg";
 
 export const Header = (): JSX.Element => {
   const size = useContext(Size);
-
   const IsLoggerIn = useIsLoggedIn();
 
   return (

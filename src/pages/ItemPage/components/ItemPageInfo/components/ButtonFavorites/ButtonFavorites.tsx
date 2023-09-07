@@ -1,6 +1,3 @@
-import { useNavigate } from "react-router-dom";
-import { useIsLoggedIn } from "../../../../../../hooks/useIsLoggedIn";
-
 interface Props {
   isAddToFavorites: boolean;
   toggleFavorites: () => void;
@@ -12,17 +9,6 @@ export const ButtonFavorites = ({
   toggleFavorites,
   isLoading,
 }: Props): JSX.Element => {
-  const navigate = useNavigate();
-  const isLoggedIn = useIsLoggedIn();
-
-  const handleClick = (): void => {
-    if (isLoggedIn) {
-      toggleFavorites();
-    } else {
-      navigate("/login");
-    }
-  };
-
   return (
     <button
       style={isLoading ? { cursor: "not-allowed" } : {}}
@@ -30,7 +16,7 @@ export const ButtonFavorites = ({
         "item-info-other-addToFavorites smart work-sans " +
         (isAddToFavorites ? "isAddToFavorites" : "")
       }
-      onClick={handleClick}
+      onClick={toggleFavorites}
     >
       {isAddToFavorites ? "In Favorites" : "Add To Favorites"}
     </button>

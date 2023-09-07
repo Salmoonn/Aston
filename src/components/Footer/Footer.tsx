@@ -25,18 +25,18 @@ export const Footer = (): JSX.Element => {
               <div className="footer-community">
                 <div className="base-body-work">Join our community</div>
                 <div className="footer-icons">
-                  <Link to="/">
+                  <div style={{ cursor: "not-allowed" }}>
                     <img src={discord} alt="discord" />
-                  </Link>
-                  <Link to="/">
+                  </div>
+                  <div style={{ cursor: "not-allowed" }}>
                     <img src={youtube} alt="youtube" />
-                  </Link>
-                  <Link to="/">
+                  </div>
+                  <div style={{ cursor: "not-allowed" }}>
                     <img src={twitter} alt="twitter" />
-                  </Link>
-                  <Link to="/">
+                  </div>
+                  <div style={{ cursor: "not-allowed" }}>
                     <img src={instagram} alt="instagram" />
-                  </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -47,12 +47,16 @@ export const Footer = (): JSX.Element => {
               <Link to="/marketplace">
                 <div className="base-body-work">Marketplace</div>
               </Link>
-              <Link to="/topcreators">
-                <div className="base-body-work">Ranking</div>
-              </Link>
-              <Link to="/">
-                <div className="base-body-work">Connect a wallet</div>
-              </Link>
+              <div style={{ cursor: "not-allowed" }}>
+                <div style={{ color: "#ccc" }} className="base-body-work">
+                  Ranking
+                </div>
+              </div>
+              <div style={{ cursor: "not-allowed" }}>
+                <div style={{ color: "#ccc" }} className="base-body-work">
+                  Connect a wallet
+                </div>
+              </div>
             </div>
           </div>
           <div className="footer-sub">

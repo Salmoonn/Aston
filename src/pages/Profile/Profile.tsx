@@ -10,6 +10,7 @@ import { mergeItems } from "../../utils/mergeItems";
 import { createSrcAvatar, createSrcBanner } from "../../utils/createSrc";
 import { TabBarBody } from "./components/TabBarBody";
 import { userAPI } from "../../store/api/slice/user";
+import { AnimLoading } from "../../components/AnimLoading/AnimLoading";
 
 export const Profile = (): JSX.Element => {
   const { id = "" } = useParams();
@@ -29,7 +30,7 @@ export const Profile = (): JSX.Element => {
   const srcAvatar = user ? createSrcAvatar(user.login) : "";
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <AnimLoading />;
   }
 
   if (!user && !isLoading) {

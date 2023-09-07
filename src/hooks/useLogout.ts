@@ -1,16 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store";
 import { authAPI } from "../store/api/slice/auth";
-import { setInitialState } from "../store/slices/authSlice";
+import { logout as createActionLogout } from "../store/slices/authSlice";
 
-export const useLogout = () => {
+export const useLogout = (): (() => void) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [logout] = authAPI.useLogoutMutation();
+  const [logoutAPI] = authAPI.useLogoutMutation();
 
-  return (): void => {
-    dispatch(setInitialState());
-    logout();
+  const logout = (): void => {
+    localStorage.setItem("refreshToken", "isNotExists");
+    dispatch(createActionLogout());
+    logoutAPI();
     navigate("/login");
   };
+
+  return logout;
 };

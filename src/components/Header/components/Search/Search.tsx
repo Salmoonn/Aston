@@ -3,16 +3,18 @@ import glass from "../../../../images/glass.svg";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { historyAPI } from "../../../../store/api/slice/history";
-import { useDispatchProfile } from "../../../../hooks/useDispatchProfile";
 import { searchAPI } from "../../../../store/api/slice/search";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import { SearchItem } from "./components/SearchItem";
+import { useIsLoggedIn } from "../../../../hooks/useIsLoggedIn";
+import { useRefreshProfile } from "../../../../hooks/useRefreshProfile";
 
 export const Search = (): JSX.Element | null => {
   const location = useLocation();
   const navigate = useNavigate();
   const refInput = useRef<HTMLInputElement>(null);
-  const dispatchProfile = useDispatchProfile();
+  const isLoggedIn = useIsLoggedIn();
+  const refreshProfile = useRefreshProfile();
 
   const [search, setSearch] = useState("");
   const [active, setActive] = useState(false);
@@ -24,9 +26,11 @@ export const Search = (): JSX.Element | null => {
   const refetch = useDebounce<string>(setSearchRequest, 300);
 
   const submit = (): void => {
-    postHistory(search);
-    dispatchProfile();
-    navigate("/marketplace", { state: { search: search } });
+    if (isLoggedIn) {
+      postHistory(search);
+      refreshProfile();
+    }
+    navigate(`/marketplace?search=${search}`);
     setActive(false);
   };
 
